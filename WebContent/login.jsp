@@ -29,6 +29,7 @@
   </style>
 </head>
 <body>
+	<h1 style="text-align:center"><font color="#FFB80F">武器装备评估系统</h1>
 	<form class="layui-form" action="main.jsp" >
 			</br>
 		  <div class="layui-form-item">
@@ -47,7 +48,7 @@
 		  
 		  <div class="layui-form-item">
 		  	<div class="layui-input-block">
-			   <button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo">登陆</button>
+			   <button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo">登录</button>
 			   <button type="reset" class="layui-btn layui-btn-primary">重置</button>
 			</div>
 		  </div>
