@@ -26,20 +26,6 @@
             <div class="layui-logo">
             	<i class="layui-icon" style="font-size: 20px; color: #009688;">&#xe62c;</i>武器装备评估系统
             </div>
-            
-         <!--     <ul class="layui-nav layui-layout-left kit-nav">
-                <li class="layui-nav-item"><a href="javascript:;">控制台</a></li>
-                <li class="layui-nav-item"><a href="javascript:;">商品管理</a></li>
-                <li class="layui-nav-item"><a href="javascript:;" id="pay"><i class="fa fa-gratipay" aria-hidden="true"></i> 捐赠我</a></li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">其它系统</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">邮件管理</a></dd>
-                        <dd><a href="javascript:;">消息管理</a></dd>
-                        <dd><a href="javascript:;">授权管理</a></dd>
-                    </dl>
-                </li>
-            </ul>  -->
         </div>
 
         <div class="layui-side layui-bg-cyan kit-side">
@@ -99,7 +85,7 @@
 
         <div class="layui-footer layui-bg-black">
             <!-- 底部固定区域 -->
-           	 <font color="#009688" size="3px">这里什么有没有哦~
+           	 <font color="#009688" size="3px">这里什么都没有哦~
         </div>
     </div>
     <script src="../layui/layui.js"></script>
