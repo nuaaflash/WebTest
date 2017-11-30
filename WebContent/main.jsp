@@ -52,9 +52,9 @@
                     <li class="layui-nav-item layui-nav-itemed layui-bg-cyan">
                         <a href="javascript:;" ></i><span> 指标体系选择</span></a>
                     	<dl class="layui-nav-child">
-                            <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'手动',id:'8'}"><i class="layui-icon">&#xe658;</i><span> 手动</span></a></dd>
-                            <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'PCA',id:'9'}"><i class="layui-icon">&#xe658;</i><span> PCA</span></a></dd>
-                            <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'ICA',id:'10'}"><i class="layui-icon">&#xe658;</i><span> ICA</span></a></dd>
+                            <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'手动',id:'8'}"><i class="layui-icon">&#xe658;</i><span> 飞机</span></a></dd>
+                            <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'PCA',id:'9'}"><i class="layui-icon">&#xe658;</i><span> 坦克</span></a></dd>
+                            <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'ICA',id:'10'}"><i class="layui-icon">&#xe658;</i><span> 潜艇</span></a></dd>
                         </dl>
                     </li>
                     <li class="layui-nav-item layui-nav-itemed layui-bg-cyan">
