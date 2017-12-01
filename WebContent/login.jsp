@@ -29,7 +29,7 @@
   </style>
 </head>
 <body>
-	<h1 style="text-align:center"><font color="#FFB80F">武器装备评估系统</h1>
+	<h1 style="text-align:center"><font color="#FFB80F">系统效能评估软件系统</h1>
 	<form class="layui-form" action="main.jsp" >
 			</br>
 		  <div class="layui-form-item">
@@ -54,5 +54,6 @@
 		  </div>
 		  
 	</form>
+	
 </body>
 </html>
