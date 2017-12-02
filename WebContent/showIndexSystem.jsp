@@ -80,36 +80,11 @@
         </div>
         <div class="layui-body" id="container" >
             <!-- 内容主体区域  -->
-            <div style="padding: 30px;">
-            <!--  
-            	<font size="4px">
-            	<p>系统效能评估是针对系统集成综合一体化的技术特征，面向系统不同的任务，基于不同系统任务的整个过程，以完成整个任务成功为首要目标，结合任务各个阶段的特点，分析系统的组成和功能，结合任务完成过程和系统组成的具体实际，构建出系统效能评估分析软件，用于复杂系统的效能评估。</p>
-				<p>系统支持武器装备结构体系、系统指标体系、系统能力及行动的建模；提供AHP层次分析法、ADC分析法、SEA法、指数法、人工智能（BP、SVM等）探索性仿真评估法等多维方法对系统效能进行整体评估，提供可视化建模、分析工具，能够自动生成效能评估报告，并支持专业评估模块的灵活扩展。</p>
-				<p>可应用于作战计划模拟评估、联合作战试验研究、武器装备体系论证、武器装备型号论证、武器装备型号论证及作战效能评估等研究领域。</p>
-				</font>-->
-				<ul class="layui-timeline">
-				<li class="layui-timeline-item">
-					<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-					<div class="layui-timeline-content layui-text">
-						
-						<h3 class="layui-timeline-title">软件工程总和课程设计</h3>
-						<p><font color="#2B2B2B">题目：系统效能评估分析软件系统</p>
-						<p>院系：计算机科学与技术学院</p>
-						<p>专业：软件工程</p>
-						<p>小组成员：邓基浩 夏涵 吾逸阳 张敩 莫永浩</p>
-					</div>
-				</li>
-				<li class="layui-timeline-item">
-					<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-					<div class="layui-timeline-content layui-text">
-						<h3 class="layui-timeline-title">系统效能评估分析软件系统</h3>
-						<p><font color="#2B2B2B">本项目的任务提出者：南京航空航天大学计算机学院</p>
-						<p>本项目的任务开发者：南京航空航天大学计算机学院  303班项目小组</p>
-						<p>用户及实现该软件的计算中心或计算机网络：南航计算机中心</p>
-						<p>该软件系统同其他系统或其他机构的基本的相互来往关系：武器装备资料库系统</p>
-					</div>
-				</li>
-				</ul>
+            <div style="padding: 10px;">
+            	<font size=4px>
+            	<h1 style="text-align:center"><font color="#FFB80F">威胁度指标体系</h1>
+            	</br>
+            	<img src="otherResource/threatDegree.png" width="800" height="400" />
 			</div>
         </div>
 

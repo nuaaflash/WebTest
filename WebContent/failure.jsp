@@ -27,43 +27,18 @@
 	}
     .demo-carousel{height: 200px; line-height: 200px; text-align: center;}
   </style>
-   <script type="text/javascript">
-      function checkuser() {
-         if($('uname' == "admin") && $('pwd') == "admin") {
-           return true;
-         }else {
-            return false;
-         }
-      }
-
-      function $(id) {
-        return document.getElementById(id).value;
-      }
-     </script>
- </head>
- 
+</head>
 <body>
 	<h1 style="text-align:center"><font color="#FFB80F">系统效能评估软件系统</h1>
-	<form class="layui-form" action="main.jsp" >
+	<form class="layui-form" action="login.jsp" >
 			</br>
 		  <div class="layui-form-item">
-		    <label class="layui-form-label"><font color="#FFB800">用户名</font> </label>
-		    <div class="layui-input-inline">
-		      <input type="text" name="name" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
-		    </div>
+		    <p style="text-align:center"><font color="#FFB800">登录失败</font></p>
 		  </div>
-		  
-		  <div class="layui-form-item">
-		    <label class="layui-form-label"><font color="#FFB800">密码</font></label>
-		    <div class="layui-input-inline">
-		      <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
-		    </div>
-		  </div>
-		  </script>
+		  	  
 		  <div class="layui-form-item">
 		  	<div class="layui-input-block">
-			   <button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo" onclick="return checkuser()">登录</button>
-			   <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+			   <button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo">返回</button>
 			</div>
 		  </div>
 		  
