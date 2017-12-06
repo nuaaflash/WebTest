@@ -71,9 +71,10 @@ public class Sql {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
+			String[] record = new String[10];
 			if(rs.next()){
 				for(int i=0;i<10;i++){
-					String[] record;
+					
 					record[i]=rs.getString(i+1);
 				}
 			}
