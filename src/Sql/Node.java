@@ -13,4 +13,7 @@ public class Node{
 		this.nodeId = nodeId;
 		this.numofChildren = numofChildren;
 	}
+	public void ShowNode(){
+		System.out.println("node_name:"+nodeName+" parent_id:"+parentId+" node_value:"+value+" node_id:"+nodeId+" num_of_children:"+numofChildren);
+	}
 }
