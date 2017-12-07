@@ -42,38 +42,18 @@
                         <a href="intro.jsp" data-url="" data-name="form" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 系统简介</span></a>
                     </li>
                     <li class="layui-nav-item layui-nav-itemed layui-bg-cyan">
-                        <a href="javascript:;" ></i><span> 指标体系选择</span></a>
+                        <a href="javascript:;" ></i><span> 指标体系管理</span></a>
                     	<dl class="layui-nav-child">
                             <dd><a href="showIndexSystem.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'威胁度',id:'8'}"><i class="layui-icon">&#xe658;</i><span> 威胁度（目前只有这一个指标体系）</span></a></dd>
                         </dl>
                     </li>
-                    <li class="layui-nav-item layui-bg-cyan">
-                      	<a href="javascript:;"></i><span> 数据配置</span></a>
-                        <dl class="layui-nav-child">
-                            <dd>
-                                <a href="javascript:;" data-url="" data-icon="&#xe658;" data-title="数据导入" kit-target data-id='1'><i class="layui-icon">&#xe658;</i><span>数据导入</span></a>
-                            </dd>
-                            <dd>
-                                <a href="javascript:;" data-url="" data-icon="&#xe658;" data-title="归一化" kit-target data-id='2'><i class="layui-icon">&#xe658;</i><span>归一化</span></a>
-							</dd>
-							<dd>
-                                <a href="javascript:;" data-url="" data-icon="&#xe658;" data-title="量化分类" kit-target data-id='3'><i class="layui-icon">&#xe658;</i><span>量化分类</span></a>
-							</dd>
-                        </dl>
-                    </li>
                     <li class="layui-nav-item layui-nav-itemed layui-bg-cyan">
-                        <a href="javascript:;" data-url="" data-name="form" kit-loader><span> 模型训练</span></a>
+                        <a href="javascript:;" data-url="" data-name="form" kit-loader><span> 评估</span></a>
                     	<dl class="layui-nav-child">
-                            <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'分类',id:'8'}"><i class="layui-icon">&#xe658;</i><span> 算法</span></a></dd>
+                            <dd><a href="showAlgorithm1.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'分类',id:'8'}"><i class="layui-icon">&#xe658;</i><span> 算法一</span></a></dd>
                             <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'回归',id:'9'}"><i class="layui-icon">&#xe658;</i><span> 算法</span></a></dd>
                             <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'随机过程',id:'10'}"><i class="layui-icon">&#xe658;</i><span> 还是算法</span></a></dd>
                         </dl>
-                    </li>
-                    <li class="layui-nav-item layui-bg-cyan">
-                        <a href="javascript:;" data-url="" data-name="table" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 模型选择</span></a>
-                    </li>
-                    <li class="layui-nav-item layui-bg-cyan">
-                        <a href="javascript:;" data-url="" data-name="form" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 输出结果</span></a>
                     </li>
                 </ul>
             </div>
@@ -81,12 +61,6 @@
         <div class="layui-body" id="container" >
             <!-- 内容主体区域  -->
             <div style="padding: 30px;">
-            <!--  
-            	<font size="4px">
-            	<p>系统效能评估是针对系统集成综合一体化的技术特征，面向系统不同的任务，基于不同系统任务的整个过程，以完成整个任务成功为首要目标，结合任务各个阶段的特点，分析系统的组成和功能，结合任务完成过程和系统组成的具体实际，构建出系统效能评估分析软件，用于复杂系统的效能评估。</p>
-				<p>系统支持武器装备结构体系、系统指标体系、系统能力及行动的建模；提供AHP层次分析法、ADC分析法、SEA法、指数法、人工智能（BP、SVM等）探索性仿真评估法等多维方法对系统效能进行整体评估，提供可视化建模、分析工具，能够自动生成效能评估报告，并支持专业评估模块的灵活扩展。</p>
-				<p>可应用于作战计划模拟评估、联合作战试验研究、武器装备体系论证、武器装备型号论证、武器装备型号论证及作战效能评估等研究领域。</p>
-				</font>-->
 				<ul class="layui-timeline">
 				<li class="layui-timeline-item">
 					<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
@@ -117,6 +91,7 @@
             <!-- 底部固定区域 -->
            	<font color="#009688" size="3px">样式来源：<a href="http://www.layui.com/">layui.com</a></font>
         </div>
+        
     </div>
     
     <script src="layui/layui.js" charset="utf-8"></script>
