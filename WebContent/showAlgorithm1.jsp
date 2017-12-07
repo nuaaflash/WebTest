@@ -67,6 +67,9 @@
 				</form>
 			</div>
         </div>
+			<div class="layui-form-item">
+			   <button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo">确定选择</button>
+		  	</div>
         </div>
 
         <div class="layui-footer layui-bg-black">
