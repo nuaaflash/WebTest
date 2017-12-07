@@ -8,10 +8,12 @@ public class Sql {
 	private String user;// 数据库的用户名
 	private String password;// 数据库的密码
 	private String script;// 建表的命令脚本
+	private String treeName;// 树节点的名字
 	private int numofnodes;// 节点数量
 	private Connection conn; // 数据库连接对象conn
 	
 	public Sql(){
+		treeName = "Node";		// 默认威胁度指标体系
 		ConnectSql();
 	}
 	
@@ -33,16 +35,54 @@ public class Sql {
 		}
 	}
 	
-	private void InitTable(){
+	private void InitTree(String name){
 		// New A Table;
+		numofnodes = 0;
+		String sql = null;
+		ConnectSql();
+		DestroyTree(name);
+		ConnectSql();
+		sql = "CREATE TABLE "+name+"(node_id int,node_name varchar(100),parent_id int,num_of_children int,node_value int);";  //按表的名字新建树表
+		Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			stmt.executeUpdate(sql);// 执行sql语句
+			System.out.println("创建树表到数据库成功");
+			conn.close();
+			System.out.println("关闭数据库成功");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void DestroyTree(String name){
+		// New A Table;
+		String sql = null;
+		ConnectSql();
+		sql = "DROP TABLE "+name+";";  //按表的名字删去树表
+		Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			stmt.executeUpdate(sql);// 执行sql语句
+			System.out.println("从数据库删除树表成功");
+			conn.close();
+			System.out.println("关闭数据库成功");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}// 创建一个Statement对象
 	}
 	
 	public void Addnode(String name, int parent,int value){
 		// Insert A Record into Table;
 		String sql = null;
-		int nodeid = getNumofnodes() + 1;
+		int nodeid = 0;
+		if(numofnodes != 0){
+			nodeid = getNumofnodes() + 1;
+		}
 		ConnectSql();
-		sql = "INSERT INTO node(node_id, node_name, parent_id, num_of_children, node_value) values("+nodeid+", "+"'"+name+"'"+","+parent+","+ 0+","+ value+");";  //mysql语句
+		sql = "INSERT INTO "+ treeName +"(node_id, node_name, parent_id, num_of_children, node_value) values("+nodeid+", "+"'"+name+"'"+","+parent+","+ 0+","+ value+");";  //mysql语句
 		Node parentNode = getNode(parent);
 		int ChildnumofParent = parentNode.numofChildren + 1;
 		SetNodeChildrenNum(parentNode.nodeName,ChildnumofParent);
@@ -66,7 +106,7 @@ public class Sql {
 		Node node = null;
 		ConnectSql();
 		String sql = null;
-		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM node WHERE node_name ="+ "'"+name+ "'"+";";  //mysql语句
+		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM "+ treeName +" WHERE node_name ="+ "'"+name+ "'"+";";  //mysql语句
 		PreparedStatement pstmt;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -87,7 +127,6 @@ public class Sql {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return node;
 	}
 	
@@ -97,7 +136,7 @@ public class Sql {
 		Node node = null;
 		ConnectSql();
 		String sql = null;
-		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM node WHERE node_Id ="+ ID +";";  //mysql语句
+		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM "+ treeName +" WHERE node_Id ="+ ID +";";  //mysql语句
 		PreparedStatement pstmt;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -128,7 +167,7 @@ public class Sql {
 		Node node = null;
 		String sql = null;
 		Node parentnode = getNode(name);
-		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM node WHERE parent_id =" + parentnode.nodeId + ";";  //mysql语句
+		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM "+ treeName +" WHERE parent_id =" + parentnode.nodeId + ";";  //mysql语句
 		PreparedStatement pstmt;
 		ConnectSql();
 		try {
@@ -158,7 +197,7 @@ public class Sql {
 	public void SetNodeValue(String name,double value){
 		// Show the Children of a Node with this Name
 		String sql = null;
-		sql = "UPDATE node set node_value ="+ value + "WHERE node_name = '"+name+"'";  //mysql语句
+		sql = "UPDATE "+ treeName +" set node_value ="+ value + "WHERE node_name = '"+name+"'";  //mysql语句
 		Statement stmt;
 		ConnectSql();
 		try {
@@ -175,7 +214,7 @@ public class Sql {
 	public void SetNodeChildrenNum(String name,double num){
 		// Show the Children of a Node with this Name
 		String sql = null;
-		sql = "UPDATE node set num_of_children ="+ num + "WHERE node_name = '"+name+"'";  //mysql语句
+		sql = "UPDATE "+ treeName +" set num_of_children ="+ num + "WHERE node_name = '"+name+"'";  //mysql语句
 		Statement stmt;
 		ConnectSql();
 		try {
@@ -215,12 +254,19 @@ public class Sql {
 	public void TestSetNodeValue(){
 		SetNodeValue("TreatDegree",100);
 	}
+	
+	@Test
+	public void TestInitTree(){
+		treeName = "Newexp";
+		InitTree(treeName);
+	}
+	
 
 	public int getNumofnodes() {
 		// Find the Record with this Name;
 		ConnectSql();
 		String sql = null;
-		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM node ORDER BY node_id DESC";  //mysql语句
+		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM"+ treeName +"ORDER BY node_id DESC";  //mysql语句
 		PreparedStatement pstmt;
 		try {
 			pstmt = conn.prepareStatement(sql);

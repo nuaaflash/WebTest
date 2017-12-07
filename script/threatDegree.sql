@@ -1,4 +1,4 @@
-﻿DROP TABLE Node;
+DROP TABLE Node;
 
 CREATE TABLE Node(
 node_id int,
