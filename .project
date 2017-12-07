@@ -28,4 +28,11 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>WebContent/WEB-INF/lib/smartupload.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Arc/smartupload.jar</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

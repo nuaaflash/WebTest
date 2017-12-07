@@ -42,40 +42,18 @@
                         <a href="intro.jsp" data-url="" data-name="form" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 系统简介</span></a>
                     </li>
                     <li class="layui-nav-item layui-nav-itemed layui-bg-cyan">
-                        <a href="javascript:;" ></i><span> 指标体系选择</span></a>
+                        <a href="javascript:;" ></i><span> 指标体系管理</span></a>
                     	<dl class="layui-nav-child">
-                            <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'手动',id:'8'}"><i class="layui-icon">&#xe658;</i><span> 目标威胁因素</span></a></dd>
-                            <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'PCA',id:'9'}"><i class="layui-icon">&#xe658;</i><span> 太空威胁因素</span></a></dd>
-                            <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'ICA',id:'10'}"><i class="layui-icon">&#xe658;</i><span> 电磁威胁因素</span></a></dd>
-                        </dl>
-                    </li>
-                    <li class="layui-nav-item layui-bg-cyan">
-                      	<a href="javascript:;"></i><span> 数据配置</span></a>
-                        <dl class="layui-nav-child">
-                            <dd>
-                                <a href="javascript:;" data-url="" data-icon="&#xe658;" data-title="数据导入" kit-target data-id='1'><i class="layui-icon">&#xe658;</i><span>数据导入</span></a>
-                            </dd>
-                            <dd>
-                                <a href="javascript:;" data-url="" data-icon="&#xe658;" data-title="归一化" kit-target data-id='2'><i class="layui-icon">&#xe658;</i><span>归一化</span></a>
-							</dd>
-							<dd>
-                                <a href="javascript:;" data-url="" data-icon="&#xe658;" data-title="量化分类" kit-target data-id='3'><i class="layui-icon">&#xe658;</i><span>量化分类</span></a>
-							</dd>
+                            <dd><a href="showIndexSystem.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'威胁度',id:'8'}"><i class="layui-icon">&#xe658;</i><span> 威胁度（目前只有这一个指标体系）</span></a></dd>
                         </dl>
                     </li>
                     <li class="layui-nav-item layui-nav-itemed layui-bg-cyan">
-                        <a href="javascript:;" data-url="" data-name="form" kit-loader><span> 模型训练</span></a>
+                        <a href="javascript:;" data-url="" data-name="form" kit-loader><span> 评估</span></a>
                     	<dl class="layui-nav-child">
                             <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'分类',id:'8'}"><i class="layui-icon">&#xe658;</i><span> 算法</span></a></dd>
                             <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'回归',id:'9'}"><i class="layui-icon">&#xe658;</i><span> 算法</span></a></dd>
                             <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'随机过程',id:'10'}"><i class="layui-icon">&#xe658;</i><span> 还是算法</span></a></dd>
                         </dl>
-                    </li>
-                    <li class="layui-nav-item layui-bg-cyan">
-                        <a href="javascript:;" data-url="" data-name="table" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 模型选择</span></a>
-                    </li>
-                    <li class="layui-nav-item layui-bg-cyan">
-                        <a href="javascript:;" data-url="" data-name="form" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 输出结果</span></a>
                     </li>
                 </ul>
             </div>
