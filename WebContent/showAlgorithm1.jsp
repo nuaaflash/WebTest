@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="org.lxh.smart.SmartUpload"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -51,9 +50,9 @@
                     <li class="layui-nav-item layui-nav-itemed layui-bg-cyan">
                         <a href="javascript:;" data-url="" data-name="form" kit-loader><span> 评估</span></a>
                     	<dl class="layui-nav-child">
-                            <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'分类',id:'8'}"><i class="layui-icon">&#xe658;</i><span> 算法</span></a></dd>
-                            <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'回归',id:'9'}"><i class="layui-icon">&#xe658;</i><span> 算法</span></a></dd>
-                            <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'随机过程',id:'10'}"><i class="layui-icon">&#xe658;</i><span> 还是算法</span></a></dd>
+                            <dd><a href="showAlgorithm1.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'分类',id:'8'}"><i class="layui-icon">&#xe658;</i><span> 算法</span></a></dd>
+                            <dd><a href="showAlgorithm2.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'回归',id:'9'}"><i class="layui-icon">&#xe658;</i><span> 算法</span></a></dd>
+                            <dd><a href="showAlgorithm3.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'随机过程',id:'10'}"><i class="layui-icon">&#xe658;</i><span> 还是算法</span></a></dd>
                         </dl>
                     </li>
                 </ul>
@@ -62,21 +61,23 @@
         <div class="layui-body" id="container" >
             <!-- 内容主体区域  -->
             <div style="padding: 30px;">
-				<form action="UploadServlet" method="post" enctype="multipart/form-data">
-					<input type="file" name="file1" ><input type="submit">
+            	<h2>算法一<h2>
+            	<p>神经网络算法，需要训练数据进行模型训练。模型训练结束后，根据模型，获得指标叶子层的节点值来计算指标顶层的值。</p>
+            	<br>
+            	<br>
+            	<br>
+            	<p>请上传训练用的数据(支持.xls，.xlsx格式)</p>
+				<form action="UploadAG1Servlet" method="post" enctype="multipart/form-data">
+					<input type="file" name="file1" ><br>
+					<input type="submit">
 				</form>
 			</div>
         </div>
-			<div class="layui-form-item">
-			   <button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo">确定选择</button>
-		  	</div>
-        </div>
-
-        <div class="layui-footer layui-bg-black">
-            <!-- 底部固定区域 -->
-           	<font color="#009688" size="3px">样式来源：<a href="http://www.layui.com/">layui.com</a></font>
-        </div>
-    </div>
+	    <div class="layui-footer layui-bg-black">
+	        <!-- 底部固定区域 -->
+	       	<font color="#009688" size="3px">样式来源：<a href="http://www.layui.com/">layui.com</a></font>
+	    </div>
+	</div>
     
     <script src="layui/layui.js" charset="utf-8"></script>
 	<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->

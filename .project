@@ -32,7 +32,7 @@
 		<link>
 			<name>WebContent/WEB-INF/lib/smartupload.jar</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Arc/smartupload.jar</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/WebTest/WebContent/WEB-INF/lib/smartupload.jar</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

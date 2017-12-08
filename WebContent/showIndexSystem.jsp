@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="Sql.Sql" import="Sql.Node" import="java.util.ArrayList" import="java.util.List"  %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -80,11 +81,18 @@
         </div>
         <div class="layui-body" id="container" >
             <!-- 内容主体区域  -->
-            <div style="padding: 10px;">
-            	<font size=4px>
-            	<h1 style="text-align:center"><font color="#FFB80F">威胁度指标体系</h1>
-            	</br>
-            	<img src="otherResource/threatDegree.png" width="800" height="400" />
+            <div style="padding: 30px;">
+				<form action="SqlServlet" method="post">
+				新建树的名字:<input type="text" name="Treename" id="Treename" size="10">
+							<input type="text" name="Submits" id="Submits" size="10" value="0">
+							<input type="submit">
+				</form>
+				<form action="SqlServlet" method="post">
+				新建节点的名字:<input type="text" name="Nodename" id="Nodename" size="10" value="TestNodeName">
+				新建节点的父节点编号:<input type="text" name="parent" id="parent" size="10" value="0">
+							<input type="text" name="Submits" id="Submits" size="10" value="1">
+							<input type="submit">
+				</form>
 			</div>
         </div>
 

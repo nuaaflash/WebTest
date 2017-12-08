@@ -11,14 +11,14 @@ import org.lxh.smart.SmartUpload;
 /**
  * Servlet implementation class Upload
  */
-@WebServlet("/Upload")
-public class UploadServlet extends HttpServlet {
+//@WebServlet("/Upload")
+public class UploadAG1Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UploadServlet() {
+    public UploadAG1Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,12 +34,13 @@ public class UploadServlet extends HttpServlet {
 		su.initialize(this.getServletConfig(), request, response);
 		try {
 			su.upload();
-			su.save("E:\\");
+			String ext = su.getFiles().getFile(0).getFileExt();
+			String filename="theData."+ext;
+			su.getFiles().getFile(0).saveAs("E:\\"+filename);
+			//su.save("E:\\"); //使用绝对路径
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		String filename=su.getFiles().getFile(0).getFileName();
-		System.out.println(filename);
 		request.getRequestDispatcher(path).forward(request, response);
 	}
 

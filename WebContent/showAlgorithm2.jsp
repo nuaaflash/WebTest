@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="org.lxh.smart.SmartUpload"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -42,58 +43,37 @@
                         <a href="intro.jsp" data-url="" data-name="form" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 系统简介</span></a>
                     </li>
                     <li class="layui-nav-item layui-nav-itemed layui-bg-cyan">
-                        <a href="javascript:;" ></i><span> 指标体系选择</span></a>
+                        <a href="javascript:;" ></i><span> 指标体系管理</span></a>
                     	<dl class="layui-nav-child">
-                            <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'威胁度',id:'8'}"><i class="layui-icon">&#xe658;</i><span> 威胁度（目前只有这一个指标体系）</span></a></dd>
-                        </dl>
-                    </li>
-                    <li class="layui-nav-item layui-bg-cyan">
-                      	<a href="javascript:;"></i><span> 数据配置</span></a>
-                        <dl class="layui-nav-child">
-                            <dd>
-                                <a href="javascript:;" data-url="" data-icon="&#xe658;" data-title="数据导入" kit-target data-id='1'><i class="layui-icon">&#xe658;</i><span>数据导入</span></a>
-                            </dd>
-                            <dd>
-                                <a href="javascript:;" data-url="" data-icon="&#xe658;" data-title="归一化" kit-target data-id='2'><i class="layui-icon">&#xe658;</i><span>归一化</span></a>
-							</dd>
-							<dd>
-                                <a href="javascript:;" data-url="" data-icon="&#xe658;" data-title="量化分类" kit-target data-id='3'><i class="layui-icon">&#xe658;</i><span>量化分类</span></a>
-							</dd>
+                            <dd><a href="showIndexSystem.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'威胁度',id:'8'}"><i class="layui-icon">&#xe658;</i><span> 威胁度（目前只有这一个指标体系）</span></a></dd>
                         </dl>
                     </li>
                     <li class="layui-nav-item layui-nav-itemed layui-bg-cyan">
-                        <a href="javascript:;" data-url="" data-name="form" kit-loader><span> 模型训练</span></a>
+                        <a href="javascript:;" data-url="" data-name="form" kit-loader><span> 评估</span></a>
                     	<dl class="layui-nav-child">
-                            <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'分类',id:'8'}"><i class="layui-icon">&#xe658;</i><span> 算法</span></a></dd>
-                            <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'回归',id:'9'}"><i class="layui-icon">&#xe658;</i><span> 算法</span></a></dd>
-                            <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'随机过程',id:'10'}"><i class="layui-icon">&#xe658;</i><span> 还是算法</span></a></dd>
+                            <dd><a href="showAlgorithm1.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'分类',id:'8'}"><i class="layui-icon">&#xe658;</i><span> 算法</span></a></dd>
+                            <dd><a href="showAlgorithm2.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'回归',id:'9'}"><i class="layui-icon">&#xe658;</i><span> 算法</span></a></dd>
+                            <dd><a href="showAlgorithm3.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'随机过程',id:'10'}"><i class="layui-icon">&#xe658;</i><span> 还是算法</span></a></dd>
                         </dl>
-                    </li>
-                    <li class="layui-nav-item layui-bg-cyan">
-                        <a href="javascript:;" data-url="" data-name="table" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 模型选择</span></a>
-                    </li>
-                    <li class="layui-nav-item layui-bg-cyan">
-                        <a href="javascript:;" data-url="" data-name="form" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 输出结果</span></a>
                     </li>
                 </ul>
             </div>
         </div>
         <div class="layui-body" id="container" >
             <!-- 内容主体区域  -->
-            <div style="padding: 10px;">
-            	<font size=4px>
-            	<p>算法二的描述</p>
+            <div style="padding: 30px;">
+            	<h2>算法二<h2>
+            	<p>待添加</p>
+            	<br>
+            	<br>
+            	<br>
 			</div>
-			<div class="layui-form-item">
-			   <button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo" onclick="return checkuser()">确定选择</button>
-		  	</div>
         </div>
-
-        <div class="layui-footer layui-bg-black">
-            <!-- 底部固定区域 -->
-           	<font color="#009688" size="3px">样式来源：<a href="http://www.layui.com/">layui.com</a></font>
-        </div>
-    </div>
+	    <div class="layui-footer layui-bg-black">
+	        <!-- 底部固定区域 -->
+	       	<font color="#009688" size="3px">样式来源：<a href="http://www.layui.com/">layui.com</a></font>
+	    </div>
+	</div>
     
     <script src="layui/layui.js" charset="utf-8"></script>
 	<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
