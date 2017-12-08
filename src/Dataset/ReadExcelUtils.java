@@ -56,7 +56,7 @@ public class ReadExcelUtils {
     }  
   
     public ReadExcelUtils(){
-    	 String filepath = "C:\\44.xls"; 
+    	 String filepath = "F:\\1.xlsx"; 
     	 ReadExcel(filepath);
     }
     
