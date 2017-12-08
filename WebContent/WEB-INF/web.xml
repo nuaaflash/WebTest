@@ -11,6 +11,7 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>layui.css</welcome-file>
   </welcome-file-list>
+  
   <servlet>
     <servlet-name>UploadAG1Servlet</servlet-name>
     <servlet-class>upload.servlet.UploadAG1Servlet</servlet-class>
@@ -19,6 +20,7 @@
     <servlet-name>UploadAG1Servlet</servlet-name>
     <url-pattern>/UploadAG1Servlet</url-pattern>
   </servlet-mapping>
+  
   
     <servlet>
     <servlet-name>SqlServlet</servlet-name>
