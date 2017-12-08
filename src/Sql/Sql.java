@@ -5,29 +5,27 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 public class Sql {
-	private String url;// Êý¾Ý¿âµÄurl
-	private String user;// Êý¾Ý¿âµÄÓÃ»§Ãû
-	private String password;// Êý¾Ý¿âµÄÃÜÂë
-	private String script;// ½¨±íµÄÃüÁî½Å±¾
-	private String treeName;// Ê÷½ÚµãµÄÃû×Ö
-	private int numofnodes;// ½ÚµãÊýÁ¿
-	private Connection conn; // Êý¾Ý¿âÁ¬½Ó¶ÔÏóconn
+	private String url;// ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½url
+	private String user;// ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½
+	private String password;// ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String treeName;// ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private int numofnodes;// ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
+	private Connection conn; // ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½conn
 	
 	public Sql(){
-		treeName = "Node";		// Ä¬ÈÏÍþÐ²¶ÈÖ¸±êÌåÏµ
+		treeName = "Node";		// Ä¬ï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ïµ
 		ConnectSql();
 	}
 	
 	public void ConnectSql(){
-		setScript("sdfads");
 		setNumofnodes(0);
-		this.setUrl("jdbc:mysql://localhost:3306/threatDegree");
+		this.setUrl("jdbc:mysql://localhost:3306/dks");
 		this.setUser("root");
-		this.setPassword("123");
+		this.setPassword("112358");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPassword());
-			System.out.println("Á¬½ÓÊý¾Ý¿â³É¹¦");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½É¹ï¿½");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -44,14 +42,14 @@ public class Sql {
 		//ConnectSql();
 		//DestroyTree(name);
 		ConnectSql();
-		sql = "CREATE TABLE "+name+"(node_id int,node_name varchar(100),parent_id int,num_of_children int,node_value int);";  //°´±íµÄÃû×ÖÐÂ½¨Ê÷±í
+		sql = "CREATE TABLE "+name+"(node_id int,node_name varchar(100),parent_id int,num_of_children int,node_value int);";  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â½ï¿½ï¿½ï¿½ï¿½ï¿½
 		Statement stmt;
 		try {
 			stmt = conn.createStatement();
-			stmt.executeUpdate(sql);// Ö´ÐÐsqlÓï¾ä
-			System.out.println("´´½¨Ê÷±íµ½Êý¾Ý¿â³É¹¦");
+			stmt.executeUpdate(sql);// Ö´ï¿½ï¿½sqlï¿½ï¿½ï¿½
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½É¹ï¿½");
 			conn.close();
-			System.out.println("¹Ø±ÕÊý¾Ý¿â³É¹¦");
+			System.out.println("ï¿½Ø±ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½É¹ï¿½");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,18 +60,18 @@ public class Sql {
 		// New A Table;
 		String sql = null;
 		ConnectSql();
-		sql = "DROP TABLE "+name+";";  //°´±íµÄÃû×ÖÉ¾È¥Ê÷±í
+		sql = "DROP TABLE "+name+";";  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾È¥ï¿½ï¿½ï¿½ï¿½
 		Statement stmt;
 		try {
 			stmt = conn.createStatement();
-			stmt.executeUpdate(sql);// Ö´ÐÐsqlÓï¾ä
-			System.out.println("´ÓÊý¾Ý¿âÉ¾³ýÊ÷±í³É¹¦");
+			stmt.executeUpdate(sql);// Ö´ï¿½ï¿½sqlï¿½ï¿½ï¿½
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½");
 			conn.close();
-			System.out.println("¹Ø±ÕÊý¾Ý¿â³É¹¦");
+			System.out.println("ï¿½Ø±ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½É¹ï¿½");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}// ´´½¨Ò»¸öStatement¶ÔÏó
+		}// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Statementï¿½ï¿½ï¿½ï¿½
 	}
 	
 	public void Addnode(String name, int parent,int value){
@@ -84,7 +82,7 @@ public class Sql {
 			nodeid = getNumofnodes() + 1;
 		}
 		ConnectSql();
-		sql = "INSERT INTO "+ treeName +"(node_id, node_name, parent_id, num_of_children, node_value) values("+nodeid+", "+"'"+name+"'"+","+parent+","+ 0+","+ value+");";  //mysqlÓï¾ä
+		sql = "INSERT INTO "+ treeName +"(node_id, node_name, parent_id, num_of_children, node_value) values("+nodeid+", "+"'"+name+"'"+","+parent+","+ 0+","+ value+");";  //mysqlï¿½ï¿½ï¿½
 		if(parent != 0){
 			Node parentNode = getNode(parent);
 			int ChildnumofParent = parentNode.numofChildren + 1;
@@ -94,14 +92,14 @@ public class Sql {
 		ConnectSql();
 		try {
 			stmt = conn.createStatement();
-			stmt.executeUpdate(sql);// Ö´ÐÐsqlÓï¾ä
-			System.out.println("²åÈëµ½Êý¾Ý¿â³É¹¦");
+			stmt.executeUpdate(sql);// Ö´ï¿½ï¿½sqlï¿½ï¿½ï¿½
+			System.out.println("ï¿½ï¿½ï¿½ëµ½ï¿½ï¿½ï¿½Ý¿ï¿½É¹ï¿½");
 			conn.close();
-			System.out.println("¹Ø±ÕÊý¾Ý¿â³É¹¦");
+			System.out.println("ï¿½Ø±ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½É¹ï¿½");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}// ´´½¨Ò»¸öStatement¶ÔÏó
+		}// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Statementï¿½ï¿½ï¿½ï¿½
 		
 	}
 	public Node getNode(String name){
@@ -110,7 +108,7 @@ public class Sql {
 		Node node = null;
 		ConnectSql();
 		String sql = null;
-		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM "+ treeName +" WHERE node_name ="+ "'"+name+ "'"+";";  //mysqlÓï¾ä
+		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM "+ treeName +" WHERE node_name ="+ "'"+name+ "'"+";";  //mysqlï¿½ï¿½ï¿½
 		PreparedStatement pstmt;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -122,11 +120,11 @@ public class Sql {
 				numofChildren = rs.getInt(4);
 				value = rs.getInt(5);
 				node = new Node(nodeName,parentId,value,nodeId, numofChildren);
-				System.out.println("ÐÂ½¨½Úµã³É¹¦");
+				System.out.println("ï¿½Â½ï¿½ï¿½Úµï¿½É¹ï¿½");
 			}
 			
 			conn.close();
-			System.out.println("¹Ø±ÕÊý¾Ý¿â³É¹¦");
+			System.out.println("ï¿½Ø±ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½É¹ï¿½");
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -142,18 +140,18 @@ public class Sql {
 		//DestroyTree(name);
 		ConnectSql();
 		ArrayList names = new ArrayList();
-		sql = "SHOW TABLES;";  //µÃµ½ËùÓÐ±í
+		sql = "SHOW TABLES;";  //ï¿½Ãµï¿½ï¿½ï¿½ï¿½Ð±ï¿½
 		Statement stmt;
 		try {
 			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);// Ö´ÐÐsqlÓï¾ä
+			ResultSet rs = stmt.executeQuery(sql);// Ö´ï¿½ï¿½sqlï¿½ï¿½ï¿½
 			while (rs.next()) {
 				String temp = rs.getString(1);
 			    names.add(temp);
 			}
-			System.out.println("´´½¨Ê÷±íµ½Êý¾Ý¿â³É¹¦");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½É¹ï¿½");
 			conn.close();
-			System.out.println("¹Ø±ÕÊý¾Ý¿â³É¹¦");
+			System.out.println("ï¿½Ø±ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½É¹ï¿½");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -164,20 +162,20 @@ public class Sql {
 	@Test
 	public void testGETTREES(){
 		ArrayList names = getTreeS();
-		System.out.println("ÓÐ"+names.size()+"¸ö±í");
+		System.out.println("ï¿½ï¿½"+names.size()+"ï¿½ï¿½ï¿½ï¿½");
 		for(int i = 0;i < names.size();i ++){
 			int n = i+1;
 			System.out.println(n+":"+names.get(i));
 		}
 	}
 	
-	public Node getNode(int ID){	// Í¨¹ýID²éÕÒ½Úµã
+	public Node getNode(int ID){	// Í¨ï¿½ï¿½IDï¿½ï¿½ï¿½Ò½Úµï¿½
 		// Find the Record with this Name;
 		String nodeName = null;int parentId = 0;double value = 0;int nodeId = 0;int numofChildren = 0;
 		Node node = null;
 		ConnectSql();
 		String sql = null;
-		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM "+ treeName +" WHERE node_Id ="+ ID +";";  //mysqlÓï¾ä
+		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM "+ treeName +" WHERE node_Id ="+ ID +";";  //mysqlï¿½ï¿½ï¿½
 		PreparedStatement pstmt;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -189,11 +187,11 @@ public class Sql {
 				numofChildren = rs.getInt(4);
 				value = rs.getInt(5);
 				node = new Node(nodeName,parentId,value,nodeId, numofChildren);
-				System.out.println("ÐÂ½¨½Úµã³É¹¦");
+				System.out.println("ï¿½Â½ï¿½ï¿½Úµï¿½É¹ï¿½");
 			}
 			
 			conn.close();
-			System.out.println("¹Ø±ÕÊý¾Ý¿â³É¹¦");
+			System.out.println("ï¿½Ø±ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½É¹ï¿½");
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -208,13 +206,13 @@ public class Sql {
 		Node node = null;
 		String sql = null;
 		Node parentnode = getNode(name);
-		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM "+ treeName +" WHERE parent_id =" + parentnode.nodeId + ";";  //mysqlÓï¾ä
+		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM "+ treeName +" WHERE parent_id =" + parentnode.nodeId + ";";  //mysqlï¿½ï¿½ï¿½
 		PreparedStatement pstmt;
 		ConnectSql();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
-			System.out.println(parentnode.nodeName+"µÄ×Ó½Úµã£º");
+			System.out.println(parentnode.nodeName+"ï¿½ï¿½ï¿½Ó½Úµã£º");
 			for(int i = 0;i < parentnode.numofChildren;i ++){
 				if(rs.next()){
 					nodeId = rs.getInt(1);
@@ -228,7 +226,7 @@ public class Sql {
 			}
 			
 			conn.close();
-			System.out.println("¹Ø±ÕÊý¾Ý¿â³É¹¦");
+			System.out.println("ï¿½Ø±ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½É¹ï¿½");
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -238,15 +236,15 @@ public class Sql {
 	public void SetNodeValue(String name,double value){
 		// Show the Children of a Node with this Name
 		String sql = null;
-		sql = "UPDATE "+ treeName +" set node_value ="+ value + "WHERE node_name = '"+name+"'";  //mysqlÓï¾ä
+		sql = "UPDATE "+ treeName +" set node_value ="+ value + "WHERE node_name = '"+name+"'";  //mysqlï¿½ï¿½ï¿½
 		Statement stmt;
 		ConnectSql();
 		try {
 			stmt = conn.createStatement();
-			stmt.executeUpdate(sql);// Ö´ÐÐsqlÓï¾ä
-			System.out.println("¸üÐÂµ½Êý¾Ý¿â³É¹¦");
+			stmt.executeUpdate(sql);// Ö´ï¿½ï¿½sqlï¿½ï¿½ï¿½
+			System.out.println("ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½ï¿½Ý¿ï¿½É¹ï¿½");
 			conn.close();
-			System.out.println("¹Ø±ÕÊý¾Ý¿â³É¹¦");
+			System.out.println("ï¿½Ø±ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½É¹ï¿½");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}			
@@ -255,15 +253,15 @@ public class Sql {
 	public void SetNodeChildrenNum(String name,double num){
 		// Show the Children of a Node with this Name
 		String sql = null;
-		sql = "UPDATE "+ treeName +" set num_of_children ="+ num + "WHERE node_name = '"+name+"'";  //mysqlÓï¾ä
+		sql = "UPDATE "+ treeName +" set num_of_children ="+ num + "WHERE node_name = '"+name+"'";  //mysqlï¿½ï¿½ï¿½
 		Statement stmt;
 		ConnectSql();
 		try {
 			stmt = conn.createStatement();
-			stmt.executeUpdate(sql);// Ö´ÐÐsqlÓï¾ä
-			System.out.println("¸üÐÂµ½Êý¾Ý¿â³É¹¦");
+			stmt.executeUpdate(sql);// Ö´ï¿½ï¿½sqlï¿½ï¿½ï¿½
+			System.out.println("ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½ï¿½Ý¿ï¿½É¹ï¿½");
 			conn.close();
-			System.out.println("¹Ø±ÕÊý¾Ý¿â³É¹¦");
+			System.out.println("ï¿½Ø±ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½É¹ï¿½");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}			
@@ -306,7 +304,7 @@ public class Sql {
 		// Find the Record with this Name;
 		ConnectSql();
 		String sql = null;
-		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM"+ treeName +"ORDER BY node_id DESC";  //mysqlÓï¾ä
+		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM"+ treeName +"ORDER BY node_id DESC";  //mysqlï¿½ï¿½ï¿½
 		PreparedStatement pstmt;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -315,7 +313,7 @@ public class Sql {
 				numofnodes = rs.getInt(1);
 			}
 			conn.close();
-			System.out.println("¹Ø±ÕÊý¾Ý¿â³É¹¦");
+			System.out.println("ï¿½Ø±ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½É¹ï¿½");
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -325,14 +323,6 @@ public class Sql {
 
 	public void setNumofnodes(int numofnodes) {
 		this.numofnodes = numofnodes;
-	}
-
-	public String getScript() {
-		return script;
-	}
-
-	public void setScript(String script) {
-		this.script = script;
 	}
 
 	public String getPassword() {

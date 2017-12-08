@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="Sql.*" import="java.util.ArrayList" import="java.util.List"  %> 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -61,7 +63,7 @@
         <div class="layui-body" id="container" >
             <!-- 内容主体区域  -->
             <div style="padding: 30px;">
-            	<h2>算法一<h2>
+            	<h2>算法一</h2>
             	<p>神经网络算法，需要训练数据进行模型训练。模型训练结束后，根据模型，获得指标叶子层的节点值来计算指标顶层的值。</p>
             	<br>
             	<br>
@@ -71,6 +73,45 @@
 					<input type="file" name="file1" ><br>
 					<input type="submit">
 				</form>
+				<br>
+            	<br>
+            	<br>
+				<p>请选择指标体系</p>
+				<%
+					Sql sql = new Sql();
+					ArrayList al = sql.getTreeS();
+					int num = al.size();
+					String s;
+				%>
+				
+				<table bgcolor="#DEDEDE" border="2" cellspacing="5" cellpadding="5" width="400">
+					<form action="" method=post>
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>指标体系</th>
+							<th>.</th>
+						</tr>
+					</thead>
+					<tbody>
+<%
+					for(int i=0;i<num;i++) {
+%>
+						<tr>
+							<td><%= i%></td>
+							<td><%=al.get(i).toString() %></td>
+							<td><input type="radio" name="choose_target" value="<%=i%>"></td>
+						</tr>
+<%
+					}
+%>
+						<tr>
+							<td colspan="3"><input type="submit" value="提交"></td>
+						</tr>
+					</tbody>
+					</form>
+				</table>
+				
 			</div>
         </div>
 	    <div class="layui-footer layui-bg-black">
