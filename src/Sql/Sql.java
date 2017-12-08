@@ -9,7 +9,6 @@ public class Sql {
 	private String url;// ���ݿ��url
 	private String user;// ���ݿ���û���
 	private String password;// ���ݿ������
-	private String script;// ���������ű�
 	private String treeName;// ���ڵ������
 	private int numofnodes;// �ڵ�����
 	private Connection conn; // ���ݿ����Ӷ���conn
@@ -20,11 +19,10 @@ public class Sql {
 	}
 	
 	public void ConnectSql(){
-		setScript("sdfads");
 		setNumofnodes(0);
-		this.setUrl("jdbc:mysql://localhost:3306/threatDegree");
+		this.setUrl("jdbc:mysql://localhost:3306/dks");
 		this.setUser("root");
-		this.setPassword("123");
+		this.setPassword("112358");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPassword());
@@ -326,14 +324,6 @@ public class Sql {
 
 	public void setNumofnodes(int numofnodes) {
 		this.numofnodes = numofnodes;
-	}
-
-	public String getScript() {
-		return script;
-	}
-
-	public void setScript(String script) {
-		this.script = script;
 	}
 
 	public String getPassword() {
