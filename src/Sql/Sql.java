@@ -1,5 +1,6 @@
 package Sql;
 import java.sql.*;
+import java.util.ArrayList;
 
 import org.junit.Test;
 
@@ -35,12 +36,13 @@ public class Sql {
 		}
 	}
 	
-	private void InitTree(String name){
+	public void InitTree(String name){
 		// New A Table;
 		numofnodes = 0;
 		String sql = null;
-		ConnectSql();
-		DestroyTree(name);
+		treeName = name;
+		//ConnectSql();
+		//DestroyTree(name);
 		ConnectSql();
 		sql = "CREATE TABLE "+name+"(node_id int,node_name varchar(100),parent_id int,num_of_children int,node_value int);";  //按表的名字新建树表
 		Statement stmt;
@@ -83,9 +85,11 @@ public class Sql {
 		}
 		ConnectSql();
 		sql = "INSERT INTO "+ treeName +"(node_id, node_name, parent_id, num_of_children, node_value) values("+nodeid+", "+"'"+name+"'"+","+parent+","+ 0+","+ value+");";  //mysql语句
-		Node parentNode = getNode(parent);
-		int ChildnumofParent = parentNode.numofChildren + 1;
-		SetNodeChildrenNum(parentNode.nodeName,ChildnumofParent);
+		if(parent != 0){
+			Node parentNode = getNode(parent);
+			int ChildnumofParent = parentNode.numofChildren + 1;
+			SetNodeChildrenNum(parentNode.nodeName,ChildnumofParent);
+		}
 		Statement stmt;
 		ConnectSql();
 		try {
@@ -128,6 +132,43 @@ public class Sql {
 			e.printStackTrace();
 		}
 		return node;
+	}
+	
+	
+	public ArrayList getTreeS(){
+		numofnodes = 0;
+		String sql = null;
+		//ConnectSql();
+		//DestroyTree(name);
+		ConnectSql();
+		ArrayList names = new ArrayList();
+		sql = "SHOW TABLES;";  //得到所有表
+		Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);// 执行sql语句
+			while (rs.next()) {
+				String temp = rs.getString(1);
+			    names.add(temp);
+			}
+			System.out.println("创建树表到数据库成功");
+			conn.close();
+			System.out.println("关闭数据库成功");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return names;
+	}
+	
+	@Test
+	public void testGETTREES(){
+		ArrayList names = getTreeS();
+		System.out.println("有"+names.size()+"个表");
+		for(int i = 0;i < names.size();i ++){
+			int n = i+1;
+			System.out.println(n+":"+names.get(i));
+		}
 	}
 	
 	public Node getNode(int ID){	// 通过ID查找节点
@@ -228,37 +269,36 @@ public class Sql {
 		}			
 	}
 	
-	@Test
+	
 	public void TestnewSql(){
 		Sql sql = new Sql();
 	}
 	
-	@Test
+	
 	public void TestAddnode(){
 		Sql sql = new Sql();
 		sql.Addnode("lalal", 1, 2);
 	}
 	
-	@Test
+	
 	public void TestgetNode(){
 		Node node = getNode("YT");
 		node.ShowNode();
 	}
 	
-	@Test
+	
 	public void TestshowChildrenofNode(){
 		showChildrenofNode("TreatDegree");
 	}
 	
-	@Test
+	
 	public void TestSetNodeValue(){
 		SetNodeValue("TreatDegree",100);
 	}
 	
-	@Test
+	
 	public void TestInitTree(){
-		treeName = "Newexp";
-		InitTree(treeName);
+		InitTree("xNewexp");
 	}
 	
 

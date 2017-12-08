@@ -19,4 +19,13 @@
     <servlet-name>UploadAG1Servlet</servlet-name>
     <url-pattern>/UploadAG1Servlet</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>SqlServlet</servlet-name>
+    <servlet-class>Sql.SqlServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SqlServlet</servlet-name>
+    <url-pattern>/SqlServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
