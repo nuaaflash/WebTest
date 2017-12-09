@@ -43,6 +43,13 @@ public class SqlServlet extends HttpServlet {
 				sql.Addnode(request.getParameter("Nodename"), parentID, 0);
 				break;
 			}
+			case 2:{
+				sql.setUser(request.getParameter("user"));
+				sql.setPassword(request.getParameter("passwd"));
+				sql.SetDBS(request.getParameter("DBS"));
+				sql.ConnectSql();
+				break;
+			}
 		}
 		
 		request.getRequestDispatcher(path).forward(request, response);

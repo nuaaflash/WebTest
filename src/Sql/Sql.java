@@ -7,6 +7,7 @@ import org.junit.Test;
 
 public class Sql {
 	private String url;// 锟斤拷锟捷匡拷锟絬rl
+	private String DBS;
 	private String user;// 锟斤拷锟捷匡拷锟斤拷没锟斤拷锟�
 	private String password;// 锟斤拷锟捷匡拷锟斤拷锟斤拷锟�
 	private String treeName;// 锟斤拷锟节碉拷锟斤拷锟斤拷锟�
@@ -20,7 +21,8 @@ public class Sql {
 	
 	public void ConnectSql(){
 		setNumofnodes(0);
-		this.setUrl("jdbc:mysql://localhost:3306/threatDegree");
+		this.SetDBS("threatDegree");
+		this.setUrl("jdbc:mysql://localhost:3306/" + DBS);
 		this.setUser("root");
 		this.setPassword("123");
 		try {
@@ -35,6 +37,11 @@ public class Sql {
 		}
 	}
 	
+	public void SetDBS(String names) {
+		// TODO Auto-generated method stub
+		DBS = names;
+	}
+
 	public void InitTree(String name){
 		// New A Table;
 		numofnodes = 0;
