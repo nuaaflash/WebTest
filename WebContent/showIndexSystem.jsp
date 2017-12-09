@@ -82,17 +82,18 @@
         <div class="layui-body" id="container" >
             <!-- 内容主体区域  -->
             <div style="padding: 30px;">
-				<form action="SqlServlet" method="post">
-				新建树的名字:<input type="text" name="Treename" id="Treename" size="10">
-							<input type="text" name="Submits" id="Submits" size="10" value="0">
-							<input type="submit">
-				</form>
-				<form action="SqlServlet" method="post">
-				新建节点的名字:<input type="text" name="Nodename" id="Nodename" size="10" value="TestNodeName">
-				新建节点的父节点编号:<input type="text" name="parent" id="parent" size="10" value="0">
-							<input type="text" name="Submits" id="Submits" size="10" value="1">
-							<input type="submit">
-				</form>
+            <form action="SqlServlet" method="post">
+				<div>
+				树的名字:<input type="text" name="Treename" id="Treename" size="10">					
+				节点的名字:<input type="text" name="Nodename" id="Nodename" size="10">
+				节点的父节点编号:<input type="text" name="parent" id="parent" size="10" value="0">
+				</div>
+				<div>
+				<input type="radio" name="Submits" value="0" checked>新建树	
+				<input type="radio" name="Submits" value="1">新建节点
+				<input type="submit">
+				</div>
+			</form>
 			</div>
         </div>
 

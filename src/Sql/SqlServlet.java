@@ -39,6 +39,7 @@ public class SqlServlet extends HttpServlet {
 			}
 			case 1:{
 				int parentID = Integer.parseInt(request.getParameter("parent"));
+				sql.SetTreeName(request.getParameter("Treename"));
 				sql.Addnode(request.getParameter("Nodename"), parentID, 0);
 				break;
 			}
@@ -56,13 +57,13 @@ public class SqlServlet extends HttpServlet {
 		
 		boolean flag=false;
 		String uno=(String)request.getSession().getAttribute("uno");
-//		String uno="161530309";//娴嬭瘯鐢�
+//		String uno="161530309";//濞村鐦悽锟�
 		SmartUpload su = new SmartUpload();
 		su.initialize(this.getServletConfig(), request, response);
         try {
 			su.upload();
-		//	su.save("D:\\璇剧▼\\璁＄畻鏈哄绉慭\鍗撹秺鐝璡\椤圭洰\\Weshare\\WebRoot\\images");
-			su.save("C:\\Users\\寮犱竾楣廫\workspace\\Zz\\WebContent\\headerimg");
+		//	su.save("D:\\鐠囧墽鈻糪\鐠侊紕鐣婚張鍝勵劅缁夋叚\閸楁捁绉洪悵鐠妞ゅ湱娲癨\Weshare\\WebRoot\\images");
+			su.save("C:\\Users\\瀵姳绔炬ィ寤玕workspace\\Zz\\WebContent\\headerimg");
 		} catch (SmartUploadException e1) {
 			e1.printStackTrace();
 		}
