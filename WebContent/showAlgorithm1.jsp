@@ -84,8 +84,8 @@
 					String s;
 				%>
 				
+				<form action="ChsTgt1Servlet" method="post" enctype="multipart/form-data">
 				<table bgcolor="#DEDEDE" border="2" cellspacing="5" cellpadding="5" width="400">
-					<form action="ChooseTgt1Servlet" method=post>
 					<thead>
 						<tr>
 							<th>序号</th>
@@ -108,9 +108,9 @@
 						<tr>
 							<td colspan="3"><input type="submit" value="提交"></td>
 						</tr>
-					</tbody>
-					</form>
+					</tbody>	
 				</table>
+				</form>
 				
 			</div>
         </div>
