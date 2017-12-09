@@ -40,6 +40,8 @@ public class SqlServlet extends HttpServlet {
 			case 1:{
 				int parentID = Integer.parseInt(request.getParameter("parent"));
 				sql.SetTreeName(request.getParameter("Treename"));
+				System.out.println(sql.getTreename());
+				
 				sql.Addnode(request.getParameter("Nodename"), parentID, 0);
 				break;
 			}

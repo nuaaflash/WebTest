@@ -85,7 +85,7 @@
 				%>
 				
 				<table bgcolor="#DEDEDE" border="2" cellspacing="5" cellpadding="5" width="400">
-					<form action="" method=post>
+					<form action="ChooseTgt1Servlet" method=post>
 					<thead>
 						<tr>
 							<th>序号</th>
