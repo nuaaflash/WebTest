@@ -21,21 +21,21 @@ public class AlgorithmAHP{
 	
 	public void eigenvalue(){
 		Matrix c = new Matrix(initialMatrix);
-		double[][] x=c.eig().getD().getArray();//getD函数为求特征值。
+		double[][] x=c.eig().getD().getArray();//getD鍑芥暟涓烘眰鐗瑰緛鍊笺��
 		c.eig().getD().print(5, 5);
 		double[] ev = new double[linenum];
-		//取出特征值
+		//鍙栧嚭鐗瑰緛鍊�
 		for(int i=0;i<linenum;i++) {
 			ev[i]=x[i][i];
 		}
-		//求最大特征值
+		//姹傛渶澶х壒寰佸��
 		double maxEig=ev[0];
 		for(int i=0;i<linenum;i++) {
 			if(ev[i]>maxEig) {
 				maxEig=ev[i];
 			}
 		}
-		//求出最大特征值所在序列
+		//姹傚嚭鏈�澶х壒寰佸�兼墍鍦ㄥ簭鍒�
 		int Dnum=0;
 		for(int i=0;i<linenum;i++) {
 			if(ev[i]==maxEig) {
@@ -43,10 +43,10 @@ public class AlgorithmAHP{
 			}
 		}
 		//System.out.println(Dnum);
-		double[][] y=c.eig().getV().getArray();//getV函数为求特征向量，按列算
+		double[][] y=c.eig().getV().getArray();//getV鍑芥暟涓烘眰鐗瑰緛鍚戦噺锛屾寜鍒楃畻
 		c.eig().getV().print(5, 5);
 		double[] aVector = new double[linenum];
-		//weightVecor为权向量，赋值之后，就应该标准化
+		//weightVecor涓烘潈鍚戦噺锛岃祴鍊间箣鍚庯紝灏卞簲璇ユ爣鍑嗗寲
 		
 		for(int i=0;i<linenum;i++) {
 			aVector[i]=y[i][Dnum];
@@ -56,7 +56,7 @@ public class AlgorithmAHP{
 			System.out.print(aVector[i]+"  ");
 		}*/
 		
-		//以下为标准化，即保证向量为正，且和为一，求出来的就是权值
+		//浠ヤ笅涓烘爣鍑嗗寲锛屽嵆淇濊瘉鍚戦噺涓烘锛屼笖鍜屼负涓�锛屾眰鍑烘潵鐨勫氨鏄潈鍊�
 		double sum=0;
 		for(int i=0;i<linenum;i++) {
 			sum=aVector[i]+sum;
@@ -67,15 +67,21 @@ public class AlgorithmAHP{
 		/*for(int i=0;i<linenum;i++) {
 			System.out.print(aVector[i]+"  ");
 		}*/
-		weightVector =aVector;
+		setWeightVector(aVector);
 	}
+	
+	
+	public void TestSet(){
+		AlgorithmAHP ahp = new AlgorithmAHP();
+		ahp.setLinenum(123);
+		System.out.println(ahp.getLinenum());
+	}
+	
 	@Test
 	public void TTTEST() {
 		AlgorithmAHP ahp = new AlgorithmAHP();
-		
 		ahp.setLinenum(5);
-		linenum = 5;
-		System.out.println(linenum);
+		System.out.println(ahp.getLinenum());
 		double[][] aMatrix = {
 				{1,2,7,5,5},
 				{-2,1,4,3,3},
@@ -83,10 +89,10 @@ public class AlgorithmAHP{
 				{-5,-3,2,1,1},
 				{-5,-3,3,5,1}
 		};
-		System.out.println(linenum);
-		for(int i=0; i<linenum; i++){
-		    for(int j=0; j<linenum; j++){
-		         //由于无法直接输入分数，所以用负数代替，检测到为负数便转化为分数
+		
+		for(int i=0; i<ahp.getLinenum(); i++){
+		    for(int j=0; j<ahp.getLinenum(); j++){
+		         //鐢变簬鏃犳硶鐩存帴杈撳叆鍒嗘暟锛屾墍浠ョ敤璐熸暟浠ｆ浛锛屾娴嬪埌涓鸿礋鏁颁究杞寲涓哄垎鏁�
 		         if(aMatrix[i][j]<0) {
 		        	 aMatrix[i][j]=1/(-aMatrix[i][j]);
 		         }
@@ -96,11 +102,11 @@ public class AlgorithmAHP{
 		Matrix temp = new Matrix(aMatrix);
 		temp.print(5, 5);
 		ahp.setInitialMatrix(aMatrix);
-		//以上为输入判别矩阵
+		//浠ヤ笂涓鸿緭鍏ュ垽鍒煩闃�
 		ahp.eigenvalue();
-		System.out.println(linenum);
-		for(int i=0;i<linenum;i++) {
-			System.out.print(weightVector[i]+"  ");
+		System.out.println(ahp.getLinenum());
+		for(int i=0;i<ahp.getLinenum();i++) {
+			System.out.print(ahp.getWeightVector()[i]+"  ");
 		}
 	}
 	
@@ -108,15 +114,15 @@ public class AlgorithmAHP{
 		AlgorithmAHP ahp = new AlgorithmAHP();
 		Scanner in = new Scanner(System.in);
 		
-		int In = in.nextInt();//输入行数
+		int In = in.nextInt();//杈撳叆琛屾暟
 		ahp.setLinenum(In);
 		
-		//以下为输入判别矩阵
+		//浠ヤ笅涓鸿緭鍏ュ垽鍒煩闃�
 		double[][] aMatrix = new double[linenum][linenum];
 		for(int i=0; i<linenum; i++){
 		    for(int j=i+1; j<linenum; j++){
 		         aMatrix[i][j] = in.nextDouble();
-		         //由于无法直接输入分数，所以用负数代替，检测到为负数便转化为分数
+		         //鐢变簬鏃犳硶鐩存帴杈撳叆鍒嗘暟锛屾墍浠ョ敤璐熸暟浠ｆ浛锛屾娴嬪埌涓鸿礋鏁颁究杞寲涓哄垎鏁�
 		         if(aMatrix[i][j]<0) {
 		        	 aMatrix[i][j]=1/(-aMatrix[i][j]);
 		         }
@@ -127,10 +133,9 @@ public class AlgorithmAHP{
 			aMatrix[i][i] = 1;
 		}
 		ahp.setInitialMatrix(aMatrix);
-		//以上为输入判别矩阵
+		//浠ヤ笂涓鸿緭鍏ュ垽鍒煩闃�
 		ahp.eigenvalue();
 	}
-	
 	
 	public int getLinenum() {
 		return linenum;
@@ -142,12 +147,19 @@ public class AlgorithmAHP{
 		return initialMatrix;
 	}
 	public void setInitialMatrix(double[][] inputMatrix) {
-		initialMatrix = inputMatrix;//c是一个Matrix类的，其内容与initialMatrix一致
+		//c鏄竴涓狹atrix绫荤殑锛屽叾鍐呭涓巌nitialMatrix涓�鑷�
+		initialMatrix = new double[inputMatrix.length][inputMatrix[0].length];
+		for(int i = 0;i < inputMatrix.length;i ++){
+			for(int j = 0;j < inputMatrix[i].length;j ++){
+				initialMatrix[i][j] = inputMatrix[i][j];
+			}
+		}
 	}
 	public double[] getWeightVector() {
 		return weightVector;
 	}
 	public void setWeightVector(double[] weightVector) {
-		this.weightVector = weightVector;
+		 this.weightVector = new double[weightVector.length];
+		 this.weightVector = (double[]) weightVector.clone();
 	}
 }
