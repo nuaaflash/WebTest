@@ -48,6 +48,13 @@ public class SqlServlet extends HttpServlet {
 				sql.setPassword(request.getParameter("passwd"));
 				sql.SetDBS(request.getParameter("DBS"));
 				sql.ConnectSql();
+				request.setAttribute("dbs", request.getParameter("DBS")); 
+				request.getRequestDispatcher("showAlgorithm1.jsp").forward(request, response);  
+				request.getRequestDispatcher("showAlgorithm2.jsp").forward(request, response);  
+				break;
+			}
+			case 3:{
+				sql.DestroyTree(request.getParameter("Treename"));
 				break;
 			}
 			case 3:{
