@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="Sql.*" import="java.util.ArrayList" import="java.util.List"  %> 
-<%  
-String path = request.getContextPath();  
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
-%> 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -67,34 +64,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!-- 内容主体区域  -->
             <div style="padding: 30px;">
             	<h2>算法一</h2>
-            	<p>神经网络算法，需要训练数据进行模型训练。模型训练结束后，根据模型，获得指标叶子层的节点值来计算指标顶层的值。</p>
+            	<p>输入底层节点的值，系统将通过算法根据上传的训练数据来训练出模型，并将此次输入的用于计算顶层节点的值</p>
             	<br>
             	<br>
             	<br>
-            	<p>请上传训练用的数据(支持.xls，.xlsx格式)</p>
-				<form action="UploadAG1Servlet" method="post" enctype="multipart/form-data">
-					<input type="file" name="file1" ><br>
-					<input type="submit">
-				</form>
-				<br>
-            	<br>
-            	<br>
-				<p>请选择指标体系</p>
 				<%
-					Sql sql =  new Sql();
-					sql.SetDBS((String) request.getAttribute("dbs")); 
-					ArrayList<String> al = sql.getTreeS();
+					Sql sql = new Sql();
+					ArrayList al = sql.getTreeS();
 					int num = al.size();
 					String s;
 				%>
 				
-				<form action="inputDataAG1.jsp" method="post" enctype="multipart/form-data">
+				<form action="" method="post" enctype="multipart/form-data">
 				<table bgcolor="#DEDEDE" border="2" cellspacing="5" cellpadding="5" width="400">
 					<thead>
 						<tr>
 							<th>序号</th>
-							<th>指标体系</th>
-							<th>.</th>
+							<th>名称</th>
+							<th>请输入</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -104,7 +91,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<tr>
 							<td><%= i%></td>
 							<td><%=al.get(i).toString() %></td>
-							<td><input type="radio" name="choose_target" value="<%=i%>"></td>
+							<td>
+								<input type="range" name="point_value" min="1" max="100" step="1" value="1" oninput="change()">
+								<input id="show" type="number">
+							</td>
 						</tr>
 <%
 					}
@@ -137,5 +127,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  });
 	});
 	</script>
+	
+	<script>
+      function change(){ 
+      var num=document.getElementById("range"); 
+      var location=document.getElementById("show"); 
+      location.value=num.value; 
+  } 
+	</script>
+	
 </body>
 </html>

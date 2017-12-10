@@ -16,15 +16,13 @@ public class Sql {
 	
 	public Sql(){
 		treeName = "Node";
+		DBS = "threatDegree";
 		ConnectSql();
 	}
 	
 	public void ConnectSql(){
 		setNumofnodes(0);
-		this.SetDBS("threatDegree");
 		this.setUrl("jdbc:mysql://localhost:3306/" + DBS);
-		this.setUser("root");
-		this.setPassword("123");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPassword());
@@ -220,7 +218,7 @@ public class Sql {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
-			System.out.println(parentnode.nodeName+"锟斤拷锟接节点：");
+			System.out.println(parentnode.nodeName+"children：");
 			for(int i = 0;i < parentnode.numofChildren;i ++){
 				if(rs.next()){
 					nodeId = rs.getInt(1);
@@ -308,8 +306,12 @@ public class Sql {
 		InitTree("xNewexp");
 	}
 	
-	@Test
+	
 	public void testgetNumofnodes(){
+		SetDBS("DKS");
+		setUser("ROOT");
+		setPassword("112358");
+		SetTreeName("Node");
 		System.out.println(getNumofnodes());
 	}
 	
@@ -361,6 +363,11 @@ public class Sql {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public String getTreename() {
+		// TODO Auto-generated method stub
+		return treeName;
 	}
 }
 
