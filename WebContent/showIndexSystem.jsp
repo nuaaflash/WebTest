@@ -83,11 +83,6 @@
             <!-- 内容主体区域  -->
             <div style="padding: 30px;">
             <form action="SqlServlet" method="post">
-            	<div>
-            	数据库:<input type="text" name="DBS" id="DBS" size="10">	
-            	用户名:<input type="text" name="user" id="user" size="10" value = "root">		
-            	密码:<input type="text" name="passwd" id="passwd" size="10">		
-            	</div>
 				<div>
 				树的名字:<input type="text" name="Treename" id="Treename" size="10">					
 				节点的名字:<input type="text" name="Nodename" id="Nodename" size="10">
@@ -96,7 +91,7 @@
 				<div>
 				<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo" onclick="return checkuser()" name="Submits" value="0">新建树</button>
 				<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo" onclick="return checkuser()" name="Submits" value="1">新建节点</button>
-				<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo" onclick="return checkuser()" name="Submits" value="2">登陆数据库</button>
+				<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo" onclick="return checkuser()" name="Submits" value="3">删除树</button>
 				</div>
 			</form>
 			</div>

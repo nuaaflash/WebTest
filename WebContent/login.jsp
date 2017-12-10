@@ -46,23 +46,28 @@
 	<h1 style="text-align:center"><font color="#FFB80F">系统效能评估软件系统</h1>
 	<form class="layui-form" action="main.jsp" >
 			</br>
-		  <div class="layui-form-item">
-		    <label class="layui-form-label"><font color="#FFB800">用户名</font> </label>
+			<div class="layui-form-item">
+		    <label class="layui-form-label"><font color="#FFB800">EVA机型</font> </label>
 		    <div class="layui-input-inline">
-		      <input type="text" name="name" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+		      <input type="text" name="DBS" id="DBS" required  lay-verify="required" placeholder="请输入数据库名" autocomplete="off" class="layui-input">
 		    </div>
 		  </div>
-		  
 		  <div class="layui-form-item">
-		    <label class="layui-form-label"><font color="#FFB800">密码</font></label>
+		    <label class="layui-form-label"><font color="#FFB800">驾驶员</font> </label>
 		    <div class="layui-input-inline">
-		      <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+		      <input type="text" name="user" id="user" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+		    </div>
+		  </div>
+		  <div class="layui-form-item">
+		    <label class="layui-form-label"><font color="#FFB800">口令</font></label>
+		    <div class="layui-input-inline">
+		      <input type="password" name="passwd" id="passwd" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
 		    </div>
 		  </div>
 		  </script>
 		  <div class="layui-form-item">
 		  	<div class="layui-input-block">
-			   <button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo" onclick="return checkuser()">登录</button>
+			   <button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo" onclick="return checkuser()" name="Submits" value="2">作战</button>
 			   <button type="reset" class="layui-btn layui-btn-primary">重置</button>
 			</div>
 		  </div>

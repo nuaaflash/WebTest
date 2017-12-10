@@ -50,6 +50,10 @@ public class SqlServlet extends HttpServlet {
 				sql.ConnectSql();
 				break;
 			}
+			case 3:{
+				sql.DestroyTree(request.getParameter("Treename"));
+				break;
+			}
 		}
 		
 		request.getRequestDispatcher(path).forward(request, response);
