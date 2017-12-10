@@ -6,16 +6,18 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 public class Sql {
-	private String url;// 锟斤拷锟捷匡拷锟絬rl
-	private String DBS;
-	private String user;// 锟斤拷锟捷匡拷锟斤拷没锟斤拷锟�
-	private String password;// 锟斤拷锟捷匡拷锟斤拷锟斤拷锟�
-	private String treeName;// 锟斤拷锟节碉拷锟斤拷锟斤拷锟�
-	private int numofnodes;// 锟节碉拷锟斤拷锟斤拷
-	private Connection conn; // 锟斤拷锟捷匡拷锟斤拷锟接讹拷锟斤拷conn
+	private String url;// Url is for the connection of DBS
+	private String DBS;// NAME OF DBS
+	private String user;// root or sth else
+	private String password;
+	private String treeName;// name of the tree being operated.
+	private int numofnodes;
+	private Connection conn; //The class to connect the DBS.
 	
 	public Sql(){
-		user = "root";
+		treeName = "Node";
+		DBS = "threatDegree";
+		ConnectSql();
 	}
 	
 	public void ConnectSql(){
@@ -24,7 +26,7 @@ public class Sql {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPassword());
-			System.out.println("锟斤拷锟斤拷锟斤拷锟捷匡拷晒锟�");
+			System.out.println("Conceting now!");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -50,10 +52,10 @@ public class Sql {
 		Statement stmt;
 		try {
 			stmt = conn.createStatement();
-			stmt.executeUpdate(sql);// 执锟斤拷sql锟斤拷锟�
-			System.out.println("锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟捷匡拷晒锟�");
+			stmt.executeUpdate(sql);
+			System.out.println("Table showed!");
 			conn.close();
-			System.out.println("锟截憋拷锟斤拷锟捷匡拷晒锟�");
+			System.out.println("Database was Colsed successfully");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -64,22 +66,21 @@ public class Sql {
 		treeName = name;
 	}
 	
-	private void DestroyTree(String name){
+	public void DestroyTree(String name){
 		// New A Table;
 		String sql = null;
 		ConnectSql();
-		sql = "DROP TABLE "+name+";";  //锟斤拷锟斤拷锟斤拷锟斤拷锟缴救ワ拷锟斤拷锟�
+		sql = "DROP TABLE "+name+";";  
 		Statement stmt;
 		try {
 			stmt = conn.createStatement();
-			stmt.executeUpdate(sql);// 执锟斤拷sql锟斤拷锟�
-			System.out.println("锟斤拷锟斤拷锟捷匡拷删锟斤拷锟斤拷锟斤拷晒锟�");
+			stmt.executeUpdate(sql);
+			System.out.println("Destroy tree successfully!");
 			conn.close();
-			System.out.println("锟截憋拷锟斤拷锟捷匡拷晒锟�");
+			System.out.println("Database was Colsed successfully");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}// 锟斤拷锟斤拷一锟斤拷Statement锟斤拷锟斤拷
+		}
 	}
 	
 	public void Addnode(String name, int parent,int value){
@@ -98,14 +99,13 @@ public class Sql {
 		ConnectSql();
 		try {
 			stmt = conn.createStatement();
-			stmt.executeUpdate(sql);// 执锟斤拷sql锟斤拷锟�
-			System.out.println("锟斤拷锟诫到锟斤拷锟捷匡拷晒锟�");
+			stmt.executeUpdate(sql);
+			System.out.println("Add node successfully!");
 			conn.close();
-			System.out.println("锟截憋拷锟斤拷锟捷匡拷晒锟�");
+			System.out.println("Database was Colsed successfully");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}// 锟斤拷锟斤拷一锟斤拷Statement锟斤拷锟斤拷
+		}
 		
 	}
 	public Node getNode(String name){
@@ -126,11 +126,11 @@ public class Sql {
 				numofChildren = rs.getInt(4);
 				value = rs.getInt(5);
 				node = new Node(nodeName,parentId,value,nodeId, numofChildren);
-				System.out.println("锟铰斤拷锟节碉拷晒锟�");
+				System.out.println("Node gotten!");
 			}
 			
 			conn.close();
-			System.out.println("锟截憋拷锟斤拷锟捷匡拷晒锟�");
+			System.out.println("Database was Colsed successfully");
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -146,18 +146,18 @@ public class Sql {
 		//DestroyTree(name);
 		ConnectSql();
 		ArrayList<String> names = new ArrayList<String>();
-		sql = "SHOW TABLES;";  //锟矫碉拷锟斤拷锟叫憋拷
+		sql = "SHOW TABLES;";  
 		Statement stmt;
 		try {
 			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);// 执锟斤拷sql锟斤拷锟�
+			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				String temp = rs.getString(1);
 			    names.add(temp);
 			}
-			System.out.println("锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟捷匡拷晒锟�");
+			System.out.println("Table showed!");
 			conn.close();
-			System.out.println("锟截憋拷锟斤拷锟捷匡拷晒锟�");
+			System.out.println("Database was Colsed successfully");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -175,7 +175,7 @@ public class Sql {
 		}
 	}
 	
-	public Node getNode(int ID){	// 通锟斤拷ID锟斤拷锟揭节碉拷
+	public Node getNode(int ID){	
 		// Find the Record with this Name;
 		String nodeName = null;int parentId = 0;double value = 0;int nodeId = 0;int numofChildren = 0;
 		Node node = null;
@@ -193,11 +193,11 @@ public class Sql {
 				numofChildren = rs.getInt(4);
 				value = rs.getInt(5);
 				node = new Node(nodeName,parentId,value,nodeId, numofChildren);
-				System.out.println("锟铰斤拷锟节碉拷晒锟�");
+				System.out.println("Got the NODE!");
 			}
 			
 			conn.close();
-			System.out.println("锟截憋拷锟斤拷锟捷匡拷晒锟�");
+			System.out.println("Database was Colsed successfully");
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -218,7 +218,7 @@ public class Sql {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
-			System.out.println(parentnode.nodeName+"锟斤拷锟接节点：");
+			System.out.println(parentnode.nodeName+"children：");
 			for(int i = 0;i < parentnode.numofChildren;i ++){
 				if(rs.next()){
 					nodeId = rs.getInt(1);
@@ -232,7 +232,7 @@ public class Sql {
 			}
 			
 			conn.close();
-			System.out.println("锟截憋拷锟斤拷锟捷匡拷晒锟�");
+			System.out.println("Database was Colsed successfully");
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -242,15 +242,15 @@ public class Sql {
 	public void SetNodeValue(String name,double value){
 		// Show the Children of a Node with this Name
 		String sql = null;
-		sql = "UPDATE "+ treeName +" set node_value ="+ value + "WHERE node_name = '"+name+"'";  //mysql锟斤拷锟�
+		sql = "UPDATE "+ treeName +" set node_value ="+ value + "WHERE node_name = '"+name+"'"; 
 		Statement stmt;
 		ConnectSql();
 		try {
 			stmt = conn.createStatement();
-			stmt.executeUpdate(sql);// 执锟斤拷sql锟斤拷锟�
-			System.out.println("锟斤拷锟铰碉拷锟斤拷锟捷匡拷晒锟�");
+			stmt.executeUpdate(sql);
+			System.out.println("Update done!");
 			conn.close();
-			System.out.println("锟截憋拷锟斤拷锟捷匡拷晒锟�");
+			System.out.println("Database was Colsed successfully");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}			
@@ -259,15 +259,15 @@ public class Sql {
 	public void SetNodeChildrenNum(String name,double num){
 		// Show the Children of a Node with this Name
 		String sql = null;
-		sql = "UPDATE "+ treeName +" set num_of_children ="+ num + "WHERE node_name = '"+name+"'";  //mysql锟斤拷锟�
+		sql = "UPDATE "+ treeName +" set num_of_children ="+ num + "WHERE node_name = '"+name+"'"; 
 		Statement stmt;
 		ConnectSql();
 		try {
 			stmt = conn.createStatement();
-			stmt.executeUpdate(sql);// 执锟斤拷sql锟斤拷锟�
-			System.out.println("锟斤拷锟铰碉拷锟斤拷锟捷匡拷晒锟�");
+			stmt.executeUpdate(sql);
+			System.out.println("Update successfully");
 			conn.close();
-			System.out.println("锟截憋拷锟斤拷锟捷匡拷晒锟�");
+			System.out.println("Database was Colsed successfully");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}			
@@ -275,6 +275,7 @@ public class Sql {
 	
 	
 	public void TestnewSql(){
+		@SuppressWarnings("unused")
 		Sql sql = new Sql();
 	}
 	
@@ -318,7 +319,7 @@ public class Sql {
 		// Find the Record with this Name;
 		ConnectSql();
 		String sql = null;
-		sql = "SELECT count(0) AS totalCount FROM "+ treeName +";";  //mysql锟斤拷锟�
+		sql = "SELECT count(0) AS totalCount FROM "+ treeName +";";  
 		PreparedStatement pstmt;
 		numofnodes = 0;
 		try {
@@ -328,7 +329,7 @@ public class Sql {
 				numofnodes = rs.getInt("totalCount");
 			}
 			conn.close();
-			System.out.println("锟截憋拷锟斤拷锟捷匡拷晒锟�");
+			System.out.println("Database was Colsed successfully");
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
