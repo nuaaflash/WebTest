@@ -165,10 +165,36 @@ public class Sql {
 		return names;
 	}
 	
+	public ArrayList<String> getLeaves(String nameoftree){		//通过树名查询树的叶子节点名 返回ArrayList<String>
+		numofnodes = 0;
+		String sql = null;
+		//ConnectSql();
+		//DestroyTree(name);
+		ConnectSql();
+		ArrayList<String> names = new ArrayList<String>();
+		sql = "SELECT node_name FROM " + nameoftree +" WHERE num_of_children = 0;";  
+		Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				String temp = rs.getString(1);
+			    names.add(temp);
+			}
+			System.out.println("Children showed!");
+			conn.close();
+			System.out.println("Database was Colsed successfully");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return names;
+	}
 	
+	@Test
 	public void testGETTREES(){
-		ArrayList<String> names = getTreeS();
-		System.out.println("锟斤拷"+names.size()+"锟斤拷锟斤拷");
+		ArrayList<String> names = getLeaves("node");
+		System.out.println("有"+names.size()+"个");
 		for(int i = 0;i < names.size();i ++){
 			int n = i+1;
 			System.out.println(n+":"+names.get(i));
