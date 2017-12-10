@@ -22,14 +22,7 @@
 		<servlet-name>UploadAG1Servlet</servlet-name>
 		<url-pattern>/UploadAG1Servlet</url-pattern>
 	</servlet-mapping>
-	<servlet>
-		<servlet-name>ChsTgt1Servlet</servlet-name>
-		<servlet-class>upload.servlet.ChsTgt1Servlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ChsTgt1Servlet</servlet-name>
-		<url-pattern>/ChsTgt1Servlet</url-pattern>
-	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>SqlServlet</servlet-name>
 		<servlet-class>Sql.SqlServlet</servlet-class>

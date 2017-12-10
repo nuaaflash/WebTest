@@ -139,13 +139,13 @@ public class Sql {
 	}
 	
 	
-	public ArrayList getTreeS(){
+	public ArrayList<String> getTreeS(){
 		numofnodes = 0;
 		String sql = null;
 		//ConnectSql();
 		//DestroyTree(name);
 		ConnectSql();
-		ArrayList names = new ArrayList();
+		ArrayList<String> names = new ArrayList<String>();
 		sql = "SHOW TABLES;";  //锟矫碉拷锟斤拷锟叫憋拷
 		Statement stmt;
 		try {
@@ -167,7 +167,7 @@ public class Sql {
 	
 	
 	public void testGETTREES(){
-		ArrayList names = getTreeS();
+		ArrayList<String> names = getTreeS();
 		System.out.println("锟斤拷"+names.size()+"锟斤拷锟斤拷");
 		for(int i = 0;i < names.size();i ++){
 			int n = i+1;
