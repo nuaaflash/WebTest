@@ -15,16 +15,12 @@ public class Sql {
 	private Connection conn; // 锟斤拷锟捷匡拷锟斤拷锟接讹拷锟斤拷conn
 	
 	public Sql(){
-		treeName = "Node";		// 默锟斤拷锟斤拷胁锟斤拷指锟斤拷锟斤拷系
-		ConnectSql();
+		user = "root";
 	}
 	
 	public void ConnectSql(){
 		setNumofnodes(0);
-		this.SetDBS("threatDegree");
 		this.setUrl("jdbc:mysql://localhost:3306/" + DBS);
-		this.setUser("root");
-		this.setPassword("123");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPassword());
@@ -143,13 +139,13 @@ public class Sql {
 	}
 	
 	
-	public ArrayList getTreeS(){
+	public ArrayList<String> getTreeS(){
 		numofnodes = 0;
 		String sql = null;
 		//ConnectSql();
 		//DestroyTree(name);
 		ConnectSql();
-		ArrayList names = new ArrayList();
+		ArrayList<String> names = new ArrayList<String>();
 		sql = "SHOW TABLES;";  //锟矫碉拷锟斤拷锟叫憋拷
 		Statement stmt;
 		try {
@@ -171,7 +167,7 @@ public class Sql {
 	
 	
 	public void testGETTREES(){
-		ArrayList names = getTreeS();
+		ArrayList<String> names = getTreeS();
 		System.out.println("锟斤拷"+names.size()+"锟斤拷锟斤拷");
 		for(int i = 0;i < names.size();i ++){
 			int n = i+1;
@@ -309,8 +305,12 @@ public class Sql {
 		InitTree("xNewexp");
 	}
 	
-	@Test
+	
 	public void testgetNumofnodes(){
+		SetDBS("DKS");
+		setUser("ROOT");
+		setPassword("112358");
+		SetTreeName("Node");
 		System.out.println(getNumofnodes());
 	}
 	
@@ -362,6 +362,11 @@ public class Sql {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public String getTreename() {
+		// TODO Auto-generated method stub
+		return treeName;
 	}
 }
 

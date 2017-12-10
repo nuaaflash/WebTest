@@ -11,7 +11,7 @@ import org.lxh.smart.SmartUpload;
 /**
  * Servlet implementation class Upload
  */
-//@WebServlet("/Upload")
+
 public class UploadAG1Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,6 +32,7 @@ public class UploadAG1Servlet extends HttpServlet {
 		String path="showAlgorithm1.jsp";
 		SmartUpload su = new SmartUpload();
 		su.initialize(this.getServletConfig(), request, response);
+		
 		try {
 			su.upload();
 			String ext = su.getFiles().getFile(0).getFileExt();
