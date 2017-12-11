@@ -44,7 +44,7 @@
  
 <body>
 	<h1 style="text-align:center"><font color="#FFB80F">系统效能评估软件系统</h1>
-	<form class="layui-form" action="main.jsp" >
+	<form class="layui-form" action="SqlServlet" >
 			</br>
 			<div class="layui-form-item">
 		    <label class="layui-form-label"><font color="#FFB800">EVA机型</font> </label>

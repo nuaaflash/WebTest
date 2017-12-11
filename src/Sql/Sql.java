@@ -13,11 +13,15 @@ public class Sql {
 	private String treeName;// name of the tree being operated.
 	private int numofnodes;
 	private Connection conn; //The class to connect the DBS.
+	private static Sql single = null;
 	
-	public Sql(){
-		treeName = "Node";
-		DBS = "threatDegree";
-		ConnectSql();
+	private Sql(){}
+	
+	public static Sql getInstance() {  
+		if (single == null) {    
+		      single = new Sql();  
+		 }    
+		return single;  
 	}
 	
 	public void ConnectSql(){

@@ -81,8 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	<br>
 				<p>请选择指标体系</p>
 				<%
-					Sql sql =  new Sql();
-					sql.SetDBS((String) request.getAttribute("dbs")); 
+					Sql sql =  Sql.getInstance();
 					ArrayList<String> al = sql.getTreeS();
 					int num = al.size();
 					String s;

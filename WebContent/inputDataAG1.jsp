@@ -69,7 +69,7 @@
             	<br>
             	<br>
 				<%
-					Sql sql = new Sql();
+					Sql sql = Sql.getInstance();
 					ArrayList al = sql.getTreeS();
 					int num = al.size();
 					String s;
