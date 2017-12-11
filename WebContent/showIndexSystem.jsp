@@ -84,15 +84,41 @@
             <div style="padding: 30px;">
             <form action="SqlServlet" method="post">
 				<div>
-				树的名字:<input type="text" name="Treename" id="Treename" size="10">					
+				树的名字:<input type="text" name="Treename" id="Treename" size="10">	
+				节点的父节点编号:<input type="text" name="parent" id="parent" size="10" value="0">				
 				节点的名字:<input type="text" name="Nodename" id="Nodename" size="10">
-				节点的父节点编号:<input type="text" name="parent" id="parent" size="10" value="0">
+				节点的值:<input type="text" name="value" id="value" size="10" value="0">
 				</div>
 				<div>
 				<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo" onclick="return checkuser()" name="Submits" value="0">新建树</button>
 				<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo" onclick="return checkuser()" name="Submits" value="1">新建节点</button>
-				<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo" onclick="return checkuser()" name="Submits" value="3">删除树</button>
+				<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo" onclick="return checkuser()" name="Submits" value="4">改变节点的值</button>
 				</div>
+			</form>
+			<form action="SqlServlet" method="post" name = "showTree">
+				<%
+					Sql sql = Sql.getInstance();
+					ArrayList <String> trees = sql.getTreeS(); 
+					int num = 0;
+					if(trees != null) {
+						num = trees.size();
+					}
+				%>
+				<tbody>
+<%			
+					for(int i=0;i<num;i++) {
+%>
+						<tr>
+							<td>第<%= i+1%>个指标体系名字：</td>
+							<td><%=trees.get(i).toString() %></td>
+							<input type="hidden" name = "Deletename" value="<%=trees.get(i).toString() %>">
+							<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo" onclick="return checkuser()" name="Submits" value="3">删除树</button>
+							</br>
+						</tr>
+<%
+					}
+%>
+				</tbody>
 			</form>
 			</div>
         </div>
