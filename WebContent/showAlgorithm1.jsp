@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="Sql.*" import="java.util.ArrayList" import="java.util.List"  %> 
-
+<%  
+String path = request.getContextPath();  
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
+%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -78,7 +81,8 @@
             	<br>
 				<p>请选择指标体系</p>
 				<%
-					Sql sql = new Sql();
+					Sql sql =  new Sql();
+					sql.SetDBS((String) request.getAttribute("dbs")); 
 					ArrayList<String> al = sql.getTreeS();
 					int num = al.size();
 					String s;
