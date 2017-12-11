@@ -44,6 +44,7 @@
  
 <body>
 	<h1 style="text-align:center"><font color="#FFB80F">系统效能评估软件系统</h1>
+	<%System.out.println("ASDDFG"); %>
 	<form class="layui-form" action="main.jsp" >
 			</br>
 			<div class="layui-form-item">

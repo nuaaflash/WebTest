@@ -47,6 +47,7 @@ public class SqlServlet extends HttpServlet {
 				sql.setUser(request.getParameter("user"));
 				sql.setPassword(request.getParameter("passwd"));
 				sql.SetDBS(request.getParameter("DBS"));
+				System.out.println(request.getParameter("DBS"));
 				sql.ConnectSql();
 				request.setAttribute("dbs", request.getParameter("DBS")); 
 				request.getRequestDispatcher("showAlgorithm1.jsp").forward(request, response);  

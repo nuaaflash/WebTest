@@ -16,7 +16,6 @@ public class Sql {
 	
 	public Sql(){
 		treeName = "Node";
-		DBS = "threatDegree";
 		ConnectSql();
 	}
 	

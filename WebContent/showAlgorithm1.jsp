@@ -83,6 +83,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<%
 					Sql sql =  new Sql();
 					sql.SetDBS((String) request.getAttribute("dbs")); 
+					System.out.println((String) request.getAttribute("dbs"));
 					ArrayList<String> al = sql.getTreeS();
 					int num = al.size();
 					String s;
