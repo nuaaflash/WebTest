@@ -14,7 +14,6 @@ public class Sql {
 	private int numofnodes;
 	private Connection conn; //The class to connect the DBS.
 	private static Sql single = null;
-	
 	private Sql(){}
 	
 	public static Sql getInstance() {  
