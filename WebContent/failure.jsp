@@ -33,10 +33,7 @@
 	<form class="layui-form" action="login.jsp" >
 			</br>
 		  <div class="layui-form-item">
-		    <p style="text-align:center"><font color="#FFB800">登录失败</font></p>
-		  </div>
-		  	  
-		  <div class="layui-form-item">
+		    <label class="layui-form-label"><font color="#FFB800">登录失败！</font> </label>
 		  	<div class="layui-input-block">
 			   <button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo">返回</button>
 			</div>

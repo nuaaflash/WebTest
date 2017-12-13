@@ -52,9 +52,12 @@ public class SqlServlet extends HttpServlet {
 				sql.setPassword(request.getParameter("passwd"));
 				sql.SetDBS(request.getParameter("DBS"));
 				System.out.println(request.getParameter("DBS"));
-				sql.ConnectSql();
-
-				request.getRequestDispatcher("main.jsp").forward(request, response);   
+				if(sql.ConnectSql()){
+					request.getRequestDispatcher("main.jsp").forward(request, response);   
+				}
+				else{
+					request.getRequestDispatcher("failure.jsp").forward(request, response);  
+				}
 				break;
 			}
 			case 3:{

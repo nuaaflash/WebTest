@@ -15,7 +15,7 @@ public class Sql {
 	private Connection conn; //The class to connect the DBS.
 	private static Sql single = null;
 	
-	public Sql(){}
+	private Sql(){}
 	
 	public static Sql getInstance() {  
 		if (single == null) {    
@@ -24,18 +24,21 @@ public class Sql {
 		return single;  
 	}
 	
-	public void ConnectSql(){
+	public boolean ConnectSql(){
 		setNumofnodes(0);
 		this.setUrl("jdbc:mysql://localhost:3306/" + DBS);
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(this.getUrl(), this.getUser(), this.getPassword());
 			System.out.println("Conceting now!");
+			return true;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+			return false;
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 	
