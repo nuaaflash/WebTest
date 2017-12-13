@@ -87,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					String s;
 				%>
 				
-				<form action="inputDataAG1.jsp" method="post" enctype="multipart/form-data">
+				<form action="inputDataAG1.jsp" method="get" enctype="multipart/form-data">
 				<table bgcolor="#DEDEDE" border="2" cellspacing="5" cellpadding="5" width="400">
 					<thead>
 						<tr>
@@ -103,7 +103,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<tr>
 							<td><%= i%></td>
 							<td><%=al.get(i).toString() %></td>
-							<td><input type="radio" name="choose_target" value="<%=i%>"></td>
+							<td><input type="radio" name="choose_target" value="<%= i%>"></td>
 						</tr>
 <%
 					}
