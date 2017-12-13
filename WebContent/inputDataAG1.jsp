@@ -69,9 +69,13 @@
             	<br>
             	<br>
 				<%
+					String ww=request.getParameter("choose_target");					
+					int indx = Integer.parseInt(ww);
 					Sql sql = Sql.getInstance();
-					ArrayList al = sql.getTreeS();
-					int num = al.size();
+					ArrayList<String> al = sql.getTreeS();
+					ww=al.get(indx);
+					ArrayList<String> leaves = sql.getLeaves(ww);
+					int num = leaves.size();
 					String s;
 				%>
 				
@@ -90,10 +94,10 @@
 %>
 						<tr>
 							<td><%= i%></td>
-							<td><%=al.get(i).toString() %></td>
+							<td><%=leaves.get(i).toString() %></td>
 							<td>
-								<input type="range" name="point_value" min="1" max="100" step="1" value="1" oninput="change()">
-								<input id="show" type="number">
+								<input type="range" id="range<%= i%>" name="point_value" min="1" max="100" step="1" value="1" oninput="change()">
+								<input id="show<%= i%>" type="number">
 							</td>
 						</tr>
 <%
@@ -127,14 +131,23 @@
 	  });
 	});
 	</script>
-	
+
 	<script>
       function change(){ 
-      var num=document.getElementById("range"); 
-      var location=document.getElementById("show"); 
+    	  var num;
+    	  var location;
+<%
+	for(int i=0;i<num;i++) {
+%>
+      num=document.getElementById("range<%= i%>"); 
+      location=document.getElementById("show<%= i%>");
       location.value=num.value; 
+<%
+	}
+%>
   } 
 	</script>
-	
+
+
 </body>
 </html>
