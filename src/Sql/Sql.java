@@ -15,7 +15,7 @@ public class Sql {
 	private Connection conn; //The class to connect the DBS.
 	private static Sql single = null;
 	
-	private Sql(){}
+	public Sql(){}
 	
 	public static Sql getInstance() {  
 		if (single == null) {    
