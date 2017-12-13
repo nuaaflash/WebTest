@@ -14,6 +14,7 @@ public class Sql {
 	private int numofnodes;
 	private Connection conn; //The class to connect the DBS.
 	private static Sql single = null;
+	
 	private Sql(){}
 	
 	public static Sql getInstance() {  
@@ -194,13 +195,49 @@ public class Sql {
 		return names;
 	}
 	
+	public ArrayList<Node> getChildrenofNode(String nameofnode){		//通过节点得到树的节点的子节点 返回ArrayList<Node>
+		numofnodes = 0;
+		String sql = null;
+		//ConnectSql();
+		//DestroyTree(name);
+		ConnectSql();
+		Node thenode = getNode(nameofnode);
+		ConnectSql();
+		ArrayList<Node> cnode = new ArrayList<Node>();
+		sql = "SELECT node_name FROM " + treeName +" WHERE parent_id = "+ thenode.nodeId +";"; 
+		System.out.println(sql);
+		Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				Node temp = getNode(rs.getString(1));
+			    cnode.add(temp);
+			    ConnectSql();
+			}
+			System.out.println("Children gotten!");
+			conn.close();
+			System.out.println("Database was Colsed successfully");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cnode;
+	}
+	
+	
 	@Test
 	public void testGETTREES(){
-		ArrayList<String> names = getLeaves("node");
+		Sql sql = Sql.getInstance();
+		sql.SetTreeName("node");
+		sql.SetDBS("threatDegree");
+		sql.setUser("root");
+		sql.setPassword("123");
+		ArrayList<Node> names = sql.getChildrenofNode("Target");
 		System.out.println("有"+names.size()+"个");
 		for(int i = 0;i < names.size();i ++){
 			int n = i+1;
-			System.out.println(n+":"+names.get(i));
+			names.get(i).ShowNode();
 		}
 	}
 	
