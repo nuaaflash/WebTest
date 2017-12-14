@@ -30,4 +30,13 @@
     <url-pattern>/SqlServlet</url-pattern>
   </servlet-mapping>
   
+      <servlet>
+    <servlet-name>AlgorithmServlet</servlet-name>
+    <servlet-class>Algorithm.AlgorithmServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AlgorithmServlet</servlet-name>
+    <url-pattern>/AlgorithmServlet</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
