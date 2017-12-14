@@ -3,7 +3,8 @@ import java.io.FileInputStream;
  
 import java.io.FileNotFoundException;  
 import java.io.IOException;  
-import java.io.InputStream;  
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;  
 import java.util.HashMap;  
 import java.util.Map;  
@@ -29,7 +30,7 @@ public class ReadExcelUtils {
     private Workbook wb;  
     private Sheet sheet;  
     private Row row; 
-    @Test
+    
     public void test () {  
         try {  
             
@@ -140,6 +141,64 @@ public class ReadExcelUtils {
         return content;  
     }  
   
+    @SuppressWarnings("null")
+	public ArrayList<Object> readExcel() throws Exception{  
+        if(wb==null){  
+            throw new Exception("Workbook对象为空！");  
+        }  
+        sheet = wb.getSheetAt(0);  
+        // 得到总行数  
+        int rowNum = sheet.getLastRowNum();  
+        row = sheet.getRow(0);  
+        int colNum = row.getPhysicalNumberOfCells();  
+        // 正文内容应该从第二行开始,第一行为表头的标题  
+        ArrayList <Object> result = new ArrayList<Object>();
+        for (int i = 0; i < rowNum; i++) {  
+            row = sheet.getRow(i+1);
+            Object obj = getCellFormatValue(row.getCell(0));
+            result.add(obj);
+            int j = 1;  
+            double num[] = new double[colNum-1];
+            while (j < colNum) {  
+                obj = getCellFormatValue(row.getCell(j));
+                num[j-1] = Double.valueOf((String)obj);
+                j++;  
+            }   
+            result.add(num);  
+        }  
+        return result;  
+    }  
+    
+    @Test
+    public void testread(){
+    		try {  
+        	ReadExcelUtils excelReader = new ReadExcelUtils();  
+            // 对读取Excel表格标题测试  
+//          String[] title = excelReader.readExcelTitle();  
+//          System.out.println("获得Excel表格的标题:");  
+//          for (String s : title) {  
+//              System.out.print(s + " ");  
+//          }  
+               
+            // 对读取Excel表格内容测试  
+            ArrayList<Object> result = excelReader.readExcel();
+            System.out.println("获得Excel表格的内容:");  
+            for (int i = 0; i < result.size(); i++) { 
+            	System.out.print(result.get(i)+"  ");
+            	i ++;
+            	double [] num = (double[])result.get(i);
+            	for(int j = 0;j < num.length - 1;j ++){
+            		System.out.print(num[j]+"  ");  
+            	}
+            	System.out.println(num[num.length - 1]);
+            }  
+       } catch (FileNotFoundException e) {  
+            System.out.println("未找到指定路径的文件!");  
+            e.printStackTrace();  
+        }catch (Exception e) {  
+            e.printStackTrace();  
+        }  
+    }
     /** 
      *  
      * 根据Cell类型设置数据 
