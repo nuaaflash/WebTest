@@ -12,13 +12,13 @@ import org.lxh.smart.SmartUpload;
  * Servlet implementation class Upload
  */
 //@WebServlet("/Upload")
-public class UploadAG1Servlet extends HttpServlet {
+public class UploadAG2Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public UploadAG1Servlet() {
+	public UploadAG2Servlet() {
 	    super();
 	    // TODO Auto-generated constructor stub
 	}
@@ -29,7 +29,7 @@ public class UploadAG1Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-		String path="showAlgorithm1.jsp";
+		String path="showAlgorithm2.jsp";
 		SmartUpload su = new SmartUpload();
 		su.initialize(this.getServletConfig(), request, response);
 		try {

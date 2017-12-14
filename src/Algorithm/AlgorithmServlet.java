@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Dataset.ReadExcelUtils;
+
 /**
  * Servlet implementation class Upload
  */
@@ -31,24 +33,40 @@ public class AlgorithmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");   
-		String path="showIndexSystem.jsp";
+		String path="showAlgorithm2.jsp";
 
 		int submitchoice = 5;
 		submitchoice = Integer.parseInt(request.getParameter("Submits"));
-		System.out.println("~~~");
 		switch(submitchoice){
 			case 0:{
 				
 				break;
 			}
 			case 1:{
-				int parentID = Integer.parseInt(request.getParameter("parent"));
 				
 				break;
 			}
 			case 2:{
-				
-				System.out.println(request.getParameter("DBS"));
+        		ReadExcelUtils reader = ReadExcelUtils.getInstance();
+        		reader.setFilepath("E:\\theData.xlsx");
+        		ArrayList<Object> result = null;
+				try {
+					result = reader.readExcel();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+                System.out.println("获得Excel表格的内容:");  
+                for (int i = 0; i < result.size(); i++) { 
+                	System.out.print(result.get(i)+"  ");
+                	i ++;
+                	double [] num = (double[])result.get(i);
+                	for(int j = 0;j < num.length - 1;j ++){
+                		System.out.print(num[j]+"  ");  
+                	}
+                	System.out.println(num[num.length - 1]);
+                }  
+                request.getRequestDispatcher("showAlgorithm2.jsp").forward(request, response); 
 				break;
 			}
 			case 3:{
@@ -64,8 +82,7 @@ public class AlgorithmServlet extends HttpServlet {
 		}
 		ArrayList<String> trees = null;
 		request.setAttribute("trees", trees); 
-		request.getRequestDispatcher("showIndexSystem.jsp").forward(request, response);  
-		request.getRequestDispatcher(path).forward(request, response);
+		request.getRequestDispatcher(path).forward(request, response);  
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
