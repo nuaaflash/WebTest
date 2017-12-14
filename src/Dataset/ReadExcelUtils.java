@@ -1,5 +1,6 @@
 package Dataset;
 import java.io.FileInputStream; 
+
  
 import java.io.FileNotFoundException;  
 import java.io.IOException;  
@@ -18,7 +19,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
 import org.slf4j.Logger;  
-import org.slf4j.LoggerFactory;  
+import org.slf4j.LoggerFactory;
   
 /** 
  * 读取Excel 
@@ -30,19 +31,22 @@ public class ReadExcelUtils {
     private Workbook wb;  
     private Sheet sheet;  
     private Row row; 
+    private String filepath; 
+    private static ReadExcelUtils single = null;
+    
+    public ReadExcelUtils(){}
+	
+	public static ReadExcelUtils getInstance() {  
+		if (single == null) {    
+		      single = new ReadExcelUtils();  
+		 }    
+		return single;  
+	}
     
     public void test () {  
         try {  
             
         	ReadExcelUtils excelReader = new ReadExcelUtils();  
-            // 对读取Excel表格标题测试  
-//          String[] title = excelReader.readExcelTitle();  
-//          System.out.println("获得Excel表格的标题:");  
-//          for (String s : title) {  
-//              System.out.print(s + " ");  
-//          }  
-               
-            // 对读取Excel表格内容测试  
             Map<Integer, Map<Integer,Object>> map = excelReader.readExcelContent();  
             System.out.println("获得Excel表格的内容:");  
             for (int i = 1; i <= map.size(); i++) {  
@@ -55,10 +59,10 @@ public class ReadExcelUtils {
             e.printStackTrace();  
         }  
     }  
-  
-    public ReadExcelUtils(){
-    	 String filepath = "F:\\1.xlsx"; 
-    	 ReadExcel(filepath);
+    
+    public void setFilepath(String path){
+    	filepath = path;
+   	 	ReadExcel(filepath);
     }
     
     public void ReadExcel(String filepath) {  
@@ -141,7 +145,6 @@ public class ReadExcelUtils {
         return content;  
     }  
   
-    @SuppressWarnings("null")
 	public ArrayList<Object> readExcel() throws Exception{  
         if(wb==null){  
             throw new Exception("Workbook对象为空！");  
@@ -172,7 +175,8 @@ public class ReadExcelUtils {
     @Test
     public void testread(){
     		try {  
-        	ReadExcelUtils excelReader = new ReadExcelUtils();  
+        	ReadExcelUtils excelReader = ReadExcelUtils.getInstance();  
+        	excelReader.setFilepath("F:\\1.xlsx");
             // 对读取Excel表格标题测试  
 //          String[] title = excelReader.readExcelTitle();  
 //          System.out.println("获得Excel表格的标题:");  
