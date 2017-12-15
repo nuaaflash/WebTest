@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="org.lxh.smart.SmartUpload"%>
+<%@page import="org.lxh.smart.SmartUpload" import="Dataset.*" import="Algorithm.*" import="java.util.ArrayList" import="java.util.List" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -62,11 +62,27 @@
         <div class="layui-body" id="container" >
             <!-- 内容主体区域  -->
             <div style="padding: 30px;">
-            	<h2>算法二<h2>
-            	<p>待添加</p>
+            	<h2>算法二</h2>
+            	<p>支持向量回归算法，需要训练数据进行模型训练。模型训练结束后，根据模型，获得指标叶子层的节点值来计算指标顶层的值。</p>
             	<br>
             	<br>
             	<br>
+            	<p>请上传训练用的数据(支持.xls，.xlsx格式)</p>
+				<form action="UploadAG2Servlet" method="post" enctype="multipart/form-data">
+					<input type="file" name="file1" ><br>
+					<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo"  name="Submits" value="2">开始上传</button>
+				</form>
+				<br>
+            	<br>
+            	<br>
+            	<form action="AlgorithmServlet" method="get" enctype="multipart/form-data">
+
+            	<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo"  name="Submits" value="2">开始训练</button>
+				</form>
+            	<from action="AlgorithmServlet" method="get" enctype="multipart/form-data">
+            		
+            		
+				</from>
 			</div>
         </div>
 	    <div class="layui-footer layui-bg-black">

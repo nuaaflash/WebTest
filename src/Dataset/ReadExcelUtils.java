@@ -34,7 +34,7 @@ public class ReadExcelUtils {
     private String filepath; 
     private static ReadExcelUtils single = null;
     
-    public ReadExcelUtils(){}
+    private ReadExcelUtils(){}
 	
 	public static ReadExcelUtils getInstance() {  
 		if (single == null) {    
