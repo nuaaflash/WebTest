@@ -2,6 +2,7 @@ package Algorithm;
 
 import java.io.IOException;
 
+
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Dataset.ReadExcelUtils;
+import Algorithm.Svmr;
 
 /**
  * Servlet implementation class Upload
@@ -57,15 +59,32 @@ public class AlgorithmServlet extends HttpServlet {
 					e.printStackTrace();
 				}
                 System.out.println("获得Excel表格的内容:");  
+                double [][] leaves = new double[result.size()/2][];
+                double [] threatDegree = new double [result.size()/2];
+                int il = 0;
                 for (int i = 0; i < result.size(); i++) { 
                 	System.out.print(result.get(i)+"  ");
                 	i ++;
                 	double [] num = (double[])result.get(i);
+                	leaves[il] = new double[num.length - 1];
                 	for(int j = 0;j < num.length - 1;j ++){
-                		System.out.print(num[j]+"  ");  
+                		System.out.print(num[j]+"  ");
+                		leaves[il][j] = num[j];
                 	}
+                	threatDegree[il] = num[num.length - 1];
                 	System.out.println(num[num.length - 1]);
+                	il ++;
                 }  
+                Svmr svmr = new Svmr();
+        		double[][] leaves1 = { {1,3,4,6} , { 2, 3, 3,7}, {2, 3, 4, 9}};
+        		double[] threatDegree1 = { 14, 15, 18};
+        		svmr.Train(leaves1, threatDegree1);
+        		double p1[] = {2, 3, 4, 9};
+        		System.out.println(svmr.Predict(p1));
+                Svmr svr = new Svmr();
+                svr.Train(leaves, threatDegree);
+                double[] p = {2, 3, 4, 9};
+                System.out.println(svr.Predict(p));
                 request.getRequestDispatcher("showAlgorithm2.jsp").forward(request, response); 
 				break;
 			}

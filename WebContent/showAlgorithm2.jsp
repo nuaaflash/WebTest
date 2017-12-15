@@ -75,9 +75,13 @@
 				<br>
             	<br>
             	<br>
+            	<form action="AlgorithmServlet" method="get" enctype="multipart/form-data">
+
+            	<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo"  name="Submits" value="2">开始训练</button>
+				</form>
             	<from action="AlgorithmServlet" method="get" enctype="multipart/form-data">
-            		<input type="hidden" name = "returnpath" value="showAlgorithm2.jsp">
-            		<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo"  name="Submits" value="2">开始训练</button>
+            		
+            		
 				</from>
 			</div>
         </div>
