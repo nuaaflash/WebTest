@@ -73,12 +73,6 @@ public class AlgorithmServlet extends HttpServlet {
                 	System.out.println(num[num.length - 1]);
                 	il ++;
                 }  
-                Svmr svmr = new Svmr();
-        		double[][] leaves1 = { {1,3,4,6} , { 2, 3, 3,7}, {2, 3, 4, 9}};
-        		double[] threatDegree1 = { 14, 15, 18};
-        		svmr.Train(leaves1, threatDegree1);
-        		double p1[] = {2, 3, 4, 9};
-        		System.out.println(svmr.Predict(p1));
                 Svmr svr = new Svmr();
                 svr.Train(leaves, threatDegree);
                 double[] p = {2, 3, 4, 9};
