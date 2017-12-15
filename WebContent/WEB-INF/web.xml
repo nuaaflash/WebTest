@@ -19,6 +19,16 @@
     <servlet-name>UploadAG1Servlet</servlet-name>
     <url-pattern>/UploadAG1Servlet</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>UploadAG2Servlet</servlet-name>
+    <servlet-class>upload.servlet.UploadAG2Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadAG2Servlet</servlet-name>
+    <url-pattern>/UploadAG2Servlet</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>SqlServlet</servlet-name>
     <servlet-class>Sql.SqlServlet</servlet-class>
@@ -27,7 +37,8 @@
     <servlet-name>SqlServlet</servlet-name>
     <url-pattern>/SqlServlet</url-pattern>
   </servlet-mapping>
-  <servlet>
+  
+ <servlet>
     <servlet-name>AlgorithmServlet</servlet-name>
     <servlet-class>Algorithm.AlgorithmServlet</servlet-class>
   </servlet>
@@ -35,6 +46,7 @@
     <servlet-name>AlgorithmServlet</servlet-name>
     <url-pattern>/AlgorithmServlet</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>CalculateServlet</servlet-name>
     <servlet-class>calculate.servlet.CalculateServlet</servlet-class>
@@ -43,4 +55,6 @@
     <servlet-name>CalculateServlet</servlet-name>
     <url-pattern>/CalculateServlet</url-pattern>
   </servlet-mapping>
+
+ 
 </web-app>
