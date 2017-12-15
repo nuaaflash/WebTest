@@ -30,7 +30,7 @@
     <url-pattern>/UploadAG2Servlet</url-pattern>
   </servlet-mapping>
   
-    <servlet>
+  <servlet>
     <servlet-name>SqlServlet</servlet-name>
     <servlet-class>Sql.SqlServlet</servlet-class>
   </servlet>
@@ -39,7 +39,7 @@
     <url-pattern>/SqlServlet</url-pattern>
   </servlet-mapping>
   
-      <servlet>
+ <servlet>
     <servlet-name>AlgorithmServlet</servlet-name>
     <servlet-class>Algorithm.AlgorithmServlet</servlet-class>
   </servlet>
