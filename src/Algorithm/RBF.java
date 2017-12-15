@@ -33,30 +33,45 @@ public class RBF {
 		weight = new double [h_num];
 		err = new double [s_num];
 	}
-/*
+
 	//初始化权值、数据中心和扩展常数
 	public void initial() {
-		double max, min, d_max;	//d_max为数据中心的最大距离
+		double d_max = -1.0, temp = 0;	//d_max为数据中心的最大距离
 		Random random = new Random();
 		for(int i=0;i<h_num;i++) {
 			weight[i]=2*random.nextDouble()-1.0;
 			center[i]=input[random.nextInt(s_num)];
 		}
-		max=min=center[0];
-		for(int j=1;j<h_num;j++) {
-			if(max<center[j]) max=center[j];
-			if(min>center[j]) min=center[j];
+		for(int i=0;i<s_num;i++) {
+			for(int j=0;j<s_num;j++) {
+				if(i!=j) {
+					temp=calDistance_sq(input[i], input[j]);
+					if(temp>d_max)
+						d_max=temp;
+				}
+			}
 		}
-		d_max=max-min;
 		for(int k=0;k<h_num;k++) {
-			delta[k]=d_max/Math.pow(2.0*((double)h_num), 0.5);
+			delta[k]=Math.pow(d_max/(2.0*((double)h_num)), 0.5);
 		}
 	}
 	
-	public double compute(double x) {
+	
+	//计算两个向量（输入）之间的距离平方的函数，仅仅在确定初始扩展常数时使用
+	private double calDistance_sq(double a[], double b[]) {
+		double d = 0.0;
+		for(int i=0;i<d_num;i++) {
+			d+=Math.pow((a[i]-b[i]), 2.0);
+		}
+		return d;
+	}
+	
+	public double compute(double x[]) {
 		double y = 0;
+		double temp = 0;
 		for(int i=0;i<h_num;i++) {
-			y+=weight[i]*Math.exp(-1.0*(x-center[i])*(x-center[i])/(2*delta[i]*delta[i]));
+			temp = cal_x_minus_center_sq(x, center[i]);
+			y+=weight[i]*Math.exp(-1.0*temp/(2.0*delta[i]*delta[i]));
 		}
 		return y;
 	}
@@ -68,41 +83,63 @@ public class RBF {
 		}
 	}
 	
+	private double cal_x_minus_center_sq(double x[], double center[]) {
+		double temp = 0;
+		for(int i=0;i<d_num;i++) {
+			temp+=Math.pow((x[i]-center[i]),2.0);
+		}
+		return temp;
+	}
+	
 	public void update() {
-		double d_center, d_delta, d_weight;
-		double s_center, s_delta, s_weight;
+		double d_center[], d_delta, d_weight;
+		double s_center[], s_delta, s_weight;
+		d_center = new double[d_num];
+		s_center = new double[d_num];
+		double temp;
 		for(int i=0;i<h_num;i++) {
-			d_center=d_delta=d_weight=s_center=s_delta=s_weight=0.0;
-			for(int j=0;j<s_num;j++) {
-				s_center+=err[j]*Math.exp(-1.0*Math.pow((input[j]-center[i]), 2)/(2.0*Math.pow(delta[i], 2)))*(input[j]-center[i]);
-				s_delta+=err[j]*Math.exp(-1.0*Math.pow((input[j]-center[i]), 2)/(2.0*Math.pow(delta[i], 2)))*Math.pow((input[j]-center[i]), 2);
-				s_weight+=err[j]*Math.exp(-1.0*Math.pow((input[j]-center[i]), 2)/(2.0*Math.pow(delta[i], 2)));
+			d_delta=d_weight=s_delta=s_weight=0.0;
+			for(int k=0;k<d_num;k++) {
+				d_center[k] = 0.0;
+				s_center[k] = 0.0;
 			}
-			d_center=eta*weight[i]/Math.pow(delta[i],2)*s_center;
+			for(int j=0;j<s_num;j++) {
+				temp = cal_x_minus_center_sq(input[j], center[i]);
+				for(int k=0;k<d_num;k++) {
+					s_center[k]+=err[j]*Math.exp(-1.0*temp/(2.0*Math.pow(delta[i], 2)))*(input[j][k]-center[i][k]);
+				}
+				//s_center+=err[j]*Math.exp(-1.0*Math.pow((input[j]-center[i]), 2)/(2.0*Math.pow(delta[i], 2)))*temp;
+				s_delta+=err[j]*Math.exp(-1.0*temp/(2.0*Math.pow(delta[i], 2.0)))*temp;
+				s_weight+=err[j]*Math.exp(-1.0*temp/(2.0*Math.pow(delta[i], 2.0)));
+			}
+			for(int k=0;k<d_num;k++) {
+				d_center[k]=eta*weight[i]/Math.pow(delta[i],2.0)*s_center[k];
+				center[i][k]+=d_center[k];
+			}
+			//d_center=eta*weight[i]/Math.pow(delta[i],2)*s_center;
 			d_delta=eta*weight[i]/Math.pow(delta[i],3)*s_delta;
 			d_weight=eta*s_weight;
-			center[i]+=d_center;
+			//center[i]+=d_center;
 			delta[i]+=d_delta;
 			weight[i]+=d_weight;
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		double[] a= new double[]{1,2,7,10,23,6,15,20,4,11,24,30,13,14,0};
-		double[] b= new double[]{20,41,141,200,457,120,298,400,80,220,480,600,260,280,0};
-		RBF rbf = new RBF(15, 10, 0.005, a, b);
+		double[][] a= new double[][] { {1,2,3}, {4,5,6}, {7,8,9}, {10,11,12} };
+		double[] b= new double[]{6,61,84,95};
+		RBF rbf = new RBF(4, 4, 3, 0.001, a, b);
 		rbf.initial();
-		int te=5000;
+		int te=20000;
 		while(te>=0) {
 			rbf.calError();
 			rbf.update();
 			te--;
 		}
-		for(double i=0;i<=35;i++) {
-			System.out.println(i+"      "+rbf.compute(i));
-		}
-		
+		double[] c= new double[3];
+		System.out.println("      "+rbf.compute(new double[]{4,5,6}));
+		System.out.println("done");
 	}
-*/
+
 }
