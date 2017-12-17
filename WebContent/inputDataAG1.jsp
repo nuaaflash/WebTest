@@ -63,8 +63,8 @@
         <div class="layui-body" id="container" >
             <!-- 内容主体区域  -->
             <div style="padding: 30px;">
-            	<h2>算法一</h2>
-            	<p>输入底层节点的值，系统将通过算法根据上传的训练数据来训练出模型，并将此次输入的用于计算顶层节点的值</p>
+            	<h2><a href="https://www.cnblogs.com/zhangchaoyang/articles/2591663.html">RBF神经网络算法</a></h2>
+            	<p>输入底层节点的值，系统将通过算法根据上传的训练数据来训练出模型，并将此次输入的值用于预测计算顶层节点的值</p>
             	<br>
             	<br>
             	<br>
@@ -105,11 +105,12 @@
 <%
 					}
 %>
-						<tr>
-							<td colspan="3"><input type="submit" value="提交"></td>
-						</tr>
 					</tbody>	
 				</table>
+				输入RBFNN的隐藏层节点个数<input type="text" name="step_length"><br>
+				输入算法的<abbr title="重复反馈过程">迭代</abbr>次数<input type="text" name="count" placeholder="推荐输入5k~100k"><br>
+				输入梯度下降法的步长<input type="text" name="step_length" placeholder="推荐输入0.00001~0.001"><br>
+				<input type="submit" value="提交">
 				</form>
 				
 			</div>

@@ -48,6 +48,9 @@ public class CalculateServlet extends HttpServlet {
 			System.out.println(temp);
 			Input.add(temp);
 		}
+		int count = Integer.parseInt(request.getParameter("count"));
+		Double step_length = new Double(request.getParameter("step_length"));
+		System.out.println("count:"+count+"   step_length:"+step_length);
 		
 		ReadExcelUtils reader = ReadExcelUtils.getInstance();
 		try {
