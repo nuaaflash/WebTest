@@ -77,9 +77,11 @@
 					ArrayList<String> leaves = sql.getLeaves(ww);
 					int num = leaves.size();
 					String s;
+					System.out.println(ww);
 				%>
 				
-				<form action="" method="post" enctype="multipart/form-data">
+				<form action="CalculateServlet" method="get" enctype="multipart/form-data">
+				<input type="hidden" name="choose_target" value="<%=ww%>"/>
 				<table bgcolor="#DEDEDE" border="2" cellspacing="5" cellpadding="5" width="400">
 					<thead>
 						<tr>
@@ -96,7 +98,7 @@
 							<td><%= i%></td>
 							<td><%=leaves.get(i).toString() %></td>
 							<td>
-								<input type="range" id="range<%= i%>" name="point_value" min="1" max="100" step="1" value="1" oninput="change()">
+								<input type="range" id="range<%= i%>" name="point_value<%= i%>" min="1" max="100" step="1" value="1" oninput="change()">
 								<input id="show<%= i%>" type="number">
 							</td>
 						</tr>

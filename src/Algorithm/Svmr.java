@@ -1,7 +1,5 @@
 package Algorithm;
 
-import java.util.ArrayList;
-
 import org.junit.Test;
 
 import libsvm.svm;
@@ -82,7 +80,7 @@ public class Svmr {
 		double[][] leaves = { {1,3,4,6} , { 2, 3, 3,7}, {2, 3, 4, 9}};
 		double[] threatDegree = { 14, 15, 18};
 		svmr.Train(leaves, threatDegree);
-		double p[] = {1,3,4,6};
+		double p[] = {2, 3, 4, 9};
 		System.out.println(svmr.Predict(p));
 	}
 }

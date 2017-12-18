@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.lxh.smart.SmartUpload;
 
+import Dataset.ReadExcelUtils;
+
 /**
  * Servlet implementation class Upload
  */
@@ -16,12 +18,12 @@ public class UploadAG1Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UploadAG1Servlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public UploadAG1Servlet() {
+	    super();
+	    // TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -38,6 +40,8 @@ public class UploadAG1Servlet extends HttpServlet {
 			String filename="theData."+ext;
 			su.getFiles().getFile(0).saveAs("E:\\"+filename);
 			//su.save("E:\\"); //使用绝对路径
+			ReadExcelUtils reader = ReadExcelUtils.getInstance();
+			reader.setFilepath("E:\\"+filename);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

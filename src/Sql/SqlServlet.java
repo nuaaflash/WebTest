@@ -35,7 +35,6 @@ public class SqlServlet extends HttpServlet {
 		sql.ConnectSql();
 		int submitchoice = 5;
 		submitchoice = Integer.parseInt(request.getParameter("Submits"));
-		System.out.println("~~~");
 		switch(submitchoice){
 			case 0:{
 				sql.InitTree(request.getParameter("Treename"));
@@ -75,7 +74,6 @@ public class SqlServlet extends HttpServlet {
 		}
 		ArrayList<String> trees = sql.getTreeS();
 		request.setAttribute("trees", trees); 
-		request.getRequestDispatcher("showIndexSystem.jsp").forward(request, response);  
 		request.getRequestDispatcher(path).forward(request, response);
 	}
 
