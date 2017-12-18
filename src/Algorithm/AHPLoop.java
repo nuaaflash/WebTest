@@ -19,6 +19,7 @@ public class AHPLoop {
 		S.SetDBS("myh");
 		S.setPassword("admin");
 		S.setUser("root");*/
+		//以上是测试用的，登录本地数据库
 		AlgorithmAHP A = new AlgorithmAHP();
 		ArrayList<Node> TempN = new ArrayList<Node>();
 		for(int i=0;i<WeightExcel.size();i=i+2) {
