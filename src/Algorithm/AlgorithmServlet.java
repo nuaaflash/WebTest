@@ -74,6 +74,9 @@ public class AlgorithmServlet extends HttpServlet {
                 	il ++;
                 }  
                 Svmr svr = new Svmr();
+                svr.Setparameter(Double.parseDouble(request.getParameter("cache")),
+                				 Double.parseDouble(request.getParameter("eps")) , 
+                				 Double.parseDouble(request.getParameter("C")));
                 svr.Train(leaves, threatDegree);
                 double[] p = {2, 3, 4, 9};
                 System.out.println(svr.Predict(p));

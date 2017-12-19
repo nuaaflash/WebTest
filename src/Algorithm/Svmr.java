@@ -10,12 +10,25 @@ import libsvm.svm_problem;
 
 public class Svmr {
 	private svm_node[][] vectors;									// 训练点 
-	svm_node[] predict_vectors;	// 测试点 
-	double[] lables;					// 训练点的标签
-	double predict__lable;					// 测试点的标签
-	svm_model model;					// 训练后得到的模型
+	private svm_node[] predict_vectors;	// 测试点 
+	private double[] lables;					// 训练点的标签
+	private double predict__lable;					// 测试点的标签
+	private svm_model model;					// 训练后得到的模型
+	private double cache_size;							
+	private double my_eps;
+	private double my_C;
 	
-	public Svmr(){}
+	public Svmr(){
+        cache_size = 100; // cache内存大小 单位MB
+        my_eps = 0.001; // 终止判据 默认0.001
+        my_C = 1.9;		// 损失函数 默认1.9
+	}
+	
+	public void Setparameter(double size, double eps, double C){
+		cache_size = size;
+		my_eps = eps;
+		my_C = C;
+	}
 	
 	public void Train(double[][] leaves,double[] threatDegree) {		// 输入训练数据
 		vectors = new svm_node[leaves.length][leaves[0].length];		// 训练点
@@ -46,9 +59,12 @@ public class Svmr {
         param.svm_type = svm_parameter.EPSILON_SVR;				// 用支持向量回归 的 svm
         param.kernel_type = svm_parameter.LINEAR;				// 线性核函数
         //param.kernel_type = svm_parameter.POLY;				// 指数核函数
-        param.cache_size = 100;
-        param.eps = 0.001;
-        param.C = 1.9;
+
+        param.cache_size = cache_size;
+
+        param.eps = my_eps;
+
+        param.C = my_C;
         
         //训练SVM分类模型
         System.out.println(svm.svm_check_parameter(problem, param)); // 如果参数没有问题，则svm.svm_check_parameter()函数返回null,否则返回error描述。
