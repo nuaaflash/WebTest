@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import Dataset.ReadExcelUtils;
 import Algorithm.Svmr;
+import Sql.Sql;
 
 /**
  * Servlet implementation class Upload
@@ -78,8 +79,18 @@ public class AlgorithmServlet extends HttpServlet {
                 				 Double.parseDouble(request.getParameter("eps")) , 
                 				 Double.parseDouble(request.getParameter("C")));
                 svr.Train(leaves, threatDegree);
-                double[] p = {2, 3, 4, 9};
+                int num = Integer.parseInt(request.getParameter("num"));
+                double[] p = new double[num];
+                for(int i = 0;i < num; i ++){
+                	p[0] = Double.parseDouble(request.getParameter("point_value"+i));
+                	System.out.println(p[0]);
+                }
                 System.out.println(svr.Predict(p));
+                
+                // 结果写入数据库
+                Sql sql = Sql.getInstance();
+                sql.SetNodeValue(request.getParameter("treename"),1, svr.Predict(p));
+                
                 request.getRequestDispatcher("showAlgorithm2.jsp").forward(request, response); 
 				break;
 			}
