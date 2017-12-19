@@ -76,13 +76,12 @@
             	<br>
             	<br>
             	<form action="AlgorithmServlet" method="get" enctype="multipart/form-data">
-
+				<p>参数设置:</p>
+				cache大小:<input type= "text" name="cache" value="100"><br>
+				终止判据eps:<input type="text" name="eps" value="0.001"><br>
+				损失函数C:<input type="text" name="C" value="1.9"><br>
             	<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo"  name="Submits" value="2">开始训练</button>
 				</form>
-            	<from action="AlgorithmServlet" method="get" enctype="multipart/form-data">
-            		
-            		
-				</from>
 			</div>
         </div>
 	    <div class="layui-footer layui-bg-black">

@@ -5,7 +5,7 @@ node_id int,
 node_name varchar(100),
 parent_id int,
 num_of_children int,
-node_value int
+node_value numeric(18,2)
 );
 
 INSERT INTO node(node_id, node_name, parent_id, num_of_children, node_value)
