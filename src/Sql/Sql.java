@@ -55,7 +55,7 @@ public class Sql {
 		//ConnectSql();
 		//DestroyTree(name);
 		ConnectSql();
-		sql = "CREATE TABLE "+name+"(node_id int,node_name varchar(100),parent_id int,num_of_children int,node_value int);";  //锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷陆锟斤拷锟斤拷锟�
+		sql = "CREATE TABLE "+name+"(node_id int,node_name varchar(100),parent_id int,num_of_children int,node_value numeric(18,2));";  //合成sql命令 添加记录
 		Statement stmt;
 		try {
 			stmt = conn.createStatement();
