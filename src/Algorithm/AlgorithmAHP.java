@@ -21,21 +21,21 @@ public class AlgorithmAHP{
 	
 	public void eigenvalue(){
 		Matrix c = new Matrix(initialMatrix);
-		double[][] x=c.eig().getD().getArray();//getD鍑芥暟涓烘眰鐗瑰緛鍊笺��
+		double[][] x=c.eig().getD().getArray();//getD()函数为求特征值
 		c.eig().getD().print(5, 5);
 		double[] ev = new double[linenum];
-		//鍙栧嚭鐗瑰緛鍊�
+		//取出特征值
 		for(int i=0;i<linenum;i++) {
 			ev[i]=x[i][i];
 		}
-		//姹傛渶澶х壒寰佸��
+		//求最大特征值
 		double maxEig=ev[0];
 		for(int i=0;i<linenum;i++) {
 			if(ev[i]>maxEig) {
 				maxEig=ev[i];
 			}
 		}
-		//姹傚嚭鏈�澶х壒寰佸�兼墍鍦ㄥ簭鍒�
+		//求出最大特征值所在序列
 		int Dnum=0;
 		for(int i=0;i<linenum;i++) {
 			if(ev[i]==maxEig) {
@@ -43,10 +43,10 @@ public class AlgorithmAHP{
 			}
 		}
 		//System.out.println(Dnum);
-		double[][] y=c.eig().getV().getArray();//getV鍑芥暟涓烘眰鐗瑰緛鍚戦噺锛屾寜鍒楃畻
+		double[][] y=c.eig().getV().getArray();//getV()函数为求特征向量，每一列都是一个向量
 		c.eig().getV().print(5, 5);
 		double[] aVector = new double[linenum];
-		//weightVecor涓烘潈鍚戦噺锛岃祴鍊间箣鍚庯紝灏卞簲璇ユ爣鍑嗗寲
+		//weightVecor为权向量，赋值之后就应该标准化
 		
 		for(int i=0;i<linenum;i++) {
 			aVector[i]=y[i][Dnum];
@@ -56,7 +56,7 @@ public class AlgorithmAHP{
 			System.out.print(aVector[i]+"  ");
 		}*/
 		
-		//浠ヤ笅涓烘爣鍑嗗寲锛屽嵆淇濊瘉鍚戦噺涓烘锛屼笖鍜屼负涓�锛屾眰鍑烘潵鐨勫氨鏄潈鍊�
+		//以下为标准化，即保证向量为正，和为一，求出来的就是权值
 		double sum=0;
 		for(int i=0;i<linenum;i++) {
 			sum=aVector[i]+sum;
@@ -147,7 +147,6 @@ public class AlgorithmAHP{
 		return initialMatrix;
 	}
 	public void setInitialMatrix(double[][] inputMatrix) {
-		//c鏄竴涓狹atrix绫荤殑锛屽叾鍐呭涓巌nitialMatrix涓�鑷�
 		initialMatrix = new double[inputMatrix.length][inputMatrix[0].length];
 		for(int i = 0;i < inputMatrix.length;i ++){
 			for(int j = 0;j < inputMatrix[i].length;j ++){
