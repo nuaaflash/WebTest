@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="layui-body" id="container" >
             <!-- 内容主体区域  -->
             <div style="padding: 30px;">
-            	<h2>算法一</h2>
+            	<h2><a href="https://www.cnblogs.com/zhangchaoyang/articles/2591663.html">RBF神经网络算法</a></h2>
             	<p>神经网络算法，需要训练数据进行模型训练。模型训练结束后，根据模型，获得指标叶子层的节点值来计算指标顶层的值。</p>
             	<br>
             	<br>
