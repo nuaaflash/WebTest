@@ -325,6 +325,23 @@ public class Sql {
 		}			
 	}
 	
+	public void SetNodeValue(String tree_name, int ID,double value){
+		// Show the Children of a Node with this Name
+		String sql = null;
+		sql = "UPDATE "+ tree_name +" set node_value ="+ value + "WHERE node_id = "+ID; 
+		Statement stmt;
+		ConnectSql();
+		try {
+			stmt = conn.createStatement();
+			stmt.executeUpdate(sql);
+			System.out.println("Update done!");
+			conn.close();
+			System.out.println("Database was Colsed successfully");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}			
+	}
+	
 	public void SetNodeChildrenNum(String name,double num){
 		// Show the Children of a Node with this Name
 		String sql = null;
