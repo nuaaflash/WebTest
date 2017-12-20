@@ -17,6 +17,169 @@
 		background:#009688;
 	}
 	</style>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="zTree/css/demo.css" type="text/css">
+	<link rel="stylesheet" href="zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+	<script type="text/javascript" src="zTree/js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="zTree/js/jquery.ztree.core.js"></script>
+	<script type="text/javascript" src="zTree/js/jquery.ztree.excheck.js"></script>
+	<script type="text/javascript" src="zTree/js/jquery.ztree.exedit.js"></script>
+	<SCRIPT type="text/javascript">
+		<!--
+
+		var setting = {
+			view: {
+				addHoverDom: addHoverDom,
+				removeHoverDom: removeHoverDom,
+				selectedMulti: false
+			},
+			edit: {
+				enable: true,
+				editNameSelectAll: true,
+				showRemoveBtn: showRemoveBtn,
+				showRenameBtn: showRenameBtn
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback: {
+				onRemove: onRemove,
+				onRename: onRename
+			}
+		};
+		function showLog(str) {
+			if (!log) log = $("#log");
+			log.append("<li class='"+className+"'>"+str+"</li>");
+			if(log.children("li").length > 8) {
+				log.get(0).removeChild(log.children("li")[0]);
+			}
+		}
+
+		function onRename(e, treeId, treeNode, isCancel) {
+			showLog((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
+		}
+	function onRemove(e, treeId, treeNode) {
+			showLog("[ "+getTime()+" onRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+		}
+		
+		function removeHoverDom(treeId, treeNode) {
+			$("#addBtn_"+treeNode.tId).unbind().remove();
+		};
+
+
+		function showRemoveBtn(treeId, treeNode) {
+			return !treeNode.isFirstNode;
+		}
+		function showRenameBtn(treeId, treeNode) {
+			return !treeNode.isLastNode;
+		}
+
+
+		function setEdit() {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+			remove = $("#remove").attr("checked"),
+			rename = $("#rename").attr("checked"),
+			removeTitle = $.trim($("#removeTitle").get(0).value),
+			renameTitle = $.trim($("#renameTitle").get(0).value);
+			zTree.setting.edit.showRemoveBtn = remove;
+			zTree.setting.edit.showRenameBtn = rename;
+			zTree.setting.edit.removeTitle = removeTitle;
+			zTree.setting.edit.renameTitle = renameTitle;
+			showCode(['setting.edit.showRemoveBtn = ' + remove, 'setting.edit.showRenameBtn = ' + rename,
+				'setting.edit.removeTitle = "' + removeTitle +'"', 'setting.edit.renameTitle = "' + renameTitle + '"']);
+		}
+		function showCode(str) {
+			var code = $("#code");
+			code.empty();
+			for (var i=0, l=str.length; i<l; i++) {
+				code.append("<li>"+str[i]+"</li>");
+			}
+		}
+		
+		$(document).ready(function(){
+			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			setEdit();
+			$("#remove").bind("change", setEdit);
+			$("#rename").bind("change", setEdit);
+			$("#removeTitle").bind("propertychange", setEdit)
+			.bind("input", setEdit);
+			$("#renameTitle").bind("propertychange", setEdit)
+			.bind("input", setEdit);
+		});
+
+
+		var zNodes =[
+			{ id:1, pId:0, name:"拽 1", open:true},
+			{ id:2, pId:1, name:"拽 1-1"},
+			{ id:3, pId:1, name:"boy next door", open:true},
+			{ id:121, pId:3, name:"拽 jbzhua1-2-1"},
+			{ id:122, pId:3, name:"拽 1-2-2"},
+			{ id:123, pId:3, name:"拽 1-2-3"},
+			{ id:13, pId:1, name:"拽 1-3", open:true},
+			{ id:131, pId:13, name:"拽 1-3-1"},
+			{ id:132, pId:13, name:"拽 1-3-2"},
+			{ id:133, pId:13, name:"拽 1-3-3"},
+			{ id:2, pId:0, name:"拽 2", open:true},
+			{ id:21, pId:2, name:"拽 2-1"},
+			{ id:22, pId:2, name:"拽 2-2", open:true},
+			{ id:221, pId:22, name:"拽 2-2-1"},
+			{ id:222, pId:22, name:"拽 2-2-2"},
+			{ id:223, pId:22, name:"拽 2-2-3"},
+			{ id:23, pId:2, name:"拽 2-3"}
+		];
+		
+		function setCheck() {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+			isCopy = $("#copy").attr("checked"),
+			isMove = $("#move").attr("checked"),
+			prev = $("#prev").attr("checked"),
+			inner = $("#inner").attr("checked"),
+			next = $("#next").attr("checked");
+			zTree.setting.edit.drag.isCopy = isCopy;
+			zTree.setting.edit.drag.isMove = isMove;
+			showCode(1, ['setting.edit.drag.isCopy = ' + isCopy, 'setting.edit.drag.isMove = ' + isMove]);
+
+			zTree.setting.edit.drag.prev = prev;
+			zTree.setting.edit.drag.inner = inner;
+			zTree.setting.edit.drag.next = next;
+			showCode(2, ['setting.edit.drag.prev = ' + prev, 'setting.edit.drag.inner = ' + inner, 'setting.edit.drag.next = ' + next]);
+		}
+		function showCode(id, str) {
+			var code = $("#code" + id);
+			code.empty();
+			for (var i=0, l=str.length; i<l; i++) {
+				code.append("<li>"+str[i]+"</li>");
+			}
+		}
+
+		var newCount = 1;
+		function addHoverDom(treeId, treeNode) {
+			var sObj = $("#" + treeNode.tId + "_span");
+			if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
+			var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
+				+ "' title='add ~~~node' onfocus='this.blur();'></span>";
+			sObj.after(addStr);
+			var btn = $("#addBtn_"+treeNode.tId);
+			if (btn) btn.bind("click", function(){
+				var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+				zTree.addNodes(treeNode, {id:(100 + newCount), pId:treeNode.id, name:"new node" + (newCount++)});
+				return false;
+			});
+		};
+
+		$(document).ready(function(){
+			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			setCheck();
+			$("#copy").bind("change", setCheck);
+			$("#move").bind("change", setCheck);
+			$("#prev").bind("change", setCheck);
+			$("#inner").bind("change", setCheck);
+			$("#next").bind("change", setCheck);
+		});
+		//-->
+	</SCRIPT>
 </head>
 
 <body>

@@ -95,19 +95,18 @@ public class ReadExcelUtils {
      * @return String 表头内容的数组 
      * @author zengwendong 
      */  
-    public String[] readExcelTitle() throws Exception{  
+    public ArrayList<String> readExcelTitle() throws Exception{  
         if(wb==null){  
             throw new Exception("Workbook对象为空！");  
         }  
         sheet = wb.getSheetAt(0);  
         row = sheet.getRow(0);  
         // 标题总列数  
-        int colNum = row.getPhysicalNumberOfCells();  
-        System.out.println("colNum:" + colNum);  
-        String[] title = new String[colNum];  
-        for (int i = 0; i < colNum; i++) {  
+        int colNum = row.getPhysicalNumberOfCells();   
+        ArrayList<String> title = new ArrayList<String>();  
+        for (int i = 1; i < colNum; i++) {  
             // title[i] = getStringCellValue(row.getCell((short) i));  
-            title[i] = row.getCell(i).getCellFormula();  
+            title.add((String)getCellFormatValue(row.getCell(i)));  
         }  
         return title;  
     }  
@@ -187,6 +186,10 @@ public class ReadExcelUtils {
             // 对读取Excel表格内容测试  
             ArrayList<Object> result = excelReader.readExcel();
             System.out.println("获得Excel表格的内容:");  
+            ArrayList<String> name = excelReader.readExcelTitle();
+            for(int i= 0; i < name.size(); i++) { 
+            	System.out.println(name.get(i));
+            }
             for (int i = 0; i < result.size(); i++) { 
             	System.out.print(result.get(i)+"  ");
             	i ++;

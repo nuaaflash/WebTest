@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="Sql.*" import="java.util.ArrayList" import="java.util.List"  %> 
-<%@page import="org.lxh.smart.SmartUpload" import="Dataset.*" import="Algorithm.*" import="java.util.ArrayList" import="java.util.List" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -63,34 +63,31 @@
         <div class="layui-body" id="container" >
             <!-- 内容主体区域  -->
             <div style="padding: 30px;">
-            	<h2>算法二</h2>
-            	<p>支持向量回归算法，需要训练数据进行模型训练。模型训练结束后，根据模型，获得指标叶子层的节点值来计算指标顶层的值。</p>
+            	<h2><a href="https://www.cnblogs.com/zhangchaoyang/articles/2591663.html">SVR支持向量回归算法</a></h2>
+            	<p>输入底层节点的值，系统将通过算法根据上传的训练数据来训练出模型，并将此次输入的值用于预测计算顶层节点的值</p>
             	<br>
             	<br>
             	<br>
-            	<p>请上传训练用的数据(支持.xls，.xlsx格式)</p>
-				<form action="UploadAG2Servlet" method="post" enctype="multipart/form-data">
-					<input type="file" name="file1" ><br>
-					<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo"  name="Submits" value="2">开始上传</button>
-				</form>
-				<br>
-            	<br>
-            	<br>
-            					<p>请选择指标体系</p>
 				<%
-					Sql sql =  Sql.getInstance();
+					String ww=request.getParameter("choose_target");					
+					int indx = Integer.parseInt(ww);
+					Sql sql = Sql.getInstance();
 					ArrayList<String> al = sql.getTreeS();
-					int num = al.size();
+					ww=al.get(indx);
+					ArrayList<String> leaves = sql.getLeaves(ww);
+					int num = leaves.size();
 					String s;
+					System.out.println(ww);
 				%>
 				
-				<form action="inputDataAG2.jsp" method="get" enctype="multipart/form-data">
+				<form action="AlgorithmServlet" method="get" enctype="multipart/form-data">
+				<input type="hidden" name="choose_target" value="<%=ww%>"/>
 				<table bgcolor="#DEDEDE" border="2" cellspacing="5" cellpadding="5" width="400">
 					<thead>
 						<tr>
 							<th>序号</th>
-							<th>指标体系</th>
-							<th>.</th>
+							<th>名称</th>
+							<th>请输入</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -99,18 +96,26 @@
 %>
 						<tr>
 							<td><%= i%></td>
-							<td><%=al.get(i).toString() %></td>
-							<td><input type="radio" name="choose_target" value="<%= i%>"></td>
+							<td><%=leaves.get(i).toString() %></td>
+							<td>
+								<input type="range" id="range<%= i%>" name="point_value<%= i%>" min="1" max="100" step="1" value="1" oninput="change()">
+								<input id="show<%= i%>" type="number">
+							</td>
 						</tr>
 <%
 					}
 %>
-						<tr>
-							<td colspan="3"><input type="submit" value="提交"></td>
-						</tr>
 					</tbody>	
 				</table>
+				<td><input type="hidden" name="treename" value="<%= ww%>"></td>
+				<input type = "hidden" name="num" value="<%=num %>">
+				<p>参数设置:</p>
+				cache大小:<input type= "text" name="cache" value="100"><br>
+				终止判据eps:<input type="text" name="eps" value="0.001"><br>
+				损失函数C:<input type="text" name="C" value="1.9"><br>
+            	<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo"  name="Submits" value="2">开始训练</button>
 				</form>
+				
 			</div>
         </div>
 	    <div class="layui-footer layui-bg-black">
@@ -132,5 +137,23 @@
 	  });
 	});
 	</script>
+
+	<script>
+      function change(){ 
+    	  var num;
+    	  var location;
+<%
+	for(int i=0;i<num;i++) {
+%>
+      num=document.getElementById("range<%= i%>"); 
+      location=document.getElementById("show<%= i%>");
+      location.value=num.value; 
+<%
+	}
+%>
+  } 
+	</script>
+
+
 </body>
 </html>

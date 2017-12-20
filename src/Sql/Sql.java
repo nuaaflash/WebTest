@@ -179,7 +179,33 @@ public class Sql {
 		//DestroyTree(name);
 		ConnectSql();
 		ArrayList<String> names = new ArrayList<String>();
-		sql = "SELECT node_name FROM " + nameoftree +" WHERE num_of_children = 0;";  
+		sql = "SELECT node_name FROM " + nameoftree +" WHERE num_of_children = 0 ORDER BY node_id;";  
+		Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				String temp = rs.getString(1);
+			    names.add(temp);
+			}
+			System.out.println("Children showed!");
+			conn.close();
+			System.out.println("Database was Colsed successfully");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return names;
+	}
+	
+	public ArrayList<String> getNodes(String nameoftree){		//通过树名查询树的所有节点名 返回ArrayList<String>
+		numofnodes = 0;
+		String sql = null;
+		//ConnectSql();
+		//DestroyTree(name);
+		ConnectSql();
+		ArrayList<String> names = new ArrayList<String>();
+		sql = "SELECT node_name FROM " + nameoftree + " ORDER BY node_id";  
 		Statement stmt;
 		try {
 			stmt = conn.createStatement();
@@ -312,6 +338,23 @@ public class Sql {
 		// Show the Children of a Node with this Name
 		String sql = null;
 		sql = "UPDATE "+ treeName +" set node_value ="+ value + "WHERE node_name = '"+name+"'"; 
+		Statement stmt;
+		ConnectSql();
+		try {
+			stmt = conn.createStatement();
+			stmt.executeUpdate(sql);
+			System.out.println("Update done!");
+			conn.close();
+			System.out.println("Database was Colsed successfully");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}			
+	}
+	
+	public void SetNodeValue(String tree_name, int ID,double value){
+		// Show the Children of a Node with this Name
+		String sql = null;
+		sql = "UPDATE "+ tree_name +" set node_value ="+ value + "WHERE node_id = "+ID; 
 		Statement stmt;
 		ConnectSql();
 		try {
