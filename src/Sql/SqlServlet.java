@@ -33,7 +33,7 @@ public class SqlServlet extends HttpServlet {
 		String path="showIndexSystem.jsp";
 		Sql sql = Sql.getInstance();
 		sql.ConnectSql();
-		int submitchoice = 5;
+		int submitchoice = 6;
 		submitchoice = Integer.parseInt(request.getParameter("Submits"));
 		switch(submitchoice){
 			case 0:{
@@ -60,12 +60,16 @@ public class SqlServlet extends HttpServlet {
 				break;
 			}
 			case 3:{
-				sql.DestroyTree(request.getParameter("Deletename"));
+				sql.DestroyTree(request.getParameter("nameofTree"));
 				break;
 			}
 			case 4:{
 				double values = Double.parseDouble(request.getParameter("value"));
 				sql.SetNodeValue(request.getParameter("Nodename"),values);
+				break;
+			}
+			case 5:{
+				sql.InitTree(request.getParameter("nameofTree"));
 				break;
 			}
 			default:{

@@ -224,6 +224,34 @@ public class Sql {
 		return names;
 	}
 	
+	public ArrayList<Node> getIndexNodetoShow(){		//得到需要在指标体系里展示的节点 返回ArrayList<Node>
+		numofnodes = 0;
+		String sql = null;
+		//ConnectSql();
+		//DestroyTree(name);
+		ConnectSql();
+		ArrayList<Node> cnode = new ArrayList<Node>();
+		sql = "SELECT node_name FROM " + treeName ; 
+		System.out.println(sql);
+		Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				Node temp = getNode(rs.getString(1));
+			    cnode.add(temp);
+			    ConnectSql();
+			}
+			System.out.println("Node not ZERO gotten!");
+			conn.close();
+			System.out.println("Database was Colsed successfully");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cnode;
+	}
+	
 	public ArrayList<Node> getChildrenofNode(String nameofnode){		//通过节点得到树的节点的子节点 返回ArrayList<Node>
 		numofnodes = 0;
 		String sql = null;
@@ -254,7 +282,7 @@ public class Sql {
 		return cnode;
 	}
 	
-	public ArrayList<Node> getNodetoShow(){		//通过节点得到树的节点的子节点 返回ArrayList<Node>
+	public ArrayList<Node> getNodetoShow(){		//得到树的要在view中展示的节点 返回ArrayList<Node>
 		numofnodes = 0;
 		String sql = null;
 		//ConnectSql();
