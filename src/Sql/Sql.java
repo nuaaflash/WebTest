@@ -15,7 +15,7 @@ public class Sql {
 	private Connection conn; //The class to connect the DBS.
 	private static Sql single = null;
 	
-	private Sql(){}
+	public Sql(){}
 	
 	public static Sql getInstance() {  
 		if (single == null) {    
@@ -295,6 +295,7 @@ public class Sql {
 			int n = i+1;
 			names.get(i).ShowNode();
 		}
+		sql.InitNodeValue(-1);
 	}
 	
 	public Node getNode(int ID){	
@@ -371,6 +372,23 @@ public class Sql {
 			stmt = conn.createStatement();
 			stmt.executeUpdate(sql);
 			System.out.println("Update done!");
+			conn.close();
+			System.out.println("Database was Colsed successfully");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}			
+	}
+	
+	public void InitNodeValue(double value){				// 将所有Node的value初始化为 参数value
+		// Show the Children of a Node with this Name
+		String sql = null;
+		sql = "UPDATE "+ treeName +" set node_value ="+ value; 
+		Statement stmt;
+		ConnectSql();
+		try {
+			stmt = conn.createStatement();
+			stmt.executeUpdate(sql);
+			System.out.println("Initialization done!");
 			conn.close();
 			System.out.println("Database was Colsed successfully");
 		} catch (SQLException e) {
