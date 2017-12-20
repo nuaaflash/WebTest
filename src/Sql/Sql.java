@@ -198,6 +198,32 @@ public class Sql {
 		return names;
 	}
 	
+	public ArrayList<String> getNodes(String nameoftree){		//通过树名查询树的所有节点名 返回ArrayList<String>
+		numofnodes = 0;
+		String sql = null;
+		//ConnectSql();
+		//DestroyTree(name);
+		ConnectSql();
+		ArrayList<String> names = new ArrayList<String>();
+		sql = "SELECT node_name FROM " + nameoftree ;  
+		Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				String temp = rs.getString(1);
+			    names.add(temp);
+			}
+			System.out.println("Children showed!");
+			conn.close();
+			System.out.println("Database was Colsed successfully");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return names;
+	}
+	
 	public ArrayList<Node> getChildrenofNode(String nameofnode){		//通过节点得到树的节点的子节点 返回ArrayList<Node>
 		numofnodes = 0;
 		String sql = null;
