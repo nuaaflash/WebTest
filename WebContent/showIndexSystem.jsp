@@ -161,6 +161,10 @@
 			if (btn) btn.bind("click", function(){
 				var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 				zTree.addNodes(treeNode, {id:(100 + newCount), pId:treeNode.id, name:"new node" + (newCount++)});
+				form1 = document.getElementById("form1");
+				form1.action="SqlServlet";
+				alert(form.action);
+				form1.submit();
 				return false;
 			});
 		};
@@ -283,10 +287,17 @@
 					<ul class="info">
 							<li><p>
 								<br><br><br><br>
+								<form id = "form1" name="form1"method="post">
+									<input type="hidden" name="Treename" id="Treename" size="10" value="fq">	
+									<input type="hidden" name="parent" id="parent" size="10" value="1">				
+									<input type="hidden" name="Nodename" id="Nodename" size="10" value="Testform">
+									<input type="hidden" name="value" id="value" size="10" value="0">
+									<input type="hidden" name="Submits" id="Submits" value="1">
 									<input type="checkbox" id="remove" class="checkbox first" checked />
 									<input type="checkbox" id="rename" class="checkbox " checked />
 									<input type="text" id="removeTitle" value="remove" /><br/>
 									<input type="text" id="renameTitle" value="rename" />
+								</form>
 								</p>
 							</li>
 							</ul>
