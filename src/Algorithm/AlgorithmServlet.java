@@ -105,9 +105,6 @@ public class AlgorithmServlet extends HttpServlet {
 				break;
 			}
 		}
-		ArrayList<String> trees = null;
-		request.setAttribute("trees", trees); 
-		request.getRequestDispatcher(path).forward(request, response);  
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
