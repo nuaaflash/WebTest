@@ -179,7 +179,7 @@ public class Sql {
 		//DestroyTree(name);
 		ConnectSql();
 		ArrayList<String> names = new ArrayList<String>();
-		sql = "SELECT node_name FROM " + nameoftree +" WHERE num_of_children = 0;";  
+		sql = "SELECT node_name FROM " + nameoftree +" WHERE num_of_children = 0 ORDER BY node_id;";  
 		Statement stmt;
 		try {
 			stmt = conn.createStatement();
@@ -205,7 +205,7 @@ public class Sql {
 		//DestroyTree(name);
 		ConnectSql();
 		ArrayList<String> names = new ArrayList<String>();
-		sql = "SELECT node_name FROM " + nameoftree ;  
+		sql = "SELECT node_name FROM " + nameoftree + " ORDER BY node_id";  
 		Statement stmt;
 		try {
 			stmt = conn.createStatement();
