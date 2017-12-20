@@ -284,6 +284,28 @@
 				</tbody>
 			</form>
 			</div>
+			
+			<div class="content_wrap">
+				<div class="zTreeDemoBackground left">
+					<ul id="treeDemo" class="ztree"></ul>
+				</div>
+				<div class="right">
+					<ul class="info">
+						
+							<li><p>
+									<input type="checkbox" id="remove" class="checkbox first" checked />
+									<input type="checkbox" id="rename" class="checkbox " checked /><span>显示编辑按钮</span><br/>
+									 <input type="text" id="removeTitle" value="remove" /><br/>
+									rename 按钮的 title: <input type="text" id="renameTitle" value="rename" />
+									</p>
+							</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+			
         </div>
 
         <div class="layui-footer layui-bg-black">
