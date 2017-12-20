@@ -155,7 +155,7 @@
 			var sObj = $("#" + treeNode.tId + "_span");
 			if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
 			var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
-				+ "' title='add ~~~node' onfocus='this.blur();'></span>";
+				+ "' title='add node' onfocus='this.blur();'></span>";
 			sObj.after(addStr);
 			var btn = $("#addBtn_"+treeNode.tId);
 			if (btn) btn.bind("click", function(){
@@ -275,19 +275,19 @@
 			</form>
 			</div>
 			
-			<div class="content_wrap">
-				<div class="zTreeDemoBackground left">
+			<div class="content_wrap" id="container" >
+				<div class="zTreeDemoBackground left" >
 					<ul id="treeDemo" class="ztree"></ul>
 				</div>
-				<div class="right">
+				<div class="right" style="display: none" onMouseout="hidden();">
 					<ul class="info">
-						
 							<li><p>
+								<br><br><br><br>
 									<input type="checkbox" id="remove" class="checkbox first" checked />
-									<input type="checkbox" id="rename" class="checkbox " checked /><span>显示编辑按钮</span><br/>
-									 <input type="text" id="removeTitle" value="remove" /><br/>
-									rename 按钮的 title: <input type="text" id="renameTitle" value="rename" />
-									</p>
+									<input type="checkbox" id="rename" class="checkbox " checked />
+									<input type="text" id="removeTitle" value="remove" /><br/>
+									<input type="text" id="renameTitle" value="rename" />
+								</p>
 							</li>
 							</ul>
 						</li>
