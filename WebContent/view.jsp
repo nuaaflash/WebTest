@@ -86,11 +86,18 @@
             <div style="padding: 10px;">
 <%			
 			Sql sql = Sql.getInstance();
-			
+			sql.SetTreeName("node");
+			ArrayList <Node> node = sql.getNodetoShow();
+			for(int i=0;i<node.size();i++){ 
 %>
-            	<div class="layui-progress layui-progress-big">
-  				<div class="layui-progress-bar layui-bg-cyan" lay-percent="60%"></div>
-				</div>            	
+				<p><font color="#2B2B2B" size="5"><%= node.get(i).nodeName%>: <%=node.get(i).value %></font></p>
+            	<div class="layui-progress layui-progress-big" >
+  				<div class="layui-progress-bar layui-bg-cyan" lay-percent="<%=node.get(i).value %>%"></div>
+				</div> 
+				<br><br><br>
+<%				
+			}
+%>           	
 			</div>
         </div>
 
