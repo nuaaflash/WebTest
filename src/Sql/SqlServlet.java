@@ -30,7 +30,6 @@ public class SqlServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");   
-		String path="showIndexSystem.jsp";
 		Sql sql = Sql.getInstance();
 		sql.ConnectSql();
 		int submitchoice = 6;
@@ -84,7 +83,7 @@ public class SqlServlet extends HttpServlet {
 		}
 		ArrayList<String> trees = sql.getTreeS();
 		request.setAttribute("trees", trees); 
-		request.getRequestDispatcher(path).forward(request, response);
+		request.getRequestDispatcher("showIndexSystem.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
