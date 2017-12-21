@@ -42,7 +42,7 @@ public class AlgorithmServlet extends HttpServlet {
 		// 读文件并验证部分
 		ReadExcelUtils reader = ReadExcelUtils.getInstance();
 		Sql sql=Sql.getInstance();
-		
+		sql.SetTreeName(request.getParameter("treename"));
 		reader.setFilepath("E:\\theData.xlsx");
 		ArrayList<Object> result = null;
 		try {
@@ -121,6 +121,17 @@ public class AlgorithmServlet extends HttpServlet {
 			}
 			case 3:{
 				Sql S = Sql.getInstance(); 
+				// 将读入数据写入数据库
+				int num = Integer.parseInt(request.getParameter("num"));
+				String lname = null;
+                double value = 0;
+                for(int i = 0;i < num; i ++){
+                	value = Double.parseDouble(request.getParameter("point_value"+i));
+                	lname = request.getParameter("leavesname"+i);
+                	sql.SetNodeValue(lname, value);
+                	System.out.println(value);
+                }
+                
 				AlgorithmAHP A = new AlgorithmAHP();
 				ArrayList<Node> TempN = new ArrayList<Node>();
 				for(int i=0;i<result.size();i=i+2) {
@@ -155,6 +166,7 @@ public class AlgorithmServlet extends HttpServlet {
 					}
 					S.SetNodeValue(name, TempV);
 				}
+                request.getRequestDispatcher("showAlgorithm3.jsp").forward(request, response); 
 				break;
 			}
 			case 4:{

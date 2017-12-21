@@ -63,8 +63,8 @@
         <div class="layui-body" id="container" >
             <!-- 内容主体区域  -->
             <div style="padding: 30px;">
-            	<h2><a href="https://www.cnblogs.com/zhangchaoyang/articles/2591663.html">SVR支持向量回归算法</a></h2>
-            	<p>输入底层节点的值，系统将通过算法根据上传的训练数据来训练出模型，并将此次输入的值用于预测计算顶层节点的值</p>
+            	<h2><a href="https://www.cnblogs.com/zhangchaoyang/articles/2591663.html">AHP层次分析算法</a></h2>
+            	<p>需要从文件读入重要度，由此计算权值，再根据最后一层输入逐层向上计算</p>
             	<br>
             	<br>
             	<br>
@@ -99,6 +99,7 @@
 							<td><%=leaves.get(i).toString() %></td>
 							<td>
 								<input type="range" id="range<%= i%>" name="point_value<%= i%>" min="1" max="100" step="1" value="1" oninput="change()">
+								<input type="hidden" id="leavesname<%= i%>" name="leavesname<%= i%>" min="1" max="100" step="1" value="<%=leaves.get(i).toString() %>" oninput="change()">
 								<input id="show<%= i%>" type="number">
 							</td>
 						</tr>
