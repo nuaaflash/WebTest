@@ -25,6 +25,7 @@
 	<script type="text/javascript" src="zTree/js/jquery.ztree.excheck.js"></script>
 	<script type="text/javascript" src="zTree/js/jquery.ztree.exedit.js"></script>
 	<SCRIPT type="text/javascript">
+
 		<!--
 
 		var setting = {
@@ -110,25 +111,20 @@
 		});
 
 
-		var zNodes =[
-			{ id:1, pId:0, name:"拽 1", open:true},
-			{ id:2, pId:1, name:"拽 1-1"},
-			{ id:3, pId:1, name:"boy next door", open:true},
-			{ id:121, pId:3, name:"拽 jbzhua1-2-1"},
-			{ id:122, pId:3, name:"拽 1-2-2"},
-			{ id:123, pId:3, name:"拽 1-2-3"},
-			{ id:13, pId:1, name:"拽 1-3", open:true},
-			{ id:131, pId:13, name:"拽 1-3-1"},
-			{ id:132, pId:13, name:"拽 1-3-2"},
-			{ id:133, pId:13, name:"拽 1-3-3"},
-			{ id:2, pId:0, name:"拽 2", open:true},
-			{ id:21, pId:2, name:"拽 2-1"},
-			{ id:22, pId:2, name:"拽 2-2", open:true},
-			{ id:221, pId:22, name:"拽 2-2-1"},
-			{ id:222, pId:22, name:"拽 2-2-2"},
-			{ id:223, pId:22, name:"拽 2-2-3"},
-			{ id:23, pId:2, name:"拽 2-3"}
-		];
+		var zNodes =[];
+		<%
+		Sql sql = Sql.getInstance();
+		ArrayList <String> trees = sql.getTreeS();
+		ArrayList <Node> sqlnode = sql.getIndexNodetoShow();
+		int num = 0; 
+		if(trees != null) {
+			num = trees.size();
+		}
+		%>
+<%		for(int i = 0;i < sqlnode.size();i ++){
+%>			zNodes.push({id:<%=sqlnode.get(i).nodeId%>, pId:<%=sqlnode.get(i).parentId%>, name:"<%=sqlnode.get(i).nodeName%>", open:true });
+<%		}
+%>			
 		
 		function setCheck() {
 			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
@@ -159,7 +155,7 @@
 			var sObj = $("#" + treeNode.tId + "_span");
 			if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
 			var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
-				+ "' title='add ~~~node' onfocus='this.blur();'></span>";
+				+ "' title='add node' onfocus='this.blur();'></span>";
 			sObj.after(addStr);
 			var btn = $("#addBtn_"+treeNode.tId);
 			if (btn) btn.bind("click", function(){
@@ -259,14 +255,7 @@
 				</div>
 			</form>
 			<form action="SqlServlet" method="post" name = "showTree">
-				<%
-					Sql sql = Sql.getInstance();
-					ArrayList <String> trees = sql.getTreeS(); 
-					int num = 0;
-					if(trees != null) {
-						num = trees.size();
-					}
-				%>
+
 				<tbody>
 <%			
 					for(int i=0;i<num;i++) {
@@ -274,8 +263,9 @@
 						<tr>
 							<td>第<%= i+1%>个指标体系名字：</td>
 							<td><%=trees.get(i).toString() %></td>
-							<input type="hidden" name = "Deletename" value="<%=trees.get(i).toString() %>">
+							<input type="hidden" name = "nameofTree" value="<%=trees.get(i).toString() %>">
 							<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo" onclick="return checkuser()" name="Submits" value="3">删除树</button>
+							<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo" onclick="return checkuser()" name="Submits" value="5">显示树</button>
 							</br>
 						</tr>
 <%
@@ -284,6 +274,28 @@
 				</tbody>
 			</form>
 			</div>
+			
+			<div class="content_wrap" id="container" >
+				<div class="zTreeDemoBackground left" >
+					<ul id="treeDemo" class="ztree"></ul>
+				</div>
+				<div class="right" style="display: none" onMouseout="hidden();">
+					<ul class="info">
+							<li><p>
+								<br><br><br><br>
+									<input type="checkbox" id="remove" class="checkbox first" checked />
+									<input type="checkbox" id="rename" class="checkbox " checked />
+									<input type="text" id="removeTitle" value="remove" /><br/>
+									<input type="text" id="renameTitle" value="rename" />
+								</p>
+							</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+			
         </div>
 
         <div class="layui-footer layui-bg-black">
