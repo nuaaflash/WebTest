@@ -27,14 +27,14 @@ import Sql.Sql;
 public class AHPLoop {
 	public void Calcu() throws Exception {
 		ReadExcelUtils E = ReadExcelUtils.getInstance();
-		E.setFilepath("F:\\Weight.xlsx");
+		E.setFilepath("E:\\theData.xlsx");
 		ArrayList <Object> WeightExcel = new ArrayList<Object>();
 		WeightExcel = E.readExcel();
 		Sql S = Sql.getInstance(); 
-		/*S.SetTreeName("node");
-		S.SetDBS("myh");
-		S.setPassword("admin");
-		S.setUser("root");*/
+		S.SetTreeName("node");
+		S.SetDBS("threatDegree");
+		S.setPassword("123");
+		S.setUser("root");
 		//以上是测试用的，登录本地数据库
 		AlgorithmAHP A = new AlgorithmAHP();
 		ArrayList<Node> TempN = new ArrayList<Node>();

@@ -10,7 +10,7 @@ INSERT INTO node(node_id, node_name, parent_id, num_of_children, node_value)
 values(1,'威胁度',0,3,0);
 
 INSERT INTO node(node_id, node_name, parent_id, num_of_children, node_value)
-values(2,'海面、水下、天空目标威胁度',1,3,0);
+values(2,'海面、水下、天空目标威胁因素',1,3,0);
 
 INSERT INTO node(node_id, node_name, parent_id, num_of_children, node_value)
 values(3,'太空威胁因素',1,3,0);
