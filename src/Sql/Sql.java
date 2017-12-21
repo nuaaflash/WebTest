@@ -263,6 +263,7 @@ public class Sql {
 		//DestroyTree(name);
 		ConnectSql();
 		ArrayList<Node> cnode = new ArrayList<Node>();
+		 int notempty = 0;
 		sql = "SELECT node_name FROM " + treeName ; 
 		System.out.println(sql);
 		Statement stmt;
@@ -272,6 +273,7 @@ public class Sql {
 			while (rs.next()) {
 				Node temp = getNode(rs.getString(1));
 			    cnode.add(temp);
+			    notempty = 1;
 			    ConnectSql();
 			}
 			System.out.println("Node not ZERO gotten!");
@@ -280,6 +282,9 @@ public class Sql {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		if(notempty == 0){
+			cnode = null;
 		}
 		return cnode;
 	}
