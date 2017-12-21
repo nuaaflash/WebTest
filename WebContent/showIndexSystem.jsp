@@ -61,8 +61,43 @@
 		function onRename(e, treeId, treeNode, isCancel) {
 			showLog((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
 		}
-	function onRemove(e, treeId, treeNode) {
+		function onRemove(e, treeId, treeNode) {
 			showLog("[ "+getTime()+" onRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+			var form1 = document.createElement("form"); 
+			form1.id = "form1"; 
+			form1.name = "form1"; 
+			// 添加到 body 中 
+			document.body.appendChild(form1); 
+			// 创建一个输入 
+			var input1 = document.createElement("input"); 
+			// 设置相应参数 
+			input1.type = "text"; 
+			input1.name = "Treename"; 
+			input1.value = "fq"; 
+			// 将该输入框插入到 form 中 
+			form1.appendChild(input1); 
+			
+			var input2 = document.createElement("input"); 
+			input2.type = "text"; 
+			input2.name = "deleteID"; 
+			input2.value = treeNode.id; 
+			// 将该输入框插入到 form 中 
+			form1.appendChild(input2); 
+			
+			var input3 = document.createElement("input"); 
+			input3.type = "text"; 
+			input3.name = "Submits"; 
+			input3.value = "6"; 						// 删除节点
+			// 将该输入框插入到 form 中 
+			form1.appendChild(input3); 
+			// form 的提交方式 
+			form1.method = "POST"; 
+			// form 提交路径 
+			form1.action="SqlServlet";
+			// 对该 form 执行提交 
+			form1.submit(); 
+			// 删除该 form 
+			document.body.removeChild(form1); 
 		}
 		
 		function removeHoverDom(treeId, treeNode) {
@@ -110,18 +145,26 @@
 			.bind("input", setEdit);
 		});
 
-
-		var zNodes =[];
-		<%
+<%
 		Sql sql = Sql.getInstance();
 		ArrayList <String> trees = sql.getTreeS();
-		ArrayList <Node> sqlnode = sql.getIndexNodetoShow();
+		ArrayList <Node> sqlnode = null;
 		int num = 0; 
+		int nodenum = 0;
 		if(trees != null) {
+			sqlnode = sql.getIndexNodetoShow();
 			num = trees.size();
 		}
-		%>
-<%		for(int i = 0;i < sqlnode.size();i ++){
+		if(sqlnode != null){		
+			nodenum = sqlnode.size();
+		}
+		else{
+			sql.Addnode("root", 0, 0);	// 判断是否有根节点来 自动创建根节点
+		}
+%>
+		var zNodes =[];
+<%		
+		for(int i = 0;i < nodenum;i ++){
 %>			zNodes.push({id:<%=sqlnode.get(i).nodeId%>, pId:<%=sqlnode.get(i).parentId%>, name:"<%=sqlnode.get(i).nodeName%>", open:true });
 <%		}
 %>			
@@ -149,8 +192,10 @@
 				code.append("<li>"+str[i]+"</li>");
 			}
 		}
-
-		var newCount = 1;
+<%
+		int nodeid = sql.getNumofnodes() + 1;
+%>
+		var newCount = <%=nodeid%>;
 		function addHoverDom(treeId, treeNode) {
 			var sObj = $("#" + treeNode.tId + "_span");
 			if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
@@ -160,7 +205,43 @@
 			var btn = $("#addBtn_"+treeNode.tId);
 			if (btn) btn.bind("click", function(){
 				var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-				zTree.addNodes(treeNode, {id:(100 + newCount), pId:treeNode.id, name:"new node" + (newCount++)});
+				zTree.addNodes(treeNode, {id:newCount, pId:treeNode.id, name:"new node" + newCount});
+
+				var form1 = document.createElement("form"); 
+				form1.id = "form1"; 
+				form1.name = "form1"; 
+				// 添加到 body 中 
+				document.body.appendChild(form1); 
+				// 创建一个输入 
+				
+				var input1 = document.createElement("input"); 
+				input1.type = "text"; 
+				input1.name = "parent"; 
+				input1.value = treeNode.id; 
+				// 将该输入框插入到 form 中 
+				form1.appendChild(input1); 
+				
+				var input2 = document.createElement("input"); 
+				input2.type = "text"; 
+				input2.name = "Nodename"; 
+				input2.value = "new node"+newCount; 
+				// 将该输入框插入到 form 中 
+				form1.appendChild(input2); 
+				
+				var input3 = document.createElement("input"); 
+				input3.type = "text"; 
+				input3.name = "Submits"; 
+				input3.value = "1"; 
+				// 将该输入框插入到 form 中 
+				form1.appendChild(input3); 
+				// form 的提交方式 
+				form1.method = "POST"; 
+				// form 提交路径 
+				form1.action="SqlServlet";
+				// 对该 form 执行提交 
+				form1.submit(); 
+				// 删除该 form 
+				document.body.removeChild(form1); 
 				return false;
 			});
 		};
@@ -255,23 +336,32 @@
 				</div>
 			</form>
 			<form action="SqlServlet" method="post" name = "showTree">
-
-				<tbody>
-<%			
+								<table bgcolor="#DEDEDE" border="2" cellspacing="5" cellpadding="5" width="400">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>指标体系</th>
+							<th>.</th>
+						</tr>
+					</thead>
+					<tbody>
+<%
 					for(int i=0;i<num;i++) {
 %>
 						<tr>
-							<td>第<%= i+1%>个指标体系名字：</td>
+							<td><%= i%></td>
 							<td><%=trees.get(i).toString() %></td>
-							<input type="hidden" name = "nameofTree" value="<%=trees.get(i).toString() %>">
-							<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo" onclick="return checkuser()" name="Submits" value="3">删除树</button>
-							<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo" onclick="return checkuser()" name="Submits" value="5">显示树</button>
-							</br>
+							<td><input type="radio" name = "nameofTree" value="<%=trees.get(i).toString() %>"></td>
 						</tr>
 <%
 					}
 %>
-				</tbody>
+						<tr>
+							<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo"  name="Submits" value="3">删除树</button>
+							<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo"  name="Submits" value="5">显示树</button>
+						</tr>
+					</tbody>	
+				
 			</form>
 			</div>
 			
@@ -283,10 +373,12 @@
 					<ul class="info">
 							<li><p>
 								<br><br><br><br>
+								<form id = "form1" name="form1"method="post">
 									<input type="checkbox" id="remove" class="checkbox first" checked />
 									<input type="checkbox" id="rename" class="checkbox " checked />
 									<input type="text" id="removeTitle" value="remove" /><br/>
 									<input type="text" id="renameTitle" value="rename" />
+								</form>
 								</p>
 							</li>
 							</ul>
