@@ -35,6 +35,7 @@ public class SqlServlet extends HttpServlet {
 		sql.ConnectSql();
 		int submitchoice = 6;
 		submitchoice = Integer.parseInt(request.getParameter("Submits"));
+		System.out.println(submitchoice+"*********************************");
 		switch(submitchoice){
 			case 0:{
 				sql.InitTree(request.getParameter("Treename"));
@@ -69,7 +70,11 @@ public class SqlServlet extends HttpServlet {
 				break;
 			}
 			case 5:{
-				sql.InitTree(request.getParameter("nameofTree"));
+				sql.SetTreeName(request.getParameter("nameofTree"));
+				break;
+			}
+			case 6:{
+				sql.Removenode( Integer.parseInt(request.getParameter("deleteID")) );
 				break;
 			}
 			default:{
