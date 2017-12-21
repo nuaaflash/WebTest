@@ -61,8 +61,44 @@
 		function onRename(e, treeId, treeNode, isCancel) {
 			showLog((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
 		}
-	function onRemove(e, treeId, treeNode) {
+		function onRemove(e, treeId, treeNode) {
 			showLog("[ "+getTime()+" onRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+			var form1 = document.createElement("form"); 
+			form1.id = "form1"; 
+			form1.name = "form1"; 
+			// 添加到 body 中 
+			document.body.appendChild(form1); 
+			// 创建一个输入 
+		<% System.out.println("ffffffffffffffffffffffffffffffffffffff");%>
+			var input1 = document.createElement("input"); 
+			// 设置相应参数 
+			input1.type = "text"; 
+			input1.name = "Treename"; 
+			input1.value = "fq"; 
+			// 将该输入框插入到 form 中 
+			form1.appendChild(input1); 
+			
+			var input2 = document.createElement("input"); 
+			input2.type = "text"; 
+			input2.name = "deleteID"; 
+			input2.value = treeNode.id; 
+			// 将该输入框插入到 form 中 
+			form1.appendChild(input2); 
+			
+			var input3 = document.createElement("input"); 
+			input3.type = "text"; 
+			input3.name = "Submits"; 
+			input3.value = "6"; 						// 删除节点
+			// 将该输入框插入到 form 中 
+			form1.appendChild(input3); 
+			// form 的提交方式 
+			form1.method = "POST"; 
+			// form 提交路径 
+			form1.action="SqlServlet";
+			// 对该 form 执行提交 
+			form1.submit(); 
+			// 删除该 form 
+			document.body.removeChild(form1); 
 		}
 		
 		function removeHoverDom(treeId, treeNode) {
@@ -110,9 +146,7 @@
 			.bind("input", setEdit);
 		});
 
-
-		var zNodes =[];
-		<%
+<%
 		Sql sql = Sql.getInstance();
 		ArrayList <String> trees = sql.getTreeS();
 		ArrayList <Node> sqlnode = sql.getIndexNodetoShow();
@@ -120,8 +154,16 @@
 		if(trees != null) {
 			num = trees.size();
 		}
-		%>
-<%		for(int i = 0;i < sqlnode.size();i ++){
+		if(sqlnode != null){
+%>
+		var zNodes =[];
+<%		}
+		else{
+%>
+		var zNodes =[{id:0, pId:0, name: "<%=sql.getTreename()%>"+"指标体系的节点为空，请添加新节点", open:true}];
+<%		}
+		
+		for(int i = 0;i < sqlnode.size();i ++){
 %>			zNodes.push({id:<%=sqlnode.get(i).nodeId%>, pId:<%=sqlnode.get(i).parentId%>, name:"<%=sqlnode.get(i).nodeName%>", open:true });
 <%		}
 %>			
@@ -161,6 +203,49 @@
 			if (btn) btn.bind("click", function(){
 				var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 				zTree.addNodes(treeNode, {id:(100 + newCount), pId:treeNode.id, name:"new node" + (newCount++)});
+
+				var form1 = document.createElement("form"); 
+				form1.id = "form1"; 
+				form1.name = "form1"; 
+				// 添加到 body 中 
+				document.body.appendChild(form1); 
+				// 创建一个输入 
+				var input1 = document.createElement("input"); 
+				// 设置相应参数 
+				input1.type = "text"; 
+				input1.name = "Treename"; 
+				input1.value = "fq"; 
+				// 将该输入框插入到 form 中 
+				form1.appendChild(input1); 
+				
+				var input2 = document.createElement("input"); 
+				input2.type = "text"; 
+				input2.name = "parent"; 
+				input2.value = treeNode.id; 
+				// 将该输入框插入到 form 中 
+				form1.appendChild(input2); 
+				
+				var input3 = document.createElement("input"); 
+				input3.type = "text"; 
+				input3.name = "Nodename"; 
+				input3.value = "New Node"; 
+				// 将该输入框插入到 form 中 
+				form1.appendChild(input3); 
+				
+				var input4 = document.createElement("input"); 
+				input4.type = "text"; 
+				input4.name = "Submits"; 
+				input4.value = "1"; 
+				// 将该输入框插入到 form 中 
+				form1.appendChild(input4); 
+				// form 的提交方式 
+				form1.method = "POST"; 
+				// form 提交路径 
+				form1.action="SqlServlet";
+				// 对该 form 执行提交 
+				form1.submit(); 
+				// 删除该 form 
+				document.body.removeChild(form1); 
 				return false;
 			});
 		};
@@ -283,10 +368,12 @@
 					<ul class="info">
 							<li><p>
 								<br><br><br><br>
+								<form id = "form1" name="form1"method="post">
 									<input type="checkbox" id="remove" class="checkbox first" checked />
 									<input type="checkbox" id="rename" class="checkbox " checked />
 									<input type="text" id="removeTitle" value="remove" /><br/>
 									<input type="text" id="renameTitle" value="rename" />
+								</form>
 								</p>
 							</li>
 							</ul>

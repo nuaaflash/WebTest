@@ -115,6 +115,38 @@ public class Sql {
 		}
 		
 	}
+	
+	public void Removenode(int deleteID){
+		// Insert A Record into Table;
+		String sql = null;
+		ConnectSql();
+		sql = "DELETE FROM "+ treeName +" WHERE node_id = " + deleteID +" OR parent_id = " + deleteID +";";  //mysql锟斤拷锟�
+		Node pnode = getNode(deleteID);
+		int parent = 0;
+		if(pnode!= null){
+			parent = pnode.parentId;							// 将父节点的子节点数目减一
+		}
+		if(parent != 0){
+			Node parentNode = getNode(parent);
+			if(parentNode != null){
+				int ChildnumofParent = parentNode.numofChildren - 1;
+				SetNodeChildrenNum(parentNode.nodeName,ChildnumofParent);
+			}
+		}
+		Statement stmt;
+		ConnectSql();
+		try {
+			stmt = conn.createStatement();
+			stmt.executeUpdate(sql);
+			System.out.println("Remove node successfully!");
+			conn.close();
+			System.out.println("Database was Colsed successfully");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public Node getNode(String name){
 		// Find the Record with this Name;
 		String nodeName = null;int parentId = 0;double value = 0;int nodeId = 0;int numofChildren = 0;
