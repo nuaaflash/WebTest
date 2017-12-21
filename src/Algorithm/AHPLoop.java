@@ -27,7 +27,7 @@ import Sql.Sql;
 public class AHPLoop {
 	public void Calcu() throws Exception {
 		ReadExcelUtils E = ReadExcelUtils.getInstance();
-		E.setFilepath("F:\\1.xlsx");
+		E.setFilepath("F:\\Weight.xlsx");
 		ArrayList <Object> WeightExcel = new ArrayList<Object>();
 		WeightExcel = E.readExcel();
 		Sql S = Sql.getInstance(); 
