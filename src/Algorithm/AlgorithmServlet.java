@@ -38,6 +38,8 @@ public class AlgorithmServlet extends HttpServlet {
 		
 		// 读文件并验证部分
 		ReadExcelUtils reader = ReadExcelUtils.getInstance();
+		Sql sql=Sql.getInstance();
+		
 		reader.setFilepath("E:\\theData.xlsx");
 		ArrayList<Object> result = null;
 		try {
@@ -47,6 +49,21 @@ public class AlgorithmServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		// 验证部分
+		ArrayList<String>title=new ArrayList<String>();
+		ArrayList<String>node=new ArrayList<String>();
+		try {
+			title=reader.readExcelTitle();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		node=sql.getNodes(request.getParameter("treename"));
+		for(int i=0;i<title.size();i++){
+			if(title.get(i)!=node.get(i))
+				System.out.println("wrong data,please choose again");
+			else 
+				System.out.println("well down");
+		}
 		
 		
 		// 控制台输出并将excel内容调整为训练模型所需的两个数组
@@ -94,7 +111,6 @@ public class AlgorithmServlet extends HttpServlet {
                 System.out.println(svr.Predict(p));
                 
                 // 结果写入数据库
-                Sql sql = Sql.getInstance();
                 sql.SetNodeValue(request.getParameter("treename"),1, svr.Predict(p));
                 
                 request.getRequestDispatcher("showAlgorithm2.jsp").forward(request, response); 
