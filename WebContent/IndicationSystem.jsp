@@ -15,6 +15,20 @@
 	
 	<link rel="stylesheet" href="zTree/css/demo.css" type="text/css">
 	<link rel="stylesheet" href="zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+	
+	<!-- SCRIPTS -->
+	<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <!--[if IE]><html class="ie" lang="en"> <![endif]-->
+	<script src="white/js/jquery.min.js" type="text/javascript"></script>
+	<script src="white/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="white/js/jquery.nicescroll.min.js" type="text/javascript"></script>
+	<script src="white/js/superfish.min.js" type="text/javascript"></script>
+	<script src="white/js/jquery.flexslider-min.js" type="text/javascript"></script>
+	<script src="white/js/owl.carousel.js" type="text/javascript"></script>
+	<script src="white/js/animate.js" type="text/javascript"></script>
+	<script src="white/js/myscript.js" type="text/javascript"></script>
+	<!-- //SCRIPTS -->
+	
 	<script type="text/javascript" src="zTree/js/jquery-1.4.4.min.js"></script>
 	<script type="text/javascript" src="zTree/js/jquery.ztree.core.js"></script>
 	<script type="text/javascript" src="zTree/js/jquery.ztree.excheck.js"></script>
@@ -369,18 +383,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500italic,700,500,700italic,900,900italic' rel='stylesheet' type='text/css'>
 	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">	
     
-	<!-- SCRIPTS -->
-	<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-    <!--[if IE]><html class="ie" lang="en"> <![endif]-->
 	
-	<script src="white/js/jquery.min.js" type="text/javascript"></script>
-	<script src="white/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="white/js/jquery.nicescroll.min.js" type="text/javascript"></script>
-	<script src="white/js/superfish.min.js" type="text/javascript"></script>
-	<script src="white/js/jquery.flexslider-min.js" type="text/javascript"></script>
-	<script src="white/js/owl.carousel.js"></script>
-	<script src="white/js/animate.js" type="text/javascript"></script>
-	<script src="white/js/myscript.js" type="text/javascript"></script>
 	
 </head>
 <body>
@@ -426,7 +429,7 @@
 		<section class="breadcrumbs_block clearfix parallax">
 			<div class="container center">
 				<h2>指标体系管理</h2>
-				<p>Index System Management</p>
+				<p>Indication System Management</p>
 			</div>
 		</section><!-- //BREADCRUMBS -->
 		
@@ -517,8 +520,8 @@
 						
 						<!-- TEXT WIDGET -->
 						<div class="sidepanel widget_text">
-							<h3><b>About</b> Blog</h3>
-							<p>I must admit this particular defense set me on edge a little bit, for two reasons. The first is that she’s being held to a completely different standard than male politicians are held to.</p>
+							<h3><b>关于指标体系</b></h3>
+							<p>指标体系指的是若干个相互联系的统计指标所组成的有机体，它的的建立是进行预测或评价研究的前提和基础，它是将抽象的研究对象按照其本质属性和特征的某一方面的标识分解成为具有行为化、可操作化的结构，并对指标体系中每一构成元素（即指标）赋予相应权重的过程。</p>
 						</div><!-- //TEXT WIDGET -->
 					</div><!-- //SIDEBAR -->
 				</div><!-- //ROW -->
@@ -541,13 +544,13 @@
 			<div class="row" data-appear-top-offset="-200" data-animated="fadeInUp">
 				
 				<div class="col-lg-4 col-md-4 col-sm-6 padbot30">
-					<h4><b>UI</b> and <b>Layouts</b></h4>
+					<h4><b>Special</b> thanks</h4>
 					<div class="recent_posts_small clearfix">
 						<div class="post_item_img_small">
 							<img src="white/images/blog/1.jpg" alt="" />
 						</div>
 						<div class="post_item_content_small">
-							<a class="title" href="layui" >Layui</a>
+							<a class="title" href="http://www.layui.com/" >Layui</a>
 							<ul class="post_item_inf_small">
 								<li>结果展示的进度条</li>
 							</ul>
@@ -558,7 +561,7 @@
 							<img src="white/images/blog/2.jpg" alt="" />
 						</div>
 						<div class="post_item_content_small">
-							<a class="title" href="ztree" >zTree</a>
+							<a class="title" href="http://www.treejs.cn/v3/main.php#_zTreeInfo" >zTree</a>
 							<ul class="post_item_inf_small">
 								<li>以树状结构形象显示指标体系</li>
 							</ul>
@@ -569,7 +572,7 @@
 							<img src="white/images/blog/3.jpg" alt="" />
 						</div>
 						<div class="post_item_content_small">
-							<a class="title" href="w3laiout" >w3layout</a>
+							<a class="title" href="https://w3layouts.com/" >w3layouts</a>
 							<ul class="post_item_inf_small">
 								<li>精美的网站模板</li>
 							</ul>

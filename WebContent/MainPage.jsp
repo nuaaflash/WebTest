@@ -35,7 +35,7 @@
 	<script src="white/js/jquery.flexslider-min.js" type="text/javascript"></script>
 	<script src="white/js/owl.carousel.js" type="text/javascript"></script>
 	<script src="white/js/animate.js" type="text/javascript"></script>
-	<script src="white/js/jquery.BlackAndWhite.js"></script>
+	<script src="white/js/jquery.BlackAndWhite.js" type="text/javascript"></script>
 	<script src="white/js/myscript.js" type="text/javascript"></script>
 	<script>
 		
@@ -435,13 +435,13 @@
 			<div class="row" data-appear-top-offset="-200" data-animated="fadeInUp">
 				
 				<div class="col-lg-4 col-md-4 col-sm-6 padbot30">
-					<h4><b>UI</b> and <b>Layouts</b></h4>
+					<h4><b>Special</b> thanks</h4>
 					<div class="recent_posts_small clearfix">
 						<div class="post_item_img_small">
 							<img src="white/images/blog/1.jpg" alt="" />
 						</div>
 						<div class="post_item_content_small">
-							<a class="title" href="layui" >Layui</a>
+							<a class="title" href="http://www.layui.com/" >Layui</a>
 							<ul class="post_item_inf_small">
 								<li>结果展示的进度条</li>
 							</ul>
@@ -452,7 +452,7 @@
 							<img src="white/images/blog/2.jpg" alt="" />
 						</div>
 						<div class="post_item_content_small">
-							<a class="title" href="ztree" >zTree</a>
+							<a class="title" href="http://www.treejs.cn/v3/main.php#_zTreeInfo" >zTree</a>
 							<ul class="post_item_inf_small">
 								<li>以树状结构形象显示指标体系</li>
 							</ul>
@@ -463,7 +463,7 @@
 							<img src="white/images/blog/3.jpg" alt="" />
 						</div>
 						<div class="post_item_content_small">
-							<a class="title" href="w3laiout" >w3layout</a>
+							<a class="title" href="https://w3layouts.com/" >w3layouts</a>
 							<ul class="post_item_inf_small">
 								<li>精美的网站模板</li>
 							</ul>
@@ -482,8 +482,6 @@
 			</div><!-- //ROW -->
 		</div><!-- //CONTAINER -->
 	</footer><!-- //FOOTER -->
-	
-	
 
 </div>
 </body>
