@@ -510,16 +510,7 @@
 								</thead>
 							</table>	
 						</form>	
-						<div class="right" style="display: none" onMouseout="hidden();">
-							<ul class="info">
-								<form id = "form1" name="hidden_form" method="post">
-									<input type="checkbox" id="remove" class="checkbox first" checked />
-									<input type="checkbox" id="rename" class="checkbox " checked />
-									<input type="text" id="removeTitle" value="remove" /><br/>
-									<input type="text" id="renameTitle" value="rename" />
-								</form>
-							</ul>
-						</div>
+						
 						</div><!-- //META WIDGET -->
 						
 						<hr>
