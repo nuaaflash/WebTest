@@ -31,6 +31,7 @@ public class SqlServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");   
 		Sql sql = Sql.getInstance();
+		String path = "showIndexSystem.jsp";
 		sql.ConnectSql();
 		int submitchoice = 6;
 		submitchoice = Integer.parseInt(request.getParameter("Submits"));
@@ -51,10 +52,10 @@ public class SqlServlet extends HttpServlet {
 				sql.SetDBS(request.getParameter("DBS"));
 				System.out.println(request.getParameter("DBS"));
 				if(sql.ConnectSql()){
-					request.getRequestDispatcher("main.jsp").forward(request, response);   
+					path = "main.jsp";   
 				}
 				else{
-					request.getRequestDispatcher("failure.jsp").forward(request, response);  
+					path = "failure.jsp";  
 				}
 				break;
 			}
@@ -68,13 +69,16 @@ public class SqlServlet extends HttpServlet {
 				break;
 			}
 			case 5:{
-				System.out.println("123123123123123123"+sql.getTreename());
 				sql.SetTreeName(request.getParameter("nameofTree"));
-				System.out.println("123123123123123123"+sql.getTreename());
 				break;
 			}
 			case 6:{
 				sql.Removenode( Integer.parseInt(request.getParameter("deleteID")) );
+				break;
+			}
+			case 7:{
+				System.out.println(request.getParameter("name")+">>>>>>>>>>>>>"+request.getParameter("newname"));
+				sql.RenameNode(request.getParameter("name"), request.getParameter("newname"));
 				break;
 			}
 			default:{
@@ -83,7 +87,7 @@ public class SqlServlet extends HttpServlet {
 		}
 		ArrayList<String> trees = sql.getTreeS();
 		request.setAttribute("trees", trees); 
-		request.getRequestDispatcher("showIndexSystem.jsp").forward(request, response);
+		request.getRequestDispatcher(path).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
