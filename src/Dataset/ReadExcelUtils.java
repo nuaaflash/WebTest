@@ -161,7 +161,7 @@ public class ReadExcelUtils {
             result.add(obj);
             int j = 1;  
             double num[] = new double[colNum-1];
-            while (j < colNum) {  
+            while (j < colNum) { 
                 obj = getCellFormatValue(row.getCell(j));
                 num[j-1] = Double.valueOf((String)obj);
                 j++;  

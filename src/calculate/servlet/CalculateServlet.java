@@ -14,6 +14,7 @@ import jdk.internal.org.xml.sax.InputSource;
 
 import Sql.*;
 import java.util.ArrayList;
+import Algorithm.*;
 /**
  * Servlet implementation class CalculateServlet
  */
@@ -36,17 +37,15 @@ public class CalculateServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		String path="main.jsp";
-		Sql sql = Sql.getInstance();
-		
-		ArrayList<Double> Input = new ArrayList<Double>();
-		String target_name = request.getParameter("choose_target");
-		System.out.println(target_name);
+		Sql sql = Sql.getInstance();	
+		String target_name = request.getParameter("choose_target");		
+		System.out.println("target_name:"+target_name);
 		ArrayList<String> leaves = sql.getLeaves(target_name);
-		int num = leaves.size();
-		for(int i=0;i<num;i++) {
+		int leaves_num = leaves.size();
+		double myinput[] = new double[leaves_num];
+		for(int i=0;i<leaves_num;i++) {
 			Double temp = new Double(request.getParameter("point_value"+i));
-			System.out.println(temp);
-			Input.add(temp);
+			myinput[i]=temp.doubleValue();
 		}
 		int hidden_nodes_num = Integer.parseInt(request.getParameter("hidden_nodes_num"));
 		int count = Integer.parseInt(request.getParameter("count"));
@@ -56,16 +55,37 @@ public class CalculateServlet extends HttpServlet {
 		ReadExcelUtils reader = ReadExcelUtils.getInstance();
 		try {
 			ArrayList<Object> re = reader.readExcel();
-			for (int i = 0; i < re.size(); i++) { 
-	        	System.out.print(re.get(i)+"  ");
-	        	i ++;
-	        	double [] nums = (double[])re.get(i);
-	        	for(int j = 0;j < nums.length - 1;j ++) {
-	        		System.out.print(nums[j]+"  ");  
-	        	}
-	        	System.out.println(nums[nums.length - 1]);
-	        }
-			
+			double inputarray[][];	//传入算法的输入样本 chuan ru suan fa de shu ru yang ben
+			double outputarray[];	//传入算法的输出样本 chuan ru suan fa de shu chu yang ben
+			inputarray = new double[re.size()/2][leaves_num];
+			outputarray = new double[re.size()/2];
+			System.out.println("re.size():"+re.size()+" leaves_num: "+leaves_num);
+			for (int i = 0; i < re.size(); i++) {
+				if(i%2==0) continue;
+				double [] nums = (double[])re.get(i);
+				for(int j=0;j<nums.length-1;j++) {
+					inputarray[i/2][j]=nums[j];
+				}
+				outputarray[i/2]=nums[nums.length-1];
+			}
+			/*for(int i=0;i<re.size()/2;i++) {
+				for(int j=0;j<leaves_num;j++)
+					System.out.print(inputarray[i][j]+" ");
+				System.out.println(outputarray[i]);
+			}*/
+			RBF rbf = new RBF(re.size()/2, hidden_nodes_num, leaves_num, step_length.doubleValue(), inputarray, outputarray);
+			while(count>=0) {
+				rbf.calError();
+				rbf.update();
+				count--;
+			}
+			double compute_result = rbf.compute(myinput);
+			/*if(compute_result<0.00001)
+				compute_result=0;
+			if(compute_result>100.0)
+				compute_result=100.0;*/
+			System.out.println(" rbf compute result: "+compute_result);
+			sql.SetNodeValue(target_name, 1, compute_result);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
