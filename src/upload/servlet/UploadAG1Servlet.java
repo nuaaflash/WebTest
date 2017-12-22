@@ -40,10 +40,26 @@ public class UploadAG1Servlet extends HttpServlet {
 			String filename="theData."+ext;
 			su.getFiles().getFile(0).saveAs("E:\\"+filename);
 			//su.save("E:\\"); //使用绝对路径
-			ReadExcelUtils reader = ReadExcelUtils.getInstance();
-			reader.setFilepath("E:\\"+filename);
 		} catch (Exception e) {
 			// TODO: handle exception
+		}
+		int submitchoice = 5;
+		String usubmitchoice = su.getRequest().getParameter("submitchoice");
+		System.out.println("usubmitchoice:"+usubmitchoice);
+		submitchoice = Integer.parseInt(usubmitchoice);
+		switch (submitchoice) {
+		case 1:	//返回RBF
+			path="A_RBF_Select.jsp";
+			break;
+		case 2: //返回SVR
+			path="A_SVR_Select.jsp";
+			break;
+		case 3:
+			path="A_AHP_Select.jsp";
+			break;
+		default: //非法进入，返回主页
+			path="MainPage.jsp";
+			break;
 		}
 		request.getRequestDispatcher(path).forward(request, response);
 	}
