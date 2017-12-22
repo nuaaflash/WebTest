@@ -127,7 +127,8 @@
 							
 							<div class="sidepanel widget_tags">
 								<div class="post_item_content_widget">
-									<form action="UploadAG2Servlet" method="post" enctype="multipart/form-data">
+									<form action="UploadAG1Servlet" method="post" enctype="multipart/form-data">
+										<input type="hidden" name="submitchoice" value="2"> <!-- 区分算法 -->
 										<input type="file" name="file1" ><br>
 										<button name="Submits" value="2">开始上传</button>
 									</form>
@@ -147,7 +148,8 @@
 										String s;
 									%>
 									
-									<form action="inputDataAG2.jsp" method="get" enctype="multipart/form-data">
+									<form action="SelectServlet" method="get" enctype="multipart/form-data">
+									<input type="hidden" name="submitchoice" value="2">
 									<table bgcolor="#DEDEDE" border="2" cellspacing="5" cellpadding="5" width="400">
 										<thead>
 											<tr>

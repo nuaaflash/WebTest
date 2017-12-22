@@ -77,12 +77,12 @@
 				</div><!-- //MENU BLOCK -->
 			</div><!-- //CONTAINER -->
 		</header><!-- //HEADER -->
-		
+
 		<!-- BREADCRUMBS -->
 		<section class="breadcrumbs_block clearfix parallax">
 			<div class="container center">
-				<h2><b>RBF</b> 径向基函数网络算法</h2>
-				<p>Radial Basis Function Network</p>
+				<h2><b>Input</b> 输入数据</h2>
+				<p>The file you just uploaded is appropriate for this indication system.</p>
 			</div>
 		</section><!-- //BREADCRUMBS -->
 		
@@ -101,17 +101,54 @@
 						
 						<!-- SINGLE BLOG POST -->
 						<div class="single_blog_post clearfix" data-animated="fadeInUp">
-							<div class="single_blog_post_title">用法 & 介绍</div>
-							<div class="single_blog_post_img"><img src="white/images/blog/2.jpg" alt="" /></div>
+							
+<%
+						int submitchoice=(Integer)request.getAttribute("submitchoice_from_SelectServlet");
+						System.out.println("submitchoice:"+submitchoice);
+						int indx=(Integer)request.getAttribute("the_system_index");	//指标体系编号
+						String indication_name=null;
+						Sql sql = Sql.getInstance();
+						ArrayList<String> al = sql.getTreeS();
+						indication_name=al.get(indx);
+						ArrayList<String> leaves = sql.getLeaves(indication_name);
+						int num = leaves.size();
+						String s;
+						System.out.println("indication_name:"+indication_name+" indx:"+indx);
+%>
 							
 							<div class="single_blog_post_content">
-								<p class="margbot50">输入底层节点的值，系统将通过算法根据上传的训练数据来训练出模型，并将之后输入的底层节点值用于预测计算顶层节点的值</p>
-								<p class="margbot30">In the field of mathematical modeling, a radial basis function network is an artificial neural network that uses radial basis functions as activation functions. The output of the network is a linear combination of radial basis functions of the inputs and neuron parameters. Radial basis function networks have many uses, including function approximation, time series prediction, classification, and system control. They were first formulated in a 1988 paper by Broomhead and Lowe, both researchers at the Royal Signals and Radar Establishment. (wikipedia)</p>
+								<form action="CalculateServlet" method="get" enctype="multipart/form-data">
+								<input type="hidden" name="choose_target" value="<%=indication_name%>"/>
+								<input type="hidden" name="submitchoice" value="<%=submitchoice%>"/>
+								<table border="2" cellspacing="5" cellpadding="5" width="400">
+									<thead>
+										<tr>
+											<th>序号</th>
+											<th>名称</th>
+											<th>请输入</th>
+										</tr>
+									</thead>
+									<tbody>
+<%
+									for(int i=0;i<num;i++) {
+%>
+										<tr>
+											<td><%= i%></td>
+											<td><%=leaves.get(i).toString() %></td>
+											<td>
+												<input type="range" id="range<%= i%>" name="point_value<%= i%>" min="1" max="100" step="1" value="1" oninput="change()">
+												<input id="show<%= i%>" type="number">
+											</td>
+										</tr>
+<%
+									}
+%>
+									</tbody>	
+								</table>
+								</form>
 							</div>
 							
 						</div><!-- //SINGLE BLOG POST -->
-						
-						<hr class="margbot80">
 						
 					</div><!-- //BLOG BLOCK -->
 					
@@ -119,66 +156,40 @@
 					<!-- SIDEBAR -->
 					<div class="sidebar col-lg-3 col-md-3 padbot50">
 						
+						<!-- POPULAR TAGS WIDGET -->
+						<div class="sidepanel widget_tags">
+							<h3><b>相关的参数</b> Tags</h3>
+<%
+							if(submitchoice==1) {
+%>
+							输入RBFNN的隐藏层节点个数<br><input type="text" name="hidden_nodes_num"><br>
+							输入算法的<abbr title="重复反馈过程">迭代</abbr>次数<br><input type="text" name="count" placeholder="推荐输入5000~100000"><br>
+							输入梯度下降法的<abbr title="每一次求偏导结果作加前乘的系数">步长</abbr><br><input type="text" name="step_length" placeholder="推荐输入0.00001~0.001"><br>
+<%								
+							} else if(submitchoice==2) {
+%>
+							cache大小:<br><input type= "text" name="cache" value="100"><br>
+							终止判据eps:<br><input type="text" name="eps" value="0.001"><br>
+							损失函数C:<br><input type="text" name="C" value="1.9"><br>
+<%								
+							} else if(submitchoice==3) {
+%>
+							.
+<%								
+							}
+%>							
+							<input type="hidden" name="treename" value="<%= indication_name%>">
+							<input type ="hidden" name="num" value="<%=num %>">
+            				<button name="Submits" value="1">开始计算</button>
+						</div><!-- POPULAR TAGS WIDGET -->
+						
 						<hr>
 						
-						<!-- POPULAR POSTS WIDGET -->
-						<div class="sidepanel widget_popular_posts">
-							<h3><b>请上传训练用的数据</b>(支持.xls，.xlsx格式)</h3>
-							
-							<div class="sidepanel widget_tags">
-								<div class="post_item_content_widget">
-									<form action="UploadAG1Servlet" method="post" enctype="multipart/form-data">
-										<input type="hidden" name="submitchoice" value="1"> <!-- 区分算法 -->
-										<input type="file" name="file1" ><br>
-										<button name="Submits" value="2">开始上传</button>
-									</form>
-								</div>
-							</div>
-							
-							<hr>
-							
-							<h3><b>请选择指标体系</b></h3>
-							<div class="sidepanel widget_popular_posts">
-								<div class="post_item_content_widget">
-								
-									<%
-										Sql sql =  Sql.getInstance();
-										ArrayList<String> al = sql.getTreeS();
-										int num = al.size();
-										String s;
-									%>
-									
-									<form action="SelectServlet" method="get" enctype="multipart/form-data">
-									<input type="hidden" name="submitchoice" value="1">
-									<table bgcolor="#DEDEDE" border="2" cellspacing="5" cellpadding="5" width="400">
-										<thead>
-											<tr>
-												<th>序号</th>
-												<th>指标体系</th>
-												<th>.</th>
-											</tr>
-										</thead>
-										<tbody>
-<%
-										for(int i=0;i<num;i++) {
-%>
-											<tr>
-												<td><%= i%></td>
-												<td><%=al.get(i).toString() %></td>
-												<td><input type="radio" name="choose_target" value="<%= i%>"></td>
-											</tr>
-<%
-										}
-%>
-											<tr>
-												<td colspan="3"><input type="submit" value="提交"></td>
-											</tr>
-										</tbody>	
-									</table>
-									</form>
-								</div>
-							</div>
-						</div><!-- //POPULAR POSTS WIDGET -->
+						<!-- TEXT WIDGET -->
+						<div class="sidepanel widget_text">
+							<h3><b>About</b> Blog</h3>
+							<p>I must admit this particular defense set me on edge a little bit, for two reasons. The first is that she’s being held to a completely different standard than male politicians are held to.</p>
+						</div><!-- //TEXT WIDGET -->
 					</div><!-- //SIDEBAR -->
 				</div><!-- //ROW -->
 			</div><!-- //CONTAINER -->
