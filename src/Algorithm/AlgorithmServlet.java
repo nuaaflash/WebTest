@@ -91,15 +91,33 @@ public class AlgorithmServlet extends HttpServlet {
 		}
 		
 		switch(submitchoice){
-			case 0:{
-				
-				break;
-			}
+		
+			// RBF神经网络算法
 			case 1:{
+				ArrayList<Double> Input = new ArrayList<Double>();
+				String target_name = request.getParameter("choose_target");
+				System.out.println(target_name);
+				ArrayList<String> leavesRBF = sql.getLeaves(target_name);
+				int num = leavesRBF.size();
+				for(int i=0;i<num;i++) {
+					Double temp = new Double(request.getParameter("point_value"+i));
+					System.out.println(temp);
+					Input.add(temp);
+				}
+				int hidden_nodes_num = Integer.parseInt(request.getParameter("hidden_nodes_num"));
+				int count = Integer.parseInt(request.getParameter("count"));
+				Double step_length = new Double(request.getParameter("step_length"));
+				System.out.println("hidden_nodes_num:"+hidden_nodes_num+"   count:"+count+"   step_length:"+step_length);
+				RBF rbf = new RBF(0, hidden_nodes_num, 0, step_length, leaves, threatDegree);
 				
+				// 结果写入数据库
+                sql.SetNodeValue(request.getParameter("treename"),1, rbf.compute(threatDegree));
+				request.getRequestDispatcher("showAlgorithm1.jsp").forward(request, response); 
 				break;
 			}
-			case 2:{
+			
+			// Svr支持向量回归算法
+			case 2:{												
                 Svmr svr = new Svmr();
                 svr.Setparameter(Double.parseDouble(request.getParameter("cache")),
                 				 Double.parseDouble(request.getParameter("eps")) , 
@@ -119,8 +137,10 @@ public class AlgorithmServlet extends HttpServlet {
                 request.getRequestDispatcher("showAlgorithm2.jsp").forward(request, response); 
 				break;
 			}
+			
+			// AHP层次分析算法
 			case 3:{
-				Sql S = Sql.getInstance(); 
+				Sql S = Sql.getInstance(); 						
 				// 将读入数据写入数据库
 				int num = Integer.parseInt(request.getParameter("num"));
 				String lname = null;
@@ -134,7 +154,7 @@ public class AlgorithmServlet extends HttpServlet {
                 
 				AlgorithmAHP A = new AlgorithmAHP();
 				ArrayList<Node> TempN = new ArrayList<Node>();
-				for(int i=0;i<result.size();i=i+2) {
+				for(int i=0;i< result.size();i=i+2) {
 					String name = (String) result.get(i);//取出结点名字
 					double[] data1 = (double[]) result.get(i+1);//取出重要度数组
 					TempN = S.getChildrenofNode(name);//从数据库取子结点
@@ -169,10 +189,8 @@ public class AlgorithmServlet extends HttpServlet {
                 request.getRequestDispatcher("showAlgorithm3.jsp").forward(request, response); 
 				break;
 			}
-			case 4:{
-				double values = Double.parseDouble(request.getParameter("value"));
-				break;
-			}
+
+
 			default:{
 				break;
 			}
