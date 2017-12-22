@@ -15,7 +15,7 @@ public class Sql {
 	private Connection conn; //The class to connect the DBS.
 	private static Sql single = null;
 	
-	private Sql(){}
+	public Sql(){}
 	
 	public static Sql getInstance() {  
 		if (single == null) {    
@@ -153,6 +153,7 @@ public class Sql {
 		Node node = null;
 		ConnectSql();
 		String sql = null;
+		System.out.println("name"+"1231232424444444444444444444444444444444444444444444444444");
 		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM "+ treeName +" WHERE node_name ="+ "'"+name+ "'"+";";  //mysql锟斤拷锟�
 		PreparedStatement pstmt;
 		try {
@@ -295,7 +296,9 @@ public class Sql {
 		//ConnectSql();
 		//DestroyTree(name);
 		ConnectSql();
+		System.out.println("here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+nameofnode);
 		Node thenode = getNode(nameofnode);
+		thenode.ShowNode();
 		ConnectSql();
 		ArrayList<Node> cnode = new ArrayList<Node>();
 		sql = "SELECT node_name FROM " + treeName +" WHERE parent_id = "+ thenode.nodeId +";"; 
@@ -350,17 +353,14 @@ public class Sql {
 	@Test
 	public void testGETTREES(){
 		Sql sql = Sql.getInstance();
-		sql.SetTreeName("fq");
+		sql.SetTreeName("node");
 		sql.SetDBS("threatDegree");
 		sql.setUser("root");
 		sql.setPassword("123");
-		ArrayList<Node> names = sql.getNodetoShow();
-		System.out.println("有"+names.size()+"个");
-		for(int i = 0;i < names.size();i ++){
-			int n = i+1;
-			names.get(i).ShowNode();
-		}
-		sql.InitNodeValue(-1);
+		Node xx = sql.getNode("威胁度");
+		xx.ShowNode();
+		sql.InitNodeValue(0);
+
 	}
 	
 	public Node getNode(int ID){	
