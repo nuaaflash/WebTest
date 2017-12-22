@@ -57,6 +57,9 @@
                             <dd><a href="showAlgorithm3.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'随机过程',id:'10'}"><i class="layui-icon">&#xe658;</i><span> 还是算法</span></a></dd>
                         </dl>
                     </li>
+                    <li class="layui-nav-item layui-nav-itemed layui-bg-cyan">
+                        <a href="view.jsp" ></i><span> 结果显示</span></a>
+                    </li>
                 </ul>
             </div>
         </div>
