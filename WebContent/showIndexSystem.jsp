@@ -84,7 +84,38 @@
 			showLog("[ "+getTime()+" beforeRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
 			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 			zTree.selectNode(treeNode);
-			return confirm("确认删除 节点 -- " + treeNode.name + " 吗？");
+			var deletes = confirm("确认删除 节点 -- " + treeNode.name + " 吗？");
+			if(deletes){
+				var form1 = document.createElement("form"); 
+				form1.id = "form1"; 
+				form1.name = "form1"; 
+				// 添加到 body 中 
+				document.body.appendChild(form1); 
+				// 创建一个输入 
+				
+				var input1 = document.createElement("input"); 
+				input1.type = "text"; 
+				input1.name = "deleteID"; 
+				input1.value = treeNode.id; 
+				// 将该输入框插入到 form 中 
+				form1.appendChild(input1); 
+				
+				var input2 = document.createElement("input"); 
+				input2.type = "text"; 
+				input2.name = "Submits"; 
+				input2.value = "6"; 						// 删除节点
+				// 将该输入框插入到 form 中 
+				form1.appendChild(input2); 
+				// form 的提交方式 
+				form1.method = "POST"; 
+				// form 提交路径 
+				form1.action="SqlServlet";
+				// 对该 form 执行提交 
+				form1.submit(); 
+				// 删除该 form 
+				document.body.removeChild(form1); 
+			}
+			return deletes;
 		}
 		function onRemove(e, treeId, treeNode) {
 			showLog("[ "+getTime()+" onRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
@@ -158,9 +189,7 @@
 		function onRename(e, treeId, treeNode, isCancel) {
 			showLog((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
 		}
-		function onRename(e, treeId, treeNode, isCancel) {
-			showLog((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
-		}
+
 		function onRemove(e, treeId, treeNode) {
 			showLog("[ "+getTime()+" onRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
 		}
@@ -297,34 +326,7 @@
 			}
 			var callbackFlag = $("#callbackTrigger").attr("checked");
 			zTree.removeNode(treeNode, callbackFlag);
-			var form1 = document.createElement("form"); 
-			form1.id = "form1"; 
-			form1.name = "form1"; 
-			// 添加到 body 中 
-			document.body.appendChild(form1); 
-			// 创建一个输入 
 			
-			var input1 = document.createElement("input"); 
-			input1.type = "text"; 
-			input1.name = "deleteID"; 
-			input1.value = treeNode.id; 
-			// 将该输入框插入到 form 中 
-			form1.appendChild(input1); 
-			
-			var input2 = document.createElement("input"); 
-			input2.type = "text"; 
-			input2.name = "Submits"; 
-			input3.value = "6"; 						// 删除节点
-			// 将该输入框插入到 form 中 
-			form1.appendChild(input2); 
-			// form 的提交方式 
-			form1.method = "POST"; 
-			// form 提交路径 
-			form1.action="SqlServlet";
-			// 对该 form 执行提交 
-			form1.submit(); 
-			// 删除该 form 
-			document.body.removeChild(form1); 
 		};
 
 		function showLog(str) {
