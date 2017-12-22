@@ -110,7 +110,9 @@
 				输入RBFNN的隐藏层节点个数<input type="text" name="hidden_nodes_num"><br>
 				输入算法的<abbr title="重复反馈过程">迭代</abbr>次数<input type="text" name="count" placeholder="推荐输入5k~100k"><br>
 				输入梯度下降法的<abbr title="每一次求偏导结果作加前乘的系数">步长</abbr><input type="text" name="step_length" placeholder="推荐输入0.00001~0.001"><br>
-				<input type="submit" value="提交">
+				<td><input type="hidden" name="treename" value="<%= ww%>"></td>
+				<input type = "hidden" name="num" value="<%=num %>">
+            	<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo"  name="Submits" value="1">开始计算</button>
 				</form>
 				
 			</div>

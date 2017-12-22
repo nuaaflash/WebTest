@@ -13,6 +13,7 @@ public class Sql {
 	private String treeName;// name of the tree being operated.
 	private int numofnodes;
 	private Connection conn; //The class to connect the DBS.
+	private double initvalue = 0;
 	private static Sql single = null;
 	
 	public Sql(){}
@@ -329,7 +330,7 @@ public class Sql {
 		//DestroyTree(name);
 		ConnectSql();
 		ArrayList<Node> cnode = new ArrayList<Node>();
-		sql = "SELECT node_name FROM " + treeName +" WHERE node_value != 0"; 
+		sql = "SELECT node_name FROM " + treeName +" WHERE node_value != " + initvalue;  // 不为默认值的时候 这个节点的值有写入 需要显示
 		System.out.println(sql);
 		Statement stmt;
 		try {
@@ -444,8 +445,27 @@ public class Sql {
 		}			
 	}
 	
+	public void RenameNode(String name,String newname){				// 重命名节点
+		// Show the Children of a Node with this Name
+		String sql = null;
+		sql = "UPDATE "+ treeName +" set node_name = '"+ newname + "' WHERE node_name = '"+name+"'"; 
+		Statement stmt;
+		ConnectSql();
+		try {
+			stmt = conn.createStatement();
+			stmt.executeUpdate(sql);
+			System.out.println("Rename done!");
+			conn.close();
+			System.out.println("Database was Colsed successfully");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}			
+	}
+	
+	
 	public void InitNodeValue(double value){				// 将所有Node的value初始化为 参数value
 		// Show the Children of a Node with this Name
+		initvalue = value;
 		String sql = null;
 		sql = "UPDATE "+ treeName +" set node_value ="+ value; 
 		Statement stmt;

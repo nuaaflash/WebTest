@@ -113,7 +113,7 @@
 				cache大小:<input type= "text" name="cache" value="100"><br>
 				终止判据eps:<input type="text" name="eps" value="0.001"><br>
 				损失函数C:<input type="text" name="C" value="1.9"><br>
-            	<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo"  name="Submits" value="2">开始训练</button>
+            	<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo"  name="Submits" value="2">开始计算</button>
 				</form>
 				
 			</div>

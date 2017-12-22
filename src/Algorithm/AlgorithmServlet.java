@@ -35,14 +35,18 @@ public class AlgorithmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");   
-		String path="showAlgorithm2.jsp";
+		String path="view.jsp";// 计算完跳转显示结果
 		int submitchoice = 5;
 		
 		submitchoice = Integer.parseInt(request.getParameter("Submits"));
-		// 读文件并验证部分
-		ReadExcelUtils reader = ReadExcelUtils.getInstance();
+		
+		// 连接数据库 并将操作的树（指标体系）设置为前一页面选择的树 并将数据库各节点初始化为0 避免对显示数据产生干扰
 		Sql sql=Sql.getInstance();
 		sql.SetTreeName(request.getParameter("treename"));
+		sql.InitNodeValue(0);
+		
+		// 读文件并验证部分
+		ReadExcelUtils reader = ReadExcelUtils.getInstance();
 		reader.setFilepath("E:\\theData.xlsx");
 		ArrayList<Object> result = null;
 		try {
@@ -98,21 +102,30 @@ public class AlgorithmServlet extends HttpServlet {
 				String target_name = request.getParameter("choose_target");
 				System.out.println(target_name);
 				ArrayList<String> leavesRBF = sql.getLeaves(target_name);
-				int num = leavesRBF.size();
-				for(int i=0;i<num;i++) {
+				int leaves_num = leavesRBF.size();
+				double myinput[] = new double[leaves_num];
+				for(int i=0;i<leaves_num;i++) {
 					Double temp = new Double(request.getParameter("point_value"+i));
-					System.out.println(temp);
-					Input.add(temp);
+					myinput[i]=temp.doubleValue();
 				}
 				int hidden_nodes_num = Integer.parseInt(request.getParameter("hidden_nodes_num"));
 				int count = Integer.parseInt(request.getParameter("count"));
 				Double step_length = new Double(request.getParameter("step_length"));
 				System.out.println("hidden_nodes_num:"+hidden_nodes_num+"   count:"+count+"   step_length:"+step_length);
-				RBF rbf = new RBF(0, hidden_nodes_num, 0, step_length, leaves, threatDegree);
-				
+				RBF rbf = new RBF(result.size()/2, hidden_nodes_num, leaves_num, step_length.doubleValue(), leaves, threatDegree);
+				while(count>=0) {
+					rbf.calError();
+					rbf.update();
+					count--;
+				}
+				double compute_result = rbf.compute(myinput);
+				/*if(compute_result<0.00001)
+					compute_result=0;
+				if(compute_result>100.0)
+					compute_result=100.0;*/
+				System.out.println(" rbf compute result: "+compute_result);
+				sql.SetNodeValue(target_name, 1, compute_result);
 				// 结果写入数据库
-                sql.SetNodeValue(request.getParameter("treename"),1, rbf.compute(threatDegree));
-				request.getRequestDispatcher("showAlgorithm1.jsp").forward(request, response); 
 				break;
 			}
 			
@@ -133,8 +146,6 @@ public class AlgorithmServlet extends HttpServlet {
                 
                 // 结果写入数据库
                 sql.SetNodeValue(request.getParameter("treename"),1, svr.Predict(p));
-                
-                request.getRequestDispatcher("showAlgorithm2.jsp").forward(request, response); 
 				break;
 			}
 			
@@ -186,7 +197,6 @@ public class AlgorithmServlet extends HttpServlet {
 					}
 					S.SetNodeValue(name, TempV);
 				}
-                request.getRequestDispatcher("showAlgorithm3.jsp").forward(request, response); 
 				break;
 			}
 
@@ -195,6 +205,7 @@ public class AlgorithmServlet extends HttpServlet {
 				break;
 			}
 		}
+        request.getRequestDispatcher(path).forward(request, response); // 计算完跳转显示结果
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

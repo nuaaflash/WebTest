@@ -18,7 +18,7 @@
 	}
 	</style>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="zTree/css/demo.css" type="text/css">
+	<link rel="stylesheet" href="zTree/css/demo2.css" type="text/css">
 	<link rel="stylesheet" href="zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
 	<script type="text/javascript" src="zTree/js/jquery-1.4.4.min.js"></script>
 	<script type="text/javascript" src="zTree/js/jquery.ztree.core.js"></script>
@@ -46,73 +46,167 @@
 				}
 			},
 			callback: {
+				beforeEditName: beforeEditName,
+				beforeRemove: beforeRemove,
+				beforeRename: beforeRename,
 				onRemove: onRemove,
 				onRename: onRename
 			}
 		};
-		function showLog(str) {
-			if (!log) log = $("#log");
-			log.append("<li class='"+className+"'>"+str+"</li>");
-			if(log.children("li").length > 8) {
-				log.get(0).removeChild(log.children("li")[0]);
-			}
-		}
 
-		function onRename(e, treeId, treeNode, isCancel) {
-			showLog((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
+		var log, className = "dark";
+<%
+		Sql sql = Sql.getInstance();
+		ArrayList <String> trees = sql.getTreeS();
+		ArrayList <Node> sqlnode = null;
+		int num = 0; 
+		int nodenum = 0;
+		if(trees != null) {
+			sqlnode = sql.getIndexNodetoShow();
+			num = trees.size();
+		}
+		if(sqlnode != null){		
+			nodenum = sqlnode.size();
+		}
+		else{
+			sql.Addnode("root", 0, 0);	// 判断是否有根节点来 自动创建根节点
+		}
+%>
+		var zNodes =[];
+<%		
+		for(int i = 0;i < nodenum;i ++){
+%>			zNodes.push({id:<%=sqlnode.get(i).nodeId%>, pId:<%=sqlnode.get(i).parentId%>, name:"<%=sqlnode.get(i).nodeName%>", open:true });
+<%		}
+%>			
+
+		function beforeRemove(treeId, treeNode) {
+			className = (className === "dark" ? "":"dark");
+			showLog("[ "+getTime()+" beforeRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			zTree.selectNode(treeNode);
+			var deletes = confirm("确认删除 节点 -- " + treeNode.name + " 吗？");
+			if(deletes){
+				var form1 = document.createElement("form"); 
+				form1.id = "form1"; 
+				form1.name = "form1"; 
+				// 添加到 body 中 
+				document.body.appendChild(form1); 
+				// 创建一个输入 
+				
+				var input1 = document.createElement("input"); 
+				input1.type = "text"; 
+				input1.name = "deleteID"; 
+				input1.value = treeNode.id; 
+				// 将该输入框插入到 form 中 
+				form1.appendChild(input1); 
+				
+				var input2 = document.createElement("input"); 
+				input2.type = "text"; 
+				input2.name = "Submits"; 
+				input2.value = "6"; 						// 删除节点
+				// 将该输入框插入到 form 中 
+				form1.appendChild(input2); 
+				// form 的提交方式 
+				form1.method = "POST"; 
+				// form 提交路径 
+				form1.action="SqlServlet";
+				// 对该 form 执行提交 
+				form1.submit(); 
+				// 删除该 form 
+				document.body.removeChild(form1); 
+			}
+			return deletes;
 		}
 		function onRemove(e, treeId, treeNode) {
 			showLog("[ "+getTime()+" onRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
-			var form1 = document.createElement("form"); 
-			form1.id = "form1"; 
-			form1.name = "form1"; 
-			// 添加到 body 中 
-			document.body.appendChild(form1); 
-			// 创建一个输入 
-			var input1 = document.createElement("input"); 
-			// 设置相应参数 
-			input1.type = "text"; 
-			input1.name = "Treename"; 
-			input1.value = "fq"; 
-			// 将该输入框插入到 form 中 
-			form1.appendChild(input1); 
-			
-			var input2 = document.createElement("input"); 
-			input2.type = "text"; 
-			input2.name = "deleteID"; 
-			input2.value = treeNode.id; 
-			// 将该输入框插入到 form 中 
-			form1.appendChild(input2); 
-			
-			var input3 = document.createElement("input"); 
-			input3.type = "text"; 
-			input3.name = "Submits"; 
-			input3.value = "6"; 						// 删除节点
-			// 将该输入框插入到 form 中 
-			form1.appendChild(input3); 
-			// form 的提交方式 
-			form1.method = "POST"; 
-			// form 提交路径 
-			form1.action="SqlServlet";
-			// 对该 form 执行提交 
-			form1.submit(); 
-			// 删除该 form 
-			document.body.removeChild(form1); 
+		}
+		
+		function beforeEditName(treeId, treeNode) {
+			oldname = treeNode.name;
+			className = (className === "dark" ? "":"dark");
+			showLog("[ "+getTime()+" beforeEditName ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			zTree.selectNode(treeNode);
+			setTimeout(function() {
+				if (confirm("进入节点 -- " + treeNode.name + " 的编辑状态吗？")) {
+					setTimeout(function() {
+						zTree.editName(treeNode);
+					}, 0);
+				}
+			}, 0);
+			return false;
+		}
+		function beforeRename(treeId, treeNode, newName, isCancel) {
+			className = (className === "dark" ? "":"dark");
+			showLog((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" beforeRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
+			if (newName.length == 0) {
+				setTimeout(function() {
+					var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+					zTree.cancelEditName();
+					alert("节点名称不能为空.");
+				}, 0);
+				return false;
+			}
+			else{ // 提交表单 写入数据库
+				var form1 = document.createElement("form"); 
+				form1.id = "form1"; 
+				form1.name = "form1"; 
+				// 添加到 body 中 
+				document.body.appendChild(form1); 
+				// 创建一个输入 
+				
+				var input1 = document.createElement("input"); 
+				input1.type = "text"; 
+				input1.name = "newname"; 
+				input1.value = newName; 
+				// 将该输入框插入到 form 中 
+				form1.appendChild(input1); 
+				
+				var input2 = document.createElement("input"); 
+				input2.type = "text"; 
+				input2.name = "name"; 
+				input2.value = treeNode.name; 
+				// 将该输入框插入到 form 中 
+				form1.appendChild(input2); 
+				
+				var input3 = document.createElement("input"); 
+				input3.type = "text"; 
+				input3.name = "Submits"; 
+				input3.value = "7"; 						// 重命名节点
+				// 将该输入框插入到 form 中 
+				form1.appendChild(input3); 
+				// form 的提交方式 
+				form1.method = "POST"; 
+				// form 提交路径 
+				form1.action="SqlServlet";
+				// 对该 form 执行提交 
+				form1.submit(); 
+				// 删除该 form 
+				document.body.removeChild(form1); 
+			}
+			return true;
+		}
+		function onRename(e, treeId, treeNode, isCancel) {
+			showLog((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
+		}
+
+		function onRemove(e, treeId, treeNode) {
+			showLog("[ "+getTime()+" onRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
 		}
 		
 		function removeHoverDom(treeId, treeNode) {
 			$("#addBtn_"+treeNode.tId).unbind().remove();
 		};
-
-
+		
+		
 		function showRemoveBtn(treeId, treeNode) {
 			return !treeNode.isFirstNode;
 		}
 		function showRenameBtn(treeId, treeNode) {
 			return !treeNode.isLastNode;
 		}
-
-
+		
+		
 		function setEdit() {
 			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
 			remove = $("#remove").attr("checked"),
@@ -144,30 +238,6 @@
 			$("#renameTitle").bind("propertychange", setEdit)
 			.bind("input", setEdit);
 		});
-
-<%
-		Sql sql = Sql.getInstance();
-		ArrayList <String> trees = sql.getTreeS();
-		ArrayList <Node> sqlnode = null;
-		int num = 0; 
-		int nodenum = 0;
-		if(trees != null) {
-			sqlnode = sql.getIndexNodetoShow();
-			num = trees.size();
-		}
-		if(sqlnode != null){		
-			nodenum = sqlnode.size();
-		}
-		else{
-			sql.Addnode("root", 0, 0);	// 判断是否有根节点来 自动创建根节点
-		}
-%>
-		var zNodes =[];
-<%		
-		for(int i = 0;i < nodenum;i ++){
-%>			zNodes.push({id:<%=sqlnode.get(i).nodeId%>, pId:<%=sqlnode.get(i).parentId%>, name:"<%=sqlnode.get(i).nodeName%>", open:true });
-<%		}
-%>			
 		
 		function setCheck() {
 			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
@@ -245,7 +315,39 @@
 				return false;
 			});
 		};
+		
+		function remove(e) {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+			nodes = zTree.getSelectedNodes(),
+			treeNode = nodes[0];
+			if (nodes.length == 0) {
+				alert("请先选择一个节点");
+				return;
+			}
+			var callbackFlag = $("#callbackTrigger").attr("checked");
+			zTree.removeNode(treeNode, callbackFlag);
+			
+		};
 
+		function showLog(str) {
+			if (!log) log = $("#log");
+			log.append("<li class='"+className+"'>"+str+"</li>");
+			if(log.children("li").length > 8) {
+				log.get(0).removeChild(log.children("li")[0]);
+			}
+		}
+		function getTime() {
+			var now= new Date(),
+			h=now.getHours(),
+			m=now.getMinutes(),
+			s=now.getSeconds(),
+			ms=now.getMilliseconds();
+			return (h+":"+m+":"+s+ " " +ms);
+		}
+		function selectAll() {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			zTree.setting.edit.editNameSelectAll =  $("#selectAll").attr("checked");
+		}
 		$(document).ready(function(){
 			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
 			setCheck();
@@ -255,6 +357,8 @@
 			$("#inner").bind("change", setCheck);
 			$("#next").bind("change", setCheck);
 		});
+		
+		
 		//-->
 	</SCRIPT>
 </head>
@@ -319,6 +423,33 @@
         <div class="layui-body" id="container" >
             <!-- 内容主体区域  -->
             <div style="padding: 30px;">
+            <div class="content_wrap" id="container" >
+				<div class="zTreeDemoBackground left" >
+					<ul id="treeDemo" class="ztree"></ul>
+				</div>
+				<div class="right" >
+					<ul class="info">
+							<li><p>
+								<br><br><br><br>
+								<form id = "form1" name="form1"method="post">
+									<input type="checkbox" id="remove" class="checkbox first" checked />
+									<input type="checkbox" id="rename" class="checkbox " checked />
+									<input type="text" id="removeTitle" value="remove" /><br/>
+									<input type="text" id="renameTitle" value="rename" />
+									<li><p><span class="highlight_red">在对这些灵活的配置熟悉以后，相信你能够做出更加合理的编辑界面！</span><br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="selectAll" checked /> 编辑名称时是否全选 text<br/>
+					remove / rename log:&nbsp;&nbsp;<span style="color:red">红色</span> 表示取消编辑操作 (v3.5.13+)<br/>
+					<ul id="log" class="log"></ul></p>
+				</li>
+								</form>
+								</p>
+							</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</div>
+			</div><br><br><br><br>
             <form action="SqlServlet" method="post">
 				<div>
 				树的名字:<input type="text" name="Treename" id="Treename" size="10">	
@@ -362,28 +493,7 @@
 			</form>
 			</div>
 			
-			<div class="content_wrap" id="container" >
-				<div class="zTreeDemoBackground left" >
-					<ul id="treeDemo" class="ztree"></ul>
-				</div>
-				<div class="right" style="display: none" onMouseout="hidden();">
-					<ul class="info">
-							<li><p>
-								<br><br><br><br>
-								<form id = "form1" name="form1"method="post">
-									<input type="checkbox" id="remove" class="checkbox first" checked />
-									<input type="checkbox" id="rename" class="checkbox " checked />
-									<input type="text" id="removeTitle" value="remove" /><br/>
-									<input type="text" id="renameTitle" value="rename" />
-								</form>
-								</p>
-							</li>
-							</ul>
-						</li>
-						
-					</ul>
-				</div>
-			</div>
+			
 			
         </div>
 
