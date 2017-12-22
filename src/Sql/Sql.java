@@ -15,6 +15,7 @@ public class Sql {
 	private Connection conn; //The class to connect the DBS.
 	private double initvalue = 0;
 	private static Sql single = null;
+	public ArrayList<String> Instruct;	// 用来存储指令 用于批量执行jsp中对树的操作 减少刷新次数
 	
 	public Sql(){}
 	
@@ -40,6 +41,24 @@ public class Sql {
 		catch (SQLException e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	public void doInstructions(){
+		String sql = null;
+		ConnectSql();
+		for(int i = 0;i < Instruct.size();i ++){
+			sql = Instruct.get(i);  
+			Statement stmt;
+			try {
+				stmt = conn.createStatement();
+				stmt.executeUpdate(sql);
+				System.out.println((i+1)+":"+sql+" done!");
+				conn.close();
+				System.out.println("Database was Colsed successfully");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
