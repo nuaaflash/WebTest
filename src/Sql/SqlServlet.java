@@ -31,7 +31,7 @@ public class SqlServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");   
 		Sql sql = Sql.getInstance();
-		String path = "showIndexSystem.jsp";
+		String path = "IndexSystem.jsp";
 		sql.ConnectSql();
 		int submitchoice = 6;
 		submitchoice = Integer.parseInt(request.getParameter("Submits"));
