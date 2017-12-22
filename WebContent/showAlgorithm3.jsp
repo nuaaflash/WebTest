@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="org.lxh.smart.SmartUpload"%>
+<%@page import="Sql.*" import="java.util.ArrayList" import="java.util.List"  %> 
+<%@page import="org.lxh.smart.SmartUpload" import="Dataset.*" import="Algorithm.*" import="java.util.ArrayList" import="java.util.List" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -56,17 +57,63 @@
                             <dd><a href="showAlgorithm3.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'随机过程',id:'10'}"><i class="layui-icon">&#xe658;</i><span> 还是算法</span></a></dd>
                         </dl>
                     </li>
+                    <li class="layui-nav-item layui-nav-itemed layui-bg-cyan">
+                        <a href="view.jsp" ></i><span> 结果显示</span></a>
+                    </li>
                 </ul>
             </div>
         </div>
         <div class="layui-body" id="container" >
             <!-- 内容主体区域  -->
             <div style="padding: 30px;">
-            	<h2>算法三<h2>
-            	<p>待添加</p>
+            	<h2>算法三</h2>
+            	<p>AHP算法，需要从文件读入重要度。</p>
             	<br>
             	<br>
             	<br>
+            	<p>请上传训练用的数据(支持.xls，.xlsx格式)</p>
+				<form action="UploadAG2Servlet" method="post" enctype="multipart/form-data">
+					<input type="file" name="file1" ><br>
+					<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo"  name="Submits" value="2">开始上传</button>
+				</form>
+				<br>
+            	<br>
+            	<br>
+            					<p>请选择指标体系</p>
+				<%
+					Sql sql =  Sql.getInstance();
+					ArrayList<String> al = sql.getTreeS();
+					int num = al.size();
+					String s;
+				%>
+				
+				<form action="inputDataAG3.jsp" method="get" enctype="multipart/form-data">
+				<table bgcolor="#DEDEDE" border="2" cellspacing="5" cellpadding="5" width="400">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>指标体系</th>
+							<th>.</th>
+						</tr>
+					</thead>
+					<tbody>
+<%
+					for(int i=0;i<num;i++) {
+%>
+						<tr>
+							<td><%= i%></td>
+							<td><%=al.get(i).toString() %></td>
+							<td><input type="radio" name="choose_target" value="<%= i%>"></td>
+						</tr>
+<%
+					}
+%>
+						<tr>
+							<td colspan="3"><input type="submit" value="提交"></td>
+						</tr>
+					</tbody>	
+				</table>
+				</form>
 			</div>
         </div>
 	    <div class="layui-footer layui-bg-black">

@@ -303,18 +303,15 @@
                         </dl>
                     </li>
                     <li class="layui-nav-item layui-nav-itemed layui-bg-cyan">
-                        <a href="javascript:;" data-url="" data-name="form" kit-loader><span> 模型训练</span></a>
+                        <a href="javascript:;" data-url="" data-name="form" kit-loader><span> 评估</span></a>
                     	<dl class="layui-nav-child">
-                            <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'分类',id:'8'}"><i class="layui-icon">&#xe658;</i><span> 算法</span></a></dd>
-                            <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'回归',id:'9'}"><i class="layui-icon">&#xe658;</i><span> 算法</span></a></dd>
-                            <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'随机过程',id:'10'}"><i class="layui-icon">&#xe658;</i><span> 还是算法</span></a></dd>
+                            <dd><a href="showAlgorithm1.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'分类',id:'8'}"><i class="layui-icon">&#xe658;</i><span> 算法</span></a></dd>
+                            <dd><a href="showAlgorithm2.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'回归',id:'9'}"><i class="layui-icon">&#xe658;</i><span> 算法</span></a></dd>
+                            <dd><a href="showAlgorithm3.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'随机过程',id:'10'}"><i class="layui-icon">&#xe658;</i><span> 还是算法</span></a></dd>
                         </dl>
                     </li>
-                    <li class="layui-nav-item layui-bg-cyan">
-                        <a href="javascript:;" data-url="" data-name="table" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 模型选择</span></a>
-                    </li>
-                    <li class="layui-nav-item layui-bg-cyan">
-                        <a href="javascript:;" data-url="" data-name="form" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 输出结果</span></a>
+                    <li class="layui-nav-item layui-nav-itemed layui-bg-cyan">
+                        <a href="view.jsp" ></i><span> 结果显示</span></a>
                     </li>
                 </ul>
             </div>

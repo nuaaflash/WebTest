@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="Sql.*" import="java.util.ArrayList" import="java.util.List"  %> 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -50,7 +52,7 @@
                     <li class="layui-nav-item layui-nav-itemed layui-bg-cyan">
                         <a href="javascript:;" data-url="" data-name="form" kit-loader><span> 评估</span></a>
                     	<dl class="layui-nav-child">
-                            <dd><a href="showAlgorithm1.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'分类',id:'8'}"><i class="layui-icon">&#xe658;</i><span> 算法一</span></a></dd>
+                            <dd><a href="showAlgorithm1.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'分类',id:'8'}"><i class="layui-icon">&#xe658;</i><span> 算法</span></a></dd>
                             <dd><a href="showAlgorithm2.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'回归',id:'9'}"><i class="layui-icon">&#xe658;</i><span> 算法</span></a></dd>
                             <dd><a href="showAlgorithm3.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'随机过程',id:'10'}"><i class="layui-icon">&#xe658;</i><span> 还是算法</span></a></dd>
                         </dl>
@@ -64,38 +66,63 @@
         <div class="layui-body" id="container" >
             <!-- 内容主体区域  -->
             <div style="padding: 30px;">
-				<ul class="layui-timeline">
-				<li class="layui-timeline-item">
-					<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-					<div class="layui-timeline-content layui-text">
-						
-						<h3 class="layui-timeline-title">软件工程总和课程设计</h3>
-						<p><font color="#2B2B2B">题目：系统效能评估分析软件系统</p>
-						<p>院系：计算机科学与技术学院</p>
-						<p>专业：软件工程</p>
-						<p>小组成员：邓基浩 夏涵 吾逸阳 张敩 莫永浩</p>
-					</div>
-				</li>
-				<li class="layui-timeline-item">
-					<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-					<div class="layui-timeline-content layui-text">
-						<h3 class="layui-timeline-title">系统效能评估分析软件系统</h3>
-						<p><font color="#2B2B2B">本项目的任务提出者：南京航空航天大学计算机学院</p>
-						<p>本项目的任务开发者：南京航空航天大学计算机学院  303班项目小组</p>
-						<p>用户及实现该软件的计算中心或计算机网络：南航计算机中心</p>
-						<p>该软件系统同其他系统或其他机构的基本的相互来往关系：武器装备资料库系统</p>
-					</div>
-				</li>
-				</ul>
+            	<h2><a href="https://www.cnblogs.com/zhangchaoyang/articles/2591663.html">AHP层次分析算法</a></h2>
+            	<p>需要从文件读入重要度，由此计算权值，再根据最后一层输入逐层向上计算</p>
+            	<br>
+            	<br>
+            	<br>
+				<%
+					String ww=request.getParameter("choose_target");					
+					int indx = Integer.parseInt(ww);
+					Sql sql = Sql.getInstance();
+					ArrayList<String> al = sql.getTreeS();
+					ww=al.get(indx);
+					ArrayList<String> leaves = sql.getLeaves(ww);
+					int num = leaves.size();
+					String s;
+					System.out.println(ww);
+				%>
+				
+				<form action="AlgorithmServlet" method="get" enctype="multipart/form-data">
+				<input type="hidden" name="choose_target" value="<%=ww%>"/>
+				<table bgcolor="#DEDEDE" border="2" cellspacing="5" cellpadding="5" width="400">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>名称</th>
+							<th>请输入</th>
+						</tr>
+					</thead>
+					<tbody>
+<%
+					for(int i=0;i<num;i++) {
+%>
+						<tr>
+							<td><%= i%></td>
+							<td><%=leaves.get(i).toString() %></td>
+							<td>
+								<input type="range" id="range<%= i%>" name="point_value<%= i%>" min="1" max="100" step="1" value="1" oninput="change()">
+								<input type="hidden" id="leavesname<%= i%>" name="leavesname<%= i%>" min="1" max="100" step="1" value="<%=leaves.get(i).toString() %>" oninput="change()">
+								<input id="show<%= i%>" type="number">
+							</td>
+						</tr>
+<%
+					}
+%>
+					</tbody>	
+				</table>
+				<td><input type="hidden" name="treename" value="<%= ww%>"></td>
+				<input type = "hidden" name="num" value="<%=num %>">
+            	<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo"  name="Submits" value="3">开始计算</button>
+				</form>
+				
 			</div>
         </div>
-
-        <div class="layui-footer layui-bg-black">
-            <!-- 底部固定区域 -->
-           	<font color="#009688" size="3px">样式来源：<a href="http://www.layui.com/">layui.com</a></font>
-        </div>
-        
-    </div>
+	    <div class="layui-footer layui-bg-black">
+	        <!-- 底部固定区域 -->
+	       	<font color="#009688" size="3px">样式来源：<a href="http://www.layui.com/">layui.com</a></font>
+	    </div>
+	</div>
     
     <script src="layui/layui.js" charset="utf-8"></script>
 	<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
@@ -110,5 +137,23 @@
 	  });
 	});
 	</script>
+
+	<script>
+      function change(){ 
+    	  var num;
+    	  var location;
+<%
+	for(int i=0;i<num;i++) {
+%>
+      num=document.getElementById("range<%= i%>"); 
+      location=document.getElementById("show<%= i%>");
+      location.value=num.value; 
+<%
+	}
+%>
+  } 
+	</script>
+
+
 </body>
 </html>

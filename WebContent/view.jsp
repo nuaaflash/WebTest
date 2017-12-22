@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="Sql.*" import="java.util.ArrayList" import="java.util.List"  %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -71,11 +72,16 @@
                             <dd><a href="javascript:;" kit-target data-options="{url:'',icon:'&#xe658;',title:'随机过程',id:'10'}"><i class="layui-icon">&#xe658;</i><span> 还是算法</span></a></dd>
                         </dl>
                     </li>
-                    <li class="layui-nav-item layui-bg-cyan">
-                        <a href="javascript:;" data-url="" data-name="table" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 模型选择</span></a>
+                    <li class="layui-nav-item layui-nav-itemed layui-bg-cyan">
+                        <a href="javascript:;" data-url="" data-name="form" kit-loader><span> 评估</span></a>
+                    	<dl class="layui-nav-child">
+                            <dd><a href="showAlgorithm1.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'分类',id:'8'}"><i class="layui-icon">&#xe658;</i><span> 算法</span></a></dd>
+                            <dd><a href="showAlgorithm2.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'回归',id:'9'}"><i class="layui-icon">&#xe658;</i><span> 算法</span></a></dd>
+                            <dd><a href="showAlgorithm3.jsp" kit-target data-options="{url:'',icon:'&#xe658;',title:'随机过程',id:'10'}"><i class="layui-icon">&#xe658;</i><span> 还是算法</span></a></dd>
+                        </dl>
                     </li>
-                    <li class="layui-nav-item layui-bg-cyan">
-                        <a href="javascript:;" data-url="" data-name="form" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 输出结果</span></a>
+                    <li class="layui-nav-item layui-nav-itemed layui-bg-cyan">
+                        <a href="view.jsp" ></i><span> 结果显示</span></a>
                     </li>
                 </ul>
             </div>
@@ -83,10 +89,20 @@
         <div class="layui-body" id="container" >
             <!-- 内容主体区域  -->
             <div style="padding: 10px;">
-            	<font size=4px>
-            	<p>系统效能评估是针对系统集成综合一体化的技术特征，面向系统不同的任务，基于不同系统任务的整个过程，以完成整个任务成功为首要目标，结合任务各个阶段的特点，分析系统的组成和功能，结合任务完成过程和系统组成的具体实际，构建出系统效能评估分析软件，用于复杂系统的效能评估。</p>
-				<p>系统支持武器装备结构体系、系统指标体系、系统能力及行动的建模；提供AHP层次分析法、ADC分析法、SEA法、指数法、人工智能（BP、SVM等）探索性仿真评估法等多维方法对系统效能进行整体评估，提供可视化建模、分析工具，能够自动生成效能评估报告，并支持专业评估模块的灵活扩展。</p>
-				<p>可应用于作战计划模拟评估、联合作战试验研究、武器装备体系论证、武器装备型号论证、武器装备型号论证及作战效能评估等研究领域。</p>
+<%			
+			Sql sql = Sql.getInstance();
+			sql.SetTreeName("node");
+			ArrayList <Node> node = sql.getNodetoShow();
+			for(int i=0;i<node.size();i++){ 
+%>
+				<p><font color="#2B2B2B" size="5"><%= node.get(i).nodeName%>: <%=node.get(i).value %></font></p>
+            	<div class="layui-progress layui-progress-big" >
+  				<div class="layui-progress-bar layui-bg-cyan" lay-percent="<%=node.get(i).value %>%"></div>
+				</div> 
+				<br><br><br>
+<%				
+			}
+%>           	
 			</div>
         </div>
 
