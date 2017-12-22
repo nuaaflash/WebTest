@@ -18,7 +18,7 @@
 	}
 	</style>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="zTree/css/demo2.css" type="text/css">
+	<link rel="stylesheet" href="zTree/css/demo.css" type="text/css">
 	<link rel="stylesheet" href="zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
 	<script type="text/javascript" src="zTree/js/jquery-1.4.4.min.js"></script>
 	<script type="text/javascript" src="zTree/js/jquery.ztree.core.js"></script>
@@ -428,69 +428,53 @@
 					<ul id="treeDemo" class="ztree"></ul>
 				</div>
 				<div class="right" >
-					<ul class="info">
-							<li><p>
-								<br><br><br><br>
-								<form id = "form1" name="form1"method="post">
+						<form action="SqlServlet" method="post" name = "showTree">
+							<table bgcolor="#DEDEDE" border="2" cellspacing="5" cellpadding="5" width="400">
+								<thead>
+									<tr>
+										<th>序号</th>
+										<th>指标体系</th>
+										<th>.</th>
+									</tr>
+								</thead>
+								<tbody>
+			<%
+								for(int i=0;i<num;i++) {
+			%>
+									<tr>
+										<td><%= i%></td>
+										<td><%=trees.get(i).toString() %></td>
+										<td><input type="radio" name = "nameofTree" value="<%=trees.get(i).toString() %>"></td>
+									</tr>
+			<%
+								}
+			%>
+									<tr>
+										<td>新建指标体系</td>
+										<td><input type="text" name="Treename" id="Treename" size="20" placeholder="请输入新指标体系的名字">	</td>
+									</tr>
+								</tbody>
+								<thead>
+								<tr>
+									<th><button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo"  name="Submits" value="3">删除</button></th>
+									<th><button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo"  name="Submits" value="5">显示</button></th>
+									<th><button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo"  name="Submits" value="0">新建</button></th>
+								</tr>
+								</thead>
+							</table>	
+						</form>	
+						<br><br><br><br>
+						<div class="right" style="display: none" onMouseout="hidden();">
+							<ul class="info">
+								<form id = "form1" name="hidden_form" method="post">
 									<input type="checkbox" id="remove" class="checkbox first" checked />
 									<input type="checkbox" id="rename" class="checkbox " checked />
 									<input type="text" id="removeTitle" value="remove" /><br/>
 									<input type="text" id="renameTitle" value="rename" />
-									<li><p><span class="highlight_red">在对这些灵活的配置熟悉以后，相信你能够做出更加合理的编辑界面！</span><br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="selectAll" checked /> 编辑名称时是否全选 text<br/>
-					remove / rename log:&nbsp;&nbsp;<span style="color:red">红色</span> 表示取消编辑操作 (v3.5.13+)<br/>
-					<ul id="log" class="log"></ul></p>
-				</li>
 								</form>
-								</p>
-							</li>
 							</ul>
-						</li>
-						
-					</ul>
-				</div>
+						</div>
 			</div><br><br><br><br>
-            <form action="SqlServlet" method="post">
-				<div>
-				树的名字:<input type="text" name="Treename" id="Treename" size="10">	
-				节点的父节点编号:<input type="text" name="parent" id="parent" size="10" value="0">				
-				节点的名字:<input type="text" name="Nodename" id="Nodename" size="10">
-				节点的值:<input type="text" name="value" id="value" size="10" value="0">
-				</div>
-				<div>
-				<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo" onclick="return checkuser()" name="Submits" value="0">新建树</button>
-				<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo" onclick="return checkuser()" name="Submits" value="1">新建节点</button>
-				<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo" onclick="return checkuser()" name="Submits" value="4">改变节点的值</button>
-				</div>
-			</form>
-			<form action="SqlServlet" method="post" name = "showTree">
-								<table bgcolor="#DEDEDE" border="2" cellspacing="5" cellpadding="5" width="400">
-					<thead>
-						<tr>
-							<th>序号</th>
-							<th>指标体系</th>
-							<th>.</th>
-						</tr>
-					</thead>
-					<tbody>
-<%
-					for(int i=0;i<num;i++) {
-%>
-						<tr>
-							<td><%= i%></td>
-							<td><%=trees.get(i).toString() %></td>
-							<td><input type="radio" name = "nameofTree" value="<%=trees.get(i).toString() %>"></td>
-						</tr>
-<%
-					}
-%>
-						<tr>
-							<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo"  name="Submits" value="3">删除树</button>
-							<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo"  name="Submits" value="5">显示树</button>
-						</tr>
-					</tbody>	
-				
-			</form>
 			</div>
 			
 			
