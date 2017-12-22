@@ -52,7 +52,7 @@ public class SqlServlet extends HttpServlet {
 				sql.SetDBS(request.getParameter("DBS"));
 				System.out.println(request.getParameter("DBS"));
 				if(sql.ConnectSql()){
-					path = "main.jsp";   
+					path = "warning.jsp";   
 				}
 				else{
 					path = "failure.jsp";  

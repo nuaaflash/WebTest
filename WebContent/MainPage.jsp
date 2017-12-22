@@ -207,7 +207,7 @@
 							</div>
 							<div class="work_description">
 								<div class="work_descr_cont">
-									<a href="portfolio-post.html" >指标体系管理</a>
+									<a href="IndicationSystem.jsp" >指标体系管理</a>
 								
 								</div>
 							</div>
@@ -223,7 +223,7 @@
 							</div>
 							<div class="work_description">
 								<div class="work_descr_cont">
-									<a href="portfolio-post.html" >支持向量回归算法</a>
+									<a href="A_SVR_Select.jsp" >支持向量回归算法</a>
 								
 								</div>
 							</div>
@@ -239,7 +239,7 @@
 							</div>
 							<div class="work_description">
 								<div class="work_descr_cont">
-									<a href="portfolio-post.html" >径向基函数神经网络算法</a>
+									<a href="A_RBF_Select.jsp" >径向基函数神经网络算法</a>
 							
 								</div>
 							</div>
@@ -255,7 +255,7 @@
 							</div>
 							<div class="work_description">
 								<div class="work_descr_cont">
-									<a href="portfolio-post.html" >AHP层次分析法</a>
+									<a href="showAlgorithm3.jsp" >AHP层次分析法</a>
 							
 								</div>
 							</div>
