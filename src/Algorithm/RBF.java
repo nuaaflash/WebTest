@@ -137,7 +137,6 @@ public class RBF {
 			rbf.update();
 			te--;
 		}
-		double[] c= new double[3];
 		System.out.println("      "+rbf.compute(new double[]{4,5,6}));
 		System.out.println("RBFNN done");
 	}
