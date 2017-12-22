@@ -45,7 +45,7 @@ section {background-color:#fff;}
 a, input, select, textarea {
 	vertical-align:top;
 	outline:none !important;
-	-webkit-appearance: none;
+/*	-webkit-appearance: none; */ /*It makes out radio not exist.*/
 	-webkit-border-radius: 0;
 }
 
