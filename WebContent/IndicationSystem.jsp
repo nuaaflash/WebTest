@@ -508,7 +508,7 @@
 					<h4><b>Special</b> thanks</h4>
 					<div class="recent_posts_small clearfix">
 						<div class="post_item_img_small">
-							<img src="white/images/blog/1.jpg" alt="" />
+							<img src="white/images/footer/a.jpg" alt="" />
 						</div>
 						<div class="post_item_content_small">
 							<a class="title" href="http://www.layui.com/" >Layui</a>
@@ -519,7 +519,7 @@
 					</div>
 					<div class="recent_posts_small clearfix">
 						<div class="post_item_img_small">
-							<img src="white/images/blog/2.jpg" alt="" />
+							<img src="white/images/footer/b.jpg" alt="" />
 						</div>
 						<div class="post_item_content_small">
 							<a class="title" href="http://www.treejs.cn/v3/main.php#_zTreeInfo" >zTree</a>
@@ -530,7 +530,7 @@
 					</div>
 					<div class="recent_posts_small clearfix">
 						<div class="post_item_img_small">
-							<img src="white/images/blog/3.jpg" alt="" />
+							<img src="white/images/footer/c.jpg" alt="" />
 						</div>
 						<div class="post_item_content_small">
 							<a class="title" href="https://w3layouts.com/" >w3layouts</a>
