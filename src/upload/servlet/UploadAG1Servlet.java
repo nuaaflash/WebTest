@@ -45,7 +45,7 @@ public class UploadAG1Servlet extends HttpServlet {
 		}
 		int submitchoice = 5;
 		String usubmitchoice = su.getRequest().getParameter("submitchoice");
-		System.out.println("usubmitchoice:"+usubmitchoice);
+		System.out.println("UploadServlet--submitchoice:"+usubmitchoice);
 		submitchoice = Integer.parseInt(usubmitchoice);
 		switch (submitchoice) {
 		case 1:	//返回RBF

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>RBF | 系统效能评估软件系统</title>
+	<title>Input | 系统效能评估软件系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -58,7 +58,7 @@
 					
 					<!-- LOGO -->
 					<div class="logo pull-left">
-						<a href="index.html" ><span class="b1">系统</span><span class="b2">效能</span><span class="b3">评估</span><span class="b4">软件</span><span class="b5">系统</span></a>
+						<a href="MainPage.jsp" ><span class="b1">系统</span><span class="b2">效能</span><span class="b3">评估</span><span class="b4">软件</span><span class="b5">系统</span></a>
 					</div><!-- //LOGO -->
 					
 					<!-- MENU -->
@@ -95,13 +95,10 @@
 				
 				<!-- ROW -->
 				<div class="row">
-				
+				<form action="AlgorithmServlet" method="get" enctype="multipart/form-data">
 					<!-- BLOG BLOCK -->
 					<div class="blog_block col-lg-9 col-md-9 padbot50">
-						
-						<!-- SINGLE BLOG POST -->
-						<div class="single_blog_post clearfix" data-animated="fadeInUp">
-							
+					
 <%
 						int submitchoice=(Integer)request.getAttribute("submitchoice_from_SelectServlet");
 						System.out.println("submitchoice:"+submitchoice);
@@ -113,13 +110,31 @@
 						ArrayList<String> leaves = sql.getLeaves(indication_name);
 						int num = leaves.size();
 						String s;
-						System.out.println("indication_name:"+indication_name+" indx:"+indx);
+						System.out.println("indication_name:"+indication_name+" indx:"+indx+" num:"+num);
 %>
-							
+						
+						<!-- SINGLE BLOG POST -->
+						<div class="single_blog_post clearfix" data-animated="fadeInUp">
+						<div class="single_blog_post_title">
+<%
+							if(submitchoice==1) {
+%>
+							径向基函数神经网络
+<%								
+							} else if(submitchoice==2) {
+%>
+							支持向量回归
+<%								
+							} else if(submitchoice==3) {
+%>
+							AHP层次分析法
+<%								
+							}
+%>
+						</div>	
 							<div class="single_blog_post_content">
-								<form action="CalculateServlet" method="get" enctype="multipart/form-data">
-								<input type="hidden" name="choose_target" value="<%=indication_name%>"/>
-								<input type="hidden" name="submitchoice" value="<%=submitchoice%>"/>
+								
+								
 								<table border="2" cellspacing="5" cellpadding="5" width="400">
 									<thead>
 										<tr>
@@ -137,7 +152,8 @@
 											<td><%=leaves.get(i).toString() %></td>
 											<td>
 												<input type="range" id="range<%= i%>" name="point_value<%= i%>" min="1" max="100" step="1" value="1" oninput="change()">
-												<input id="show<%= i%>" type="number">
+												<input type="hidden" id="leavesname<%= i%>" name="leavesname<%= i%>" value="<%=leaves.get(i).toString() %>">
+												<input id="show<%= i%>" type="number" value="1" readonly>
 											</td>
 										</tr>
 <%
@@ -145,7 +161,7 @@
 %>
 									</tbody>	
 								</table>
-								</form>
+								
 							</div>
 							
 						</div><!-- //SINGLE BLOG POST -->
@@ -178,19 +194,21 @@
 <%								
 							}
 %>							
-							<input type="hidden" name="treename" value="<%= indication_name%>">
-							<input type ="hidden" name="num" value="<%=num %>">
+							<input type="hidden" name="indication_name" value="<%=indication_name%>"/> <!-- 指标体系名称 -->
+							<input type="hidden" name="submitchoice" value="<%=submitchoice%>"/> <!-- 算法编号 -->
+							<input type ="hidden" name="num" value="<%=num %>"> <!-- 指标体系的叶子个数 -->
             				<button name="Submits" value="1">开始计算</button>
 						</div><!-- POPULAR TAGS WIDGET -->
 						
 						<hr>
 						
 						<!-- TEXT WIDGET -->
-						<div class="sidepanel widget_text">
+					<!--	<div class="sidepanel widget_text">
 							<h3><b>About</b> Blog</h3>
-							<p>I must admit this particular defense set me on edge a little bit, for two reasons. The first is that she’s being held to a completely different standard than male politicians are held to.</p>
+							<p>I must admit this particular defense set me on edge a little bit, for two reasons. The first is that she’s being held to a completely different standard than male politicians are held to.</p>-->
 						</div><!-- //TEXT WIDGET -->
 					</div><!-- //SIDEBAR -->
+				</form>
 				</div><!-- //ROW -->
 			</div><!-- //CONTAINER -->
 		</section><!-- //BLOG -->
@@ -260,5 +278,21 @@
 	</footer><!-- //FOOTER -->
 
 </div>
+
+<script>
+      function change(){ 
+    	  var num;
+    	  var location;
+<%
+	for(int i=0;i<num;i++) {
+%>
+      num=document.getElementById("range<%= i%>"); 
+      location=document.getElementById("show<%= i%>");
+      location.value=num.value; 
+<%
+	}
+%>
+  } 
+</script>
 </body>
 </html>

@@ -87,7 +87,7 @@
 					
 					<!-- LOGO -->
 					<div class="logo pull-left">
-						<a href="index.html" ><span class="b1">系统</span><span class="b2">效能</span><span class="b3">评估</span><span class="b4">软件</span><span class="b5">系统</span></a>
+						<a href="MainPage.jsp" ><span class="b1">系统</span><span class="b2">效能</span><span class="b3">评估</span><span class="b4">软件</span><span class="b5">系统</span></a>
 					</div><!-- //LOGO -->
 					
 					<!-- MENU -->
@@ -255,7 +255,7 @@
 							</div>
 							<div class="work_description">
 								<div class="work_descr_cont">
-									<a href="showAlgorithm3.jsp" >AHP层次分析法</a>
+									<a href="A_AHP_Select.jsp" >AHP层次分析法</a>
 							
 								</div>
 							</div>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>RBF | 系统效能评估软件系统</title>
+	<title>AHP | 系统效能评估软件系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -81,8 +81,8 @@
 		<!-- BREADCRUMBS -->
 		<section class="breadcrumbs_block clearfix parallax">
 			<div class="container center">
-				<h2><b>RBF</b> 径向基函数网络算法</h2>
-				<p>Radial Basis Function Network</p>
+				<h2><b>AHP</b> 层次分析法</h2>
+				<p>Analytic Hierarchy Process</p>
 			</div>
 		</section><!-- //BREADCRUMBS -->
 		
@@ -102,11 +102,13 @@
 						<!-- SINGLE BLOG POST -->
 						<div class="single_blog_post clearfix" data-animated="fadeInUp">
 							<div class="single_blog_post_title">用法 & 介绍</div>
-							<div class="single_blog_post_img"><img src="white/images/blog/2.jpg" alt="" /></div>
+							<div class="single_blog_post_img"><img src="white/images/blog/3.jpg" alt="" /></div>
 							
 							<div class="single_blog_post_content">
-								<p class="margbot50">输入底层节点的值，系统将通过算法根据上传的训练数据来训练出模型，并将之后输入的底层节点值用于预测计算顶层节点的值。</p>
-								<p class="margbot30">In the field of mathematical modeling, a radial basis function network is an artificial neural network that uses radial basis functions as activation functions. The output of the network is a linear combination of radial basis functions of the inputs and neuron parameters. Radial basis function networks have many uses, including function approximation, time series prediction, classification, and system control. They were first formulated in a 1988 paper by Broomhead and Lowe, both researchers at the Royal Signals and Radar Establishment. (wikipedia)</p>
+								<p class="margbot50">AHP算法，需要从文件读入重要度。</p>
+								<p class="margbot30">The analytic hierarchy process is a structured technique for organizing and analyzing complex decisions, based on mathematics and psychology. It was developed by Thomas L. Saaty in the 1970s and has been extensively studied and refined since then.</p>
+								<p class="margbot30">It has particular application in group decision making, and is used around the world in a wide variety of decision situations, in fields such as government, business, industry, healthcare, shipbuilding and education.</p>
+								<p class="margbot30">Rather than prescribing a "correct" decision, the AHP helps decision makers find one that best suits their goal and their understanding of the problem. It provides a comprehensive and rational framework for structuring a decision problem, for representing and quantifying its elements, for relating those elements to overall goals, and for evaluating alternative solutions. (wikipedia)</p>
 							</div>
 							
 						</div><!-- //SINGLE BLOG POST -->
@@ -128,7 +130,7 @@
 							<div class="sidepanel widget_tags">
 								<div class="post_item_content_widget">
 									<form action="UploadAG1Servlet" method="post" enctype="multipart/form-data">
-										<input type="hidden" name="submitchoice" value="1"> <!-- 区分算法 -->
+										<input type="hidden" name="submitchoice" value="3"> <!-- 区分算法 -->
 										<input type="file" name="file1" ><br>
 										<button name="Submits" value="2">开始上传</button>
 									</form>
@@ -149,7 +151,7 @@
 									%>
 									
 									<form action="SelectServlet" method="get" enctype="multipart/form-data">
-									<input type="hidden" name="submitchoice" value="1">
+									<input type="hidden" name="submitchoice" value="3">
 									<table bgcolor="#DEDEDE" border="2" cellspacing="5" cellpadding="5" width="400">
 										<thead>
 											<tr>

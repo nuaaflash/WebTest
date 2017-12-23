@@ -37,15 +37,18 @@ public class AlgorithmServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");   
 		String path="view.jsp";// 计算完跳转显示结果
 		int submitchoice = 5;
+		String indication_name = request.getParameter("indication_name");
+		int lnum = Integer.parseInt(request.getParameter("num"));
 		
-		submitchoice = Integer.parseInt(request.getParameter("Submits"));
+		submitchoice = Integer.parseInt(request.getParameter("submitchoice"));
+		System.out.println("submitchoice in AlgorithmServlet:"+submitchoice+" indication_name:"+indication_name+" lnum:"+lnum);
 		
 		// 连接数据库 并将操作的树（指标体系）设置为前一页面选择的树 并将数据库各节点初始化为0 避免对显示数据产生干扰
 		Sql sql=Sql.getInstance();
-		sql.SetTreeName(request.getParameter("treename"));
+		sql.SetTreeName(indication_name);
 		sql.InitNodeValue(0);
 		
-		// 读文件并验证部分
+		// 读文件部分
 		ReadExcelUtils reader = ReadExcelUtils.getInstance();
 		reader.setFilepath("E:\\theData.xlsx");
 		ArrayList<Object> result = null;
@@ -57,7 +60,7 @@ public class AlgorithmServlet extends HttpServlet {
 		}
         double [][] leaves = new double[result.size()/2][];
         double [] threatDegree = new double [result.size()/2];
-		if(submitchoice != 3) {// 验证部分
+		if(submitchoice != 3) {// 控制台输出Excel表格的内容
 			ArrayList<String>title=new ArrayList<String>();
 			ArrayList<String>node=new ArrayList<String>();
 			try {
@@ -66,14 +69,8 @@ public class AlgorithmServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			node=sql.getNodes(request.getParameter("treename"));
-			for(int i=0;i<title.size();i++){
-				if(title.get(i)!=node.get(i))
-					System.out.println("wrong data,please choose again");
-				else 
-					System.out.println("well down");
-			}
-			
+			node=sql.getNodes(indication_name);
+			System.out.println("node:"+node.toString());
 			
 			// 控制台输出并将excel内容调整为训练模型所需的两个数组
 	        System.out.println("获得Excel表格的内容:");  
@@ -93,15 +90,12 @@ public class AlgorithmServlet extends HttpServlet {
 	        	il ++;
 	        }  
 		}
-		
 		switch(submitchoice){
 		
 			// RBF神经网络算法
 			case 1:{
 				ArrayList<Double> Input = new ArrayList<Double>();
-				String target_name = request.getParameter("choose_target");
-				System.out.println(target_name);
-				ArrayList<String> leavesRBF = sql.getLeaves(target_name);
+				ArrayList<String> leavesRBF = sql.getLeaves(indication_name);
 				int leaves_num = leavesRBF.size();
 				double myinput[] = new double[leaves_num];
 				for(int i=0;i<leaves_num;i++) {
@@ -123,20 +117,21 @@ public class AlgorithmServlet extends HttpServlet {
 					compute_result=0;
 				if(compute_result>100.0)
 					compute_result=100.0;*/
+				compute_result = 50.0;
 				System.out.println(" rbf compute result: "+compute_result);
-				sql.SetNodeValue(target_name, 1, compute_result);
+				sql.SetNodeValue(indication_name, 1, compute_result);
 				// 结果写入数据库
 				break;
 			}
 			
 			// Svr支持向量回归算法
-			case 2:{												
+			case 2:{	
                 Svmr svr = new Svmr();
                 svr.Setparameter(Double.parseDouble(request.getParameter("cache")),
                 				 Double.parseDouble(request.getParameter("eps")) , 
                 				 Double.parseDouble(request.getParameter("C")));
                 svr.Train(leaves, threatDegree);
-                int num = Integer.parseInt(request.getParameter("num"));
+                int num = lnum;	//叶子的个数
                 double[] p = new double[num];
                 for(int i = 0;i < num; i ++){
                 	p[0] = Double.parseDouble(request.getParameter("point_value"+i));
@@ -145,7 +140,7 @@ public class AlgorithmServlet extends HttpServlet {
                 System.out.println(svr.Predict(p));
                 
                 // 结果写入数据库
-                sql.SetNodeValue(request.getParameter("treename"),1, svr.Predict(p));
+                sql.SetNodeValue(indication_name,1, svr.Predict(p));
 				break;
 			}
 			
@@ -153,7 +148,7 @@ public class AlgorithmServlet extends HttpServlet {
 			case 3:{
 				Sql S = Sql.getInstance(); 						
 				// 将读入数据写入数据库
-				int num = Integer.parseInt(request.getParameter("num"));
+				int num = lnum;	//叶子的个数
 				String lname = null;
                 double value = 0;
                 for(int i = 0;i < num; i ++){
