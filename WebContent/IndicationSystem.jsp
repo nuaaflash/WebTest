@@ -64,6 +64,7 @@
 	};
 
 	var log, className = "dark";
+	var instruct=new Array();
 <%
 	Sql sql = Sql.getInstance();
 	ArrayList <String> trees = sql.getTreeS();
@@ -93,38 +94,11 @@
 		showLog("[ "+getTime()+" beforeRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
 		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 		zTree.selectNode(treeNode);
-		var deletes = confirm("确认删除 节点 -- " + treeNode.name + " 吗？");
-		if(deletes){
-			var form1 = document.createElement("form"); 
-			form1.id = "form1"; 
-			form1.name = "form1"; 
-			// 添加到 body 中 
-			document.body.appendChild(form1); 
-			// 创建一个输入 
-			
-			var input1 = document.createElement("input"); 
-			input1.type = "text"; 
-			input1.name = "deleteID"; 
-			input1.value = treeNode.id; 
-			// 将该输入框插入到 form 中 
-			form1.appendChild(input1); 
-			
-			var input2 = document.createElement("input"); 
-			input2.type = "text"; 
-			input2.name = "Submits"; 
-			input2.value = "6"; 						// 删除节点
-			// 将该输入框插入到 form 中 
-			form1.appendChild(input2); 
-			// form 的提交方式 
-			form1.method = "POST"; 
-			// form 提交路径 
-			form1.action="SqlServlet";
-			// 对该 form 执行提交 
-			form1.submit(); 
-			// 删除该 form 
-			document.body.removeChild(form1); 
-		}
-		return deletes;
+		// 添加删除的指令
+		var tree_Name = "<%=sql.getTreename()%>";
+		instruct[instruct.length]=("DELETE FROM "+ tree_Name  +" WHERE node_id = " + treeNode.id +" OR parent_id = " + treeNode.id +";");
+		
+		return true;
 	}
 	function onRemove(e, treeId, treeNode) {
 		showLog("[ "+getTime()+" onRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
@@ -156,42 +130,11 @@
 			}, 0);
 			return false;
 		}
-		else{ // 提交表单 写入数据库
-			var form1 = document.createElement("form"); 
-			form1.id = "form1"; 
-			form1.name = "form1"; 
-			// 添加到 body 中 
-			document.body.appendChild(form1); 
-			// 创建一个输入 
+		else{ 
+			// 添加重命名的指令
+			var tree_Name = "<%=sql.getTreename()%>";
+			instruct[instruct.length]=("UPDATE "+ tree_Name +" set node_name = '"+ newName + "' WHERE node_id = "+treeNode.id+";");
 			
-			var input1 = document.createElement("input"); 
-			input1.type = "text"; 
-			input1.name = "newname"; 
-			input1.value = newName; 
-			// 将该输入框插入到 form 中 
-			form1.appendChild(input1); 
-			
-			var input2 = document.createElement("input"); 
-			input2.type = "text"; 
-			input2.name = "name"; 
-			input2.value = treeNode.name; 
-			// 将该输入框插入到 form 中 
-			form1.appendChild(input2); 
-			
-			var input3 = document.createElement("input"); 
-			input3.type = "text"; 
-			input3.name = "Submits"; 
-			input3.value = "7"; 						// 重命名节点
-			// 将该输入框插入到 form 中 
-			form1.appendChild(input3); 
-			// form 的提交方式 
-			form1.method = "POST"; 
-			// form 提交路径 
-			form1.action="SqlServlet";
-			// 对该 form 执行提交 
-			form1.submit(); 
-			// 删除该 form 
-			document.body.removeChild(form1); 
 		}
 		return true;
 	}
@@ -272,7 +215,7 @@
 		}
 	}
 <%
-	int nodeid = sql.getNumofnodes() + 1;
+	int nodeid = sql.getNumofnodes();
 %>
 	var newCount = <%=nodeid%>;
 	function addHoverDom(treeId, treeNode) {
@@ -284,43 +227,16 @@
 		var btn = $("#addBtn_"+treeNode.tId);
 		if (btn) btn.bind("click", function(){
 			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-			zTree.addNodes(treeNode, {id:newCount, pId:treeNode.id, name:"new node" + newCount});
-
-			var form1 = document.createElement("form"); 
-			form1.id = "form1"; 
-			form1.name = "form1"; 
-			// 添加到 body 中 
-			document.body.appendChild(form1); 
-			// 创建一个输入 
+			newCount ++;
+			var newName = "new node" + treeNode.id +"-" + newCount;
+			zTree.addNodes(treeNode, {id:newCount, pId:treeNode.id, name:newName});
 			
-			var input1 = document.createElement("input"); 
-			input1.type = "text"; 
-			input1.name = "parent"; 
-			input1.value = treeNode.id; 
-			// 将该输入框插入到 form 中 
-			form1.appendChild(input1); 
+			// 添加添加节点的指令
+			var tree_Name = "<%=sql.getTreename()%>";
+			var node_value = "<%=sql.getinitvalue()%>";
+	
+			instruct[instruct.length]=("INSERT INTO "+ tree_Name +"(node_id, node_name, parent_id, num_of_children, node_value) values("+newCount+", "+"'"+newName+"'"+","+treeNode.id+","+ 0+","+ node_value +");");
 			
-			var input2 = document.createElement("input"); 
-			input2.type = "text"; 
-			input2.name = "Nodename"; 
-			input2.value = "new node"+newCount; 
-			// 将该输入框插入到 form 中 
-			form1.appendChild(input2); 
-			
-			var input3 = document.createElement("input"); 
-			input3.type = "text"; 
-			input3.name = "Submits"; 
-			input3.value = "1"; 
-			// 将该输入框插入到 form 中 
-			form1.appendChild(input3); 
-			// form 的提交方式 
-			form1.method = "POST"; 
-			// form 提交路径 
-			form1.action="SqlServlet";
-			// 对该 form 执行提交 
-			form1.submit(); 
-			// 删除该 form 
-			document.body.removeChild(form1); 
 			return false;
 		});
 	};
@@ -357,6 +273,49 @@
 		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 		zTree.setting.edit.editNameSelectAll =  $("#selectAll").attr("checked");
 	}
+
+	function savechange() {
+		var form1 = document.createElement("form"); 
+		form1.id = "form1"; 
+		form1.name = "form1"; 
+		// 添加到 body 中 
+		document.body.appendChild(form1); 
+		// 创建输入 
+		// 传递指令
+		for(var i = 0;i < instruct.length;i ++){
+		var input1 = document.createElement("input"); 
+			input1.type = "text"; 
+			input1.name = "instruct"+i; 
+			input1.value = instruct[i]; 						
+			// 将该输入框插入到 form 中 
+			form1.appendChild(input1); 
+		}
+		// 传递长度
+		var input2 = document.createElement("input"); 
+			input2.type = "text"; 
+			input2.name = "length"; 
+			input2.value = instruct.length; 						
+			// 将该输入框插入到 form 中 
+			form1.appendChild(input2); 
+		
+		//Submits 用于SqlServlet分支判断
+		var input3 = document.createElement("input"); 
+			input3.type = "text"; 
+			input3.name = "Submits"; 
+			input3.value = "8"; 						
+			// 将该输入框插入到 form 中 
+			form1.appendChild(input3); 
+		
+		// form 的提交方式 
+		form1.method = "POST"; 
+		// form 提交路径 
+		form1.action="SqlServlet";
+		// 对该 form 执行提交 
+		form1.submit(); 
+		// 删除该 form 
+		document.body.removeChild(form1); 
+	}
+	
 	$(document).ready(function(){
 		$.fn.zTree.init($("#treeDemo"), setting, zNodes);
 		setCheck();
@@ -369,6 +328,7 @@
 	
 	
 	//-->
+	
 	</SCRIPT>
 	
 	<!-- CSS -->
@@ -430,6 +390,7 @@
 			<div class="container center">
 				<h2>指标体系管理</h2>
 				<p>Indication System Management</p>
+								<p id="demo"></p>
 			</div>
 		</section><!-- //BREADCRUMBS -->
 		
@@ -455,6 +416,7 @@
 								<div class="zTreeDemoBackground left">
 									<ul id="treeDemo" class="ztree"></ul>
 								</div>
+								<button class="layui-btn layui-btn-primary" lay-submit lay-filter="formDemo"  onclick="savechange()" >保存更改</button>
 								<div class="right" style="display: none" onMouseout="hidden();">
 									<ul class="info">
 										<li><br><br><br><br>
@@ -512,8 +474,7 @@
 								</tr>
 								</thead>
 							</table>	
-						</form>	
-						
+							</form>	
 						</div><!-- //META WIDGET -->
 						
 						<hr>
@@ -585,7 +546,6 @@
 					<p>We value people over profits, quality over quantity, and keeping it real. As such, we deliver an unmatched working relationship with our clients.</p>
 					<p>Life is half spent before we know what it is.</p>
 				</div>
-				
 				<div class="respond_clear"></div>
 				
 			</div><!-- //ROW -->

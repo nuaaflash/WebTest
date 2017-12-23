@@ -15,7 +15,7 @@ public class Sql {
 	private Connection conn; //The class to connect the DBS.
 	private double initvalue = 0;
 	private static Sql single = null;
-	public ArrayList<String> Instruct;	// 用来存储指令 用于批量执行jsp中对树的操作 减少刷新次数
+	private ArrayList<String> Instruct;	// 用来存储指令 用于批量执行jsp中对树的操作 减少刷新次数
 	
 	public Sql(){}
 	
@@ -44,10 +44,14 @@ public class Sql {
 		}
 	}
 	
+	public void setInstruct(ArrayList<String> instructions){
+		Instruct = instructions;
+	}
+	
 	public void doInstructions(){
 		String sql = null;
-		ConnectSql();
 		for(int i = 0;i < Instruct.size();i ++){
+			ConnectSql();
 			sql = Instruct.get(i);  
 			Statement stmt;
 			try {
@@ -629,6 +633,11 @@ public class Sql {
 	public String getTreename() {
 		// TODO Auto-generated method stub
 		return treeName;
+	}
+	
+	public double getinitvalue() {
+		// TODO Auto-generated method stub
+		return initvalue;
 	}
 }
 
