@@ -202,7 +202,7 @@
 					<div class="item">
 						<div class="work_item">
 							<div class="work_img">
-								<img src="white/images/works/1.jpg" alt="" />
+								<img src="white/images/works/indication.jpg" alt="" />
 								
 							</div>
 							<div class="work_description">
@@ -218,12 +218,12 @@
 					<div class="item">
 						<div class="work_item">
 							<div class="work_img">
-								<img src="white/images/works/2.jpg" alt="" />
+								<img src="white/images/works/a1.jpg" alt="" />
 								
 							</div>
 							<div class="work_description">
 								<div class="work_descr_cont">
-									<a href="A_SVR_Select.jsp" >支持向量回归算法</a>
+									<a href="A_RBF_Select.jsp" >径向基函数神经网络算法</a>
 								
 								</div>
 							</div>
@@ -234,12 +234,12 @@
 					<div class="item">
 						<div class="work_item">
 							<div class="work_img">
-								<img src="white/images/works/3.jpg" alt="" />
+								<img src="white/images/works/a2.jpg" alt="" />
 								
 							</div>
 							<div class="work_description">
 								<div class="work_descr_cont">
-									<a href="A_RBF_Select.jsp" >径向基函数神经网络算法</a>
+									<a href="A_SVR_Select.jsp" >支持向量回归算法</a>
 							
 								</div>
 							</div>
@@ -250,7 +250,7 @@
 					<div class="item">
 						<div class="work_item">
 							<div class="work_img">
-								<img src="white/images/works/4.jpg" alt="" />
+								<img src="white/images/works/a3.jpg" alt="" />
 								
 							</div>
 							<div class="work_description">
@@ -297,26 +297,26 @@
 						
 						<!-- TESTIMONIAL1 -->
 						<div class="item">
-							<div class="testim_content">“There is nothing scary in the darkness, if you encounter it face-to-face. The inevitable price we pay for our happiness is eternal fear to lose it. When you start thinking a lot about your past, it becomes your present and you can't see your future without it.”</div>
+							<div class="testim_content">“.........”</div>
 							<div class="testim_author">—  Anna Balashova, <b>Philosopher</b></div>
 						</div><!-- TESTIMONIAL1 -->
 						
 						<!-- TESTIMONIAL2 -->
 						<div class="item">
-							<div class="testim_content">“我跟你们讲啊......”</div>
+							<div class="testim_content">“.......”</div>
 							<div class="testim_author">—  Jiang Zemin, <b>President</b></div>
 						</div><!-- TESTIMONIAL2 -->
 						
 						<!-- TESTIMONIAL3 -->
 						<div class="item">
-							<div class="testim_content">“如果你们连我的需求都没有搞清楚，那么对不起，明年的这个时间，我们再见。”</div>
-							<div class="testim_author">—  张德平, <b>Lecturer</b></div>
+							<div class="testim_content">“..........。”</div>
+							<div class="testim_author">—  ..., <b>Lecturer</b></div>
 						</div><!-- TESTIMONIAL3 -->
 						
 						<!-- TESTIMONIAL3 -->
 						<div class="item">
-							<div class="testim_content">“前面30分你们一看就笑了。”</div>
-							<div class="testim_author">—  冯爱民, <b>Teacher</b></div>
+							<div class="testim_content">“........。”</div>
+							<div class="testim_author">—  ..., <b>Teacher</b></div>
 						</div><!-- TESTIMONIAL3 -->
 						
 					</div><!-- TESTIMONIALS SLIDER -->
@@ -341,7 +341,7 @@
 						<div class="item">
 							<div class="crewman_item">
 								<div class="crewman">
-									<img src="white/images/team/9.jpg" alt="" />
+									<img src="9.jpg" alt="" />
 								</div>
 								<div class="crewman_descr center">
 									<div class="crewman_descr_cont">
@@ -359,7 +359,7 @@
 						<div class="item">
 							<div class="crewman_item">
 								<div class="crewman">
-									<img src="white/images/team/1.jpg" alt="" />
+									<img src="1.jpg" alt="" />
 								</div>
 								<div class="crewman_descr center">
 									<div class="crewman_descr_cont">
@@ -378,7 +378,7 @@
 						<div class="item">
 							<div class="crewman_item">
 								<div class="crewman">
-									<img src="white/images/team/2.jpg" alt="" />
+									<img src="2.jpg" alt="" />
 								</div>
 								<div class="crewman_descr center">
 									<div class="crewman_descr_cont">
@@ -398,7 +398,7 @@
 						<div class="item">
 							<div class="crewman_item">
 								<div class="crewman">
-									<img src="white/images/team/3.jpg" alt="" />
+									<img src="3.jpg" alt="" />
 								</div>
 								<div class="crewman_descr center">
 									<div class="crewman_descr_cont">
@@ -438,7 +438,7 @@
 					<h4><b>Special</b> thanks</h4>
 					<div class="recent_posts_small clearfix">
 						<div class="post_item_img_small">
-							<img src="white/images/blog/1.jpg" alt="" />
+							<img src="white/images/footer/a.jpg" alt="" />
 						</div>
 						<div class="post_item_content_small">
 							<a class="title" href="http://www.layui.com/" >Layui</a>
@@ -449,7 +449,7 @@
 					</div>
 					<div class="recent_posts_small clearfix">
 						<div class="post_item_img_small">
-							<img src="white/images/blog/2.jpg" alt="" />
+							<img src="white/images/footer/b.jpg" alt="" />
 						</div>
 						<div class="post_item_content_small">
 							<a class="title" href="http://www.treejs.cn/v3/main.php#_zTreeInfo" >zTree</a>
@@ -460,7 +460,7 @@
 					</div>
 					<div class="recent_posts_small clearfix">
 						<div class="post_item_img_small">
-							<img src="white/images/blog/3.jpg" alt="" />
+							<img src="white/images/footer/c.jpg" alt="" />
 						</div>
 						<div class="post_item_content_small">
 							<a class="title" href="https://w3layouts.com/" >w3layouts</a>
