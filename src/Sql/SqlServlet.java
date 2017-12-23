@@ -47,12 +47,12 @@ public class SqlServlet extends HttpServlet {
 				break;
 			}
 			case 2:{
-				sql.setUser(request.getParameter("user"));
+				sql.setUser("root");
 				sql.setPassword(request.getParameter("passwd"));
 				sql.SetDBS(request.getParameter("DBS"));
 				System.out.println(request.getParameter("DBS"));
 				if(sql.ConnectSql()){
-					path = "warning.jsp";   
+					path = "MainPage.jsp";   
 				}
 				else{
 					path = "failure.jsp";  
@@ -82,6 +82,7 @@ public class SqlServlet extends HttpServlet {
 				break;
 			}
 			case 8:{
+				
 				ArrayList<String> instructions = new ArrayList<String>();
 				for(int i=0;i<Integer.parseInt(request.getParameter("length"));i++) {
 					String order = request.getParameter("instruct"+i);
@@ -90,6 +91,20 @@ public class SqlServlet extends HttpServlet {
 				}
 				sql.setInstruct(instructions);
 				sql.doInstructions();
+				
+				// 调整子节点被操作的父节点的 num_of_children值
+				
+				for(int i=0;i<Integer.parseInt(request.getParameter("length1"));i++) {
+					int addc = Integer.parseInt(request.getParameter("childadded"+i));
+					System.out.println(addc);
+					sql.addChildren(addc);
+				}
+				
+				for(int i=0;i<Integer.parseInt(request.getParameter("length2"));i++) {
+					int decc = Integer.parseInt(request.getParameter("childdeleted"+i));
+					sql.addChildren(decc);
+				}
+				
 				System.out.println(Integer.parseInt(request.getParameter("length")));
 				break;
 			}
