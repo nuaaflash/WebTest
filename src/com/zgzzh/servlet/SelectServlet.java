@@ -36,7 +36,6 @@ public class SelectServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		String path="A_Input.jsp";
-		System.out.println("Hehehehehehehehehehehehehehehehehehehehe");
 		int submitchoice = 5;	//算法编号 1=RBF 2=SVR 3=AHP
 		submitchoice = Integer.parseInt(request.getParameter("submitchoice"));
 		
@@ -85,7 +84,6 @@ public class SelectServlet extends HttpServlet {
 		}
 		if(data_is_correct) {
 			path="A_Input.jsp";
-			System.out.println("submitchoice:"+submitchoice+" the_system_index："+indx);
 			request.setAttribute("submitchoice_from_SelectServlet", submitchoice);
 			request.setAttribute("the_system_index", indx);
 		}

@@ -58,7 +58,7 @@
 					
 					<!-- LOGO -->
 					<div class="logo pull-left">
-						<a href="index.html" ><span class="b1">系统</span><span class="b2">效能</span><span class="b3">评估</span><span class="b4">软件</span><span class="b5">系统</span></a>
+						<a href="MainPage.jsp" ><span class="b1">系统</span><span class="b2">效能</span><span class="b3">评估</span><span class="b4">软件</span><span class="b5">系统</span></a>
 					</div><!-- //LOGO -->
 					
 					<!-- MENU -->
@@ -105,7 +105,7 @@
 							<div class="single_blog_post_img"><img src="white/images/blog/1.jpg" alt="" /></div>
 							
 							<div class="single_blog_post_content">
-								<p class="margbot50">输入底层节点的值，系统将通过算法根据上传的训练数据来训练出模型，并将之后输入的底层节点值用于预测计算顶层节点的值</p>
+								<p class="margbot50">输入底层节点的值，系统将通过算法根据上传的训练数据来训练出模型，并将之后输入的底层节点值用于预测计算顶层节点的值。</p>
 								<p class="margbot30">A version of SVM for regression was proposed in 1996 by Vladimir N. Vapnik, Harris Drucker, Christopher J. C. Burges, Linda Kaufman and Alexander J. Smola. This method is called support vector regression (SVR). The model produced by support vector classification (as described above) depends only on a subset of the training data, because the cost function for building the model does not care about training points that lie beyond the margin. Analogously, the model produced by SVR depends only on a subset of the training data, because the cost function for building the model ignores any training data close to the model prediction. Another SVM version known as least squares support vector machine (LS-SVM) has been proposed by Suykens and Vandewalle. (wikipedia)</p>
 							</div>
 							

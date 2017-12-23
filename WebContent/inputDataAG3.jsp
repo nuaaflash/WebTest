@@ -102,7 +102,7 @@
 							<td><%=leaves.get(i).toString() %></td>
 							<td>
 								<input type="range" id="range<%= i%>" name="point_value<%= i%>" min="1" max="100" step="1" value="1" oninput="change()">
-								<input type="hidden" id="leavesname<%= i%>" name="leavesname<%= i%>" min="1" max="100" step="1" value="<%=leaves.get(i).toString() %>" oninput="change()">
+								<input type="hidden" id="leavesname<%= i%>" name="leavesname<%= i%>" value="<%=leaves.get(i).toString() %>">
 								<input id="show<%= i%>" type="number">
 							</td>
 						</tr>
