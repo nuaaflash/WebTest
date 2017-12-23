@@ -52,12 +52,7 @@
 		      <input type="text" name="DBS" id="DBS" required  lay-verify="required" placeholder="请输入数据库名" autocomplete="off" class="layui-input">
 		    </div>
 		  </div>
-		  <div class="layui-form-item">
-		    <label class="layui-form-label"><font color="#FFB800">驾驶员</font> </label>
-		    <div class="layui-input-inline">
-		      <input type="text" name="user" id="user" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
-		    </div>
-		  </div>
+		  
 		  <div class="layui-form-item">
 		    <label class="layui-form-label"><font color="#FFB800">口令</font></label>
 		    <div class="layui-input-inline">

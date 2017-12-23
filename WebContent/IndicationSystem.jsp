@@ -65,6 +65,9 @@
 
 	var log, className = "dark";
 	var instruct=new Array();
+	var childadded = new Array();
+	var childdeleted = new Array();
+
 <%
 	Sql sql = Sql.getInstance();
 	ArrayList <String> trees = sql.getTreeS();
@@ -97,7 +100,9 @@
 		// 添加删除的指令
 		var tree_Name = "<%=sql.getTreename()%>";
 		instruct[instruct.length]=("DELETE FROM "+ tree_Name  +" WHERE node_id = " + treeNode.id +" OR parent_id = " + treeNode.id +";");
-		
+		if(treeNode.pId != 0){	// 记录被删除节点的id 以便调整其父节点的子节点数目
+			childdeleted[childdeleted.length] = treeNode.pId;
+		}
 		return true;
 	}
 	function onRemove(e, treeId, treeNode) {
@@ -236,7 +241,9 @@
 			var node_value = "<%=sql.getinitvalue()%>";
 	
 			instruct[instruct.length]=("INSERT INTO "+ tree_Name +"(node_id, node_name, parent_id, num_of_children, node_value) values("+newCount+", "+"'"+newName+"'"+","+treeNode.id+","+ 0+","+ node_value +");");
-			
+			if(treeNode.id != 0){ // 记录以用于增加父节点的 子节点个数
+				childadded[childadded.length] = treeNode.id;
+			}
 			return false;
 		});
 	};
@@ -290,11 +297,48 @@
 			// 将该输入框插入到 form 中 
 			form1.appendChild(input1); 
 		}
+		
 		// 传递长度
 		var input2 = document.createElement("input"); 
 			input2.type = "text"; 
 			input2.name = "length"; 
 			input2.value = instruct.length; 						
+			// 将该输入框插入到 form 中 
+			form1.appendChild(input2); 
+		
+		// 增加节点的父节点id
+		for(var i = 0;i < instruct.length;i ++){
+		var input1 = document.createElement("input"); 
+			input1.type = "text"; 
+			input1.name = "childadded"+i; 
+			input1.value = childadded[i]; 						
+			// 将该输入框插入到 form 中 
+			form1.appendChild(input1); 
+		}
+		
+		// 传递长度
+		var input2 = document.createElement("input"); 
+			input2.type = "text"; 
+			input2.name = "length1"; 
+			input2.value = childadded.length; 						
+			// 将该输入框插入到 form 中 
+			form1.appendChild(input2); 
+		
+		// 减少节点的父节点id
+		for(var i = 0;i < instruct.length;i ++){
+		var input1 = document.createElement("input"); 
+			input1.type = "text"; 
+			input1.name = "childdeleted"+i; 
+			input1.value = childdeleted[i]; 						
+			// 将该输入框插入到 form 中 
+			form1.appendChild(input1); 
+		}
+		
+		// 传递长度
+		var input2 = document.createElement("input"); 
+			input2.type = "text"; 
+			input2.name = "length2"; 
+			input2.value = childdeleted.length; 						
 			// 将该输入框插入到 form 中 
 			form1.appendChild(input2); 
 		
