@@ -81,6 +81,18 @@ public class SqlServlet extends HttpServlet {
 				sql.RenameNode(request.getParameter("name"), request.getParameter("newname"));
 				break;
 			}
+			case 8:{
+				ArrayList<String> instructions = new ArrayList<String>();
+				for(int i=0;i<Integer.parseInt(request.getParameter("length"));i++) {
+					String order = request.getParameter("instruct"+i);
+					instructions.add(order);
+					System.out.println(order);
+				}
+				sql.setInstruct(instructions);
+				sql.doInstructions();
+				System.out.println(Integer.parseInt(request.getParameter("length")));
+				break;
+			}
 			default:{
 				break;
 			}
