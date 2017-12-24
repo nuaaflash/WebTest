@@ -324,7 +324,7 @@
 			</div><!-- //CONTAINER -->
 		</section><!-- //NEWS -->
 		
-		<!-- TEAM -->
+		<!-- RELATED LINKS -->
 		<section id="related_links">
 		
 			<!-- CONTAINER -->
@@ -417,7 +417,7 @@
 				</div><!-- //ROW -->
 				<br>
 			</div><!-- //CONTAINER -->
-		</section><!-- //TEAM -->
+		</section><!-- //RELATED LINKS -->
 		
 	</div><!-- //PAGE -->
 
