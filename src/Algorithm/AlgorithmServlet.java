@@ -35,7 +35,7 @@ public class AlgorithmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");   
-		String path="view.jsp";// 计算完跳转显示结果
+		String path="ShowResult.jsp";// 计算完跳转显示结果
 		int submitchoice = 5;
 		String indication_name = request.getParameter("indication_name");
 		int lnum = Integer.parseInt(request.getParameter("num"));
@@ -200,6 +200,7 @@ public class AlgorithmServlet extends HttpServlet {
 				break;
 			}
 		}
+		//request.setAttribute("indexname", indication_name);
         request.getRequestDispatcher(path).forward(request, response); // 计算完跳转显示结果
 	}
 

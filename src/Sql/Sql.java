@@ -44,6 +44,22 @@ public class Sql {
 		}
 	}
 	
+	public void addChildren(int id){
+		if(canwegetNode(id)){
+			Node parentNode = getNode(id);
+			int ChildnumofParent = parentNode.numofChildren + 1;
+			SetNodeChildrenNum(parentNode.nodeName,ChildnumofParent);
+		}
+	}
+	
+	public void decChildren(int id){
+		if(canwegetNode(id)){
+			Node parentNode = getNode(id);
+			int ChildnumofParent = parentNode.numofChildren - 1;
+			SetNodeChildrenNum(parentNode.nodeName,ChildnumofParent);
+		}
+	}
+	
 	public void setInstruct(ArrayList<String> instructions){
 		Instruct = instructions;
 	}
@@ -416,6 +432,31 @@ public class Sql {
 		}
 		
 		return node;
+	}
+	
+	public boolean canwegetNode(int ID){	
+		// Find the Record with this Name;
+		boolean can = true;
+		ConnectSql();
+		String sql = null;
+		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM "+ treeName +" WHERE node_Id ="+ ID +";";  //mysql锟斤拷锟�
+		PreparedStatement pstmt;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			if(!rs.next()){
+				System.out.println("The NODE doesn't exist!");
+				can = false;
+			}
+			
+			conn.close();
+			System.out.println("Database was Colsed successfully");
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return can;
 	}
 	
 	public void showChildrenofNode(String name){
