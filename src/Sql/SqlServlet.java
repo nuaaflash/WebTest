@@ -92,7 +92,7 @@ public class SqlServlet extends HttpServlet {
 				sql.setInstruct(instructions);
 				sql.doInstructions();
 				
-				// 调整子节点被操作的父节点的 num_of_children值
+				// 调整子节点被操作的父节点的 num_of_children值 以及被添加节点的层次信息
 				
 				for(int i=0;i<Integer.parseInt(request.getParameter("length1"));i++) {
 					int addc = Integer.parseInt(request.getParameter("childadded"+i));
