@@ -68,7 +68,7 @@
 								<li class="scroll_btn"><a href="MainPage.jsp#about" >介绍</a></li>
 								<li class="scroll_btn"><a href="MainPage.jsp#projects" >工作</a></li>
 								<li class="scroll_btn"><a href="MainPage.jsp#group" >小组</a></li>
-								<li class="scroll_btn"><a href="MainPage.jsp#related_links" >相关</a></li>
+								<li class="scroll_btn"><a href="MainPage.jsp#team" >相关</a></li>
 								<li class="scroll_btn"><a href="#contacts" >其他</a></li>
 								<li class="scroll_btn last"><a href="login.jsp" >注销</a></li>
 							</ul>

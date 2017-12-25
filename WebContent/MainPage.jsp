@@ -97,7 +97,7 @@
 								<li class="scroll_btn"><a href="#about" >介绍</a></li>
 								<li class="scroll_btn"><a href="#projects" >工作</a></li>
 								<li class="scroll_btn"><a href="#group" >小组</a></li>
-								<li class="scroll_btn"><a href="#related_links" >相关</a></li>
+								<li class="scroll_btn"><a href="#team" >相关</a></li>
 								<li class="scroll_btn"><a href="#contacts" >其他</a></li>
 								<li class="scroll_btn last"><a href="login.jsp" >注销</a></li>
 							<!--	<li class="sub-menu">
@@ -324,8 +324,8 @@
 			</div><!-- //CONTAINER -->
 		</section><!-- //NEWS -->
 		
-		<!-- RELATED LINKS -->
-		<section id="related_links">
+		<!-- RELATED LINKS 但是为了该section的背景，此section的id设为team -->
+		<section id="team">
 		
 			<!-- CONTAINER -->
 			<div class="container">
@@ -334,86 +334,46 @@
 				<!-- ROW -->
 				<div class="row" data-appear-top-offset="-200" data-animated="fadeInUp">
 						
-					<!-- TEAM SLIDER -->
+					<!-- LINKS SLIDER -->
 					<div class="owl-demo owl-carousel team_slider">
-					
-						<!-- crewman0 -->
-						<div class="item">
-							<div class="crewman_item">
-								<div class="crewman">
-									<img src="9.jpg" alt="" />
-								</div>
-								<div class="crewman_descr center">
-									<div class="crewman_descr_cont">
-										<p>吾逸阳</p>
-										<span>党支部书记</span>
-									</div>
-								</div>
-								<div class="crewman_social">
-									<a href="javascript:void(0);" ><i class="fa fa-google-plus"></i></a>
-								</div>
-							</div>
-						</div><!-- crewman0 -->
 				
-						<!-- crewman1 -->
+						<!-- link1 -->
 						<div class="item">
 							<div class="crewman_item">
 								<div class="crewman">
-									<img src="1.jpg" alt="" />
+									<img src="white/images/ralated/wiki.jpg" alt="" />
 								</div>
 								<div class="crewman_descr center">
 									<div class="crewman_descr_cont">
-										<p>Sarah Brown</p>
-										<span>Director</span>
+										<p>Wikipedia</p>
+										<span>Referances</span>
 									</div>
 								</div>
 								<div class="crewman_social">
-									<a href="javascript:void(0);" ><i class="fa fa-wiki"></i></a>
-									<a href="javascript:void(0);" ><i class="fa fa-facebook-square"></i></a>
+									<a href="https://en.wikipedia.org/wiki/Main_Page" ><i class="fa fa-ii"></i></a>
 								</div>
 							</div>
-						</div><!-- crewman1 -->
+						</div><!-- link1 -->
 						
-						<!-- crewman2 -->
+						<!-- link2 -->
 						<div class="item">
 							<div class="crewman_item">
 								<div class="crewman">
-									<img src="2.jpg" alt="" />
+									<img src="white/images/ralated/github.jpg" alt="" />
 								</div>
 								<div class="crewman_descr center">
 									<div class="crewman_descr_cont">
-										<p>David Jones</p>
-										<span>Creative Director</span>
+										<p>github</p>
+										<span>Software Configuration Management</span>
 									</div>
 								</div>
 								<div class="crewman_social">
-									<a href="javascript:void(0);" ><i class="fa fa-google-plus"></i></a>
-									<a href="javascript:void(0);" ><i class="fa fa-twitter"></i></a>
-									<a href="javascript:void(0);" ><i class="fa fa-facebook-square"></i></a>
+									<a href="https://github.com/" ><i class="fa fa-ii"></i></a>
 								</div>
 							</div>
-						</div><!-- crewman1 -->
-						
-						<!-- crewman3 -->
-						<div class="item">
-							<div class="crewman_item">
-								<div class="crewman">
-									<img src="3.jpg" alt="" />
-								</div>
-								<div class="crewman_descr center">
-									<div class="crewman_descr_cont">
-										<p>Kate Smith</p>
-										<span>Manager</span>
-									</div>
-								</div>
-								<div class="crewman_social">
-									<a href="javascript:void(0);" ><i class="fa fa-twitter"></i></a>
-									<a href="javascript:void(0);" ><i class="fa fa-facebook-square"></i></a>
-								</div>
-							</div>
-						</div><!-- crewman3 -->
+						</div><!-- link2 -->
 
-					</div><!-- TEAM SLIDER -->
+					</div><!-- LINKS SLIDER -->
 				</div><!-- //ROW -->
 				<br>
 			</div><!-- //CONTAINER -->
