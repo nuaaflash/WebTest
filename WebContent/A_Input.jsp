@@ -135,7 +135,7 @@
 							<div class="single_blog_post_content">
 								
 								
-								<table border="2" cellspacing="5" cellpadding="5" width="400">
+								<table border="2" cellspacing="5" cellpadding="5" width="600">
 									<thead>
 										<tr>
 											<th>序号</th>
@@ -151,9 +151,9 @@
 											<td><%= i%></td>
 											<td><%=leaves.get(i).toString() %></td>
 											<td>
-												<input type="range" id="range<%= i%>" name="point_value<%= i%>" min="1" max="100" step="1" value="1" oninput="change()">
+												<input type="range" id="range<%= i%>" name="point_value<%= i%>" min="1" max="100" step="0.01" value="1" oninput="change()">
 												<input type="hidden" id="leavesname<%= i%>" name="leavesname<%= i%>" value="<%=leaves.get(i).toString() %>">
-												<input id="show<%= i%>" type="number" value="1" readonly>
+												<input type="number" id="show<%= i%>" value="1" step="0.01" width="6px" oninput="alter()">
 											</td>
 										</tr>
 <%
@@ -288,6 +288,21 @@
 %>
       num=document.getElementById("range<%= i%>"); 
       location=document.getElementById("show<%= i%>");
+      location.value=num.value; 
+<%
+	}
+%>
+  } 
+</script>
+<script>
+      function alter(){ 
+    	  var num;
+    	  var location;
+<%
+	for(int i=0;i<num;i++) {
+%>
+      num=document.getElementById("show<%= i%>"); 
+      location=document.getElementById("range<%= i%>");
       location.value=num.value; 
 <%
 	}
