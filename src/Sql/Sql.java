@@ -150,13 +150,12 @@ public class Sql {
 		}
 	}
 	
-	public void Addnode(String name, int parent,int value){
+	public void Addnode(String name, int parent,int value,int level){
 		// Insert A Record into Table;
 		String sql = null;
 		int nodeid = 0;
 		nodeid = getNumofnodes() + 1;
 		ConnectSql();
-		int level = 0;
 		Node parentNode = null;
 		if(parent != 0){
 			parentNode = getNode(parent);
@@ -217,7 +216,7 @@ public class Sql {
 		ConnectSql();
 		String sql = null;
 		System.out.println("name"+"1231232424444444444444444444444444444444444444444444444444");
-		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM "+ treeName +" WHERE node_name ="+ "'"+name+ "'"+";";  //mysql锟斤拷锟�
+		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value, node_level FROM "+ treeName +" WHERE node_name ="+ "'"+name+ "'"+";";  
 		PreparedStatement pstmt;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -227,7 +226,7 @@ public class Sql {
 				nodeName = rs.getString(2);
 				parentId = rs.getInt(3);
 				numofChildren = rs.getInt(4);
-				value = rs.getInt(5);
+				value = rs.getDouble(5);
 				level = rs.getInt(6);
 				node = new Node(nodeName,parentId,value,nodeId, numofChildren, level);
 				System.out.println("Node gotten!");
@@ -456,7 +455,7 @@ public class Sql {
 		Node node = null;
 		ConnectSql();
 		String sql = null;
-		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM "+ treeName +" WHERE node_Id ="+ ID +";";  //mysql锟斤拷锟�
+		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value,node_level FROM "+ treeName +" WHERE node_Id ="+ ID +";";  //mysql锟斤拷锟�
 		PreparedStatement pstmt;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -513,7 +512,7 @@ public class Sql {
 		Node node = null;
 		String sql = null;
 		Node parentnode = getNode(name);
-		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM "+ treeName +" WHERE parent_id =" + parentnode.nodeId + ";";  //mysql锟斤拷锟�
+		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value, node_level FROM "+ treeName +" WHERE parent_id =" + parentnode.nodeId + ";";  //mysql锟斤拷锟�
 		PreparedStatement pstmt;
 		ConnectSql();
 		try {
@@ -654,7 +653,7 @@ public class Sql {
 	
 	public void TestAddnode(){
 		Sql sql = new Sql();
-		sql.Addnode("lalal", 1, 2);
+		sql.Addnode("lalal", 1, 2, 1);
 	}
 	
 	

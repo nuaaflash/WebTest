@@ -43,7 +43,7 @@ public class SqlServlet extends HttpServlet {
 			}
 			case 1:{
 				int parentID = Integer.parseInt(request.getParameter("parent"));
-				sql.Addnode(request.getParameter("Nodename"), parentID, 0);
+				sql.Addnode(request.getParameter("Nodename"), parentID, 0,Integer.parseInt(request.getParameter("level")));
 				break;
 			}
 			case 2:{
