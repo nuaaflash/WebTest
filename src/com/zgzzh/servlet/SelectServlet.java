@@ -2,6 +2,7 @@ package com.zgzzh.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -63,24 +64,63 @@ public class SelectServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(submitchoice != 3) {// 验证部分
-			ArrayList<String>title=new ArrayList<String>();
-			ArrayList<String>node=new ArrayList<String>();
+		if(submitchoice != 3) {// 验证REF,SVR部分
+			ArrayList<String>title=new ArrayList<String>();			
+			HashSet<String>excelname=new HashSet<String>();//文件内容
+			HashSet<String>leavesname=new HashSet<String>();//叶子节点
+		
+			boolean datatest;
 			try {
 				title=reader.readExcelTitle();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			node=sql.getNodes(indication_name);
-		/*	for(int i=0;i<title.size();i++){
-				if(title.get(i)!=node.get(i)) {
-					System.out.println("wrong data,please choose again:"+title.get(i)+" != "+node.get(i));
-					data_is_correct=false;
-				}
-				else 
-					System.out.println("well down");
-			}*/
+		
+			leavesname=sql.getNameSetOfLeaves(indication_name);			
+			for(int i=0;i<title.size(); i++){
+				excelname.add(title.get(i));	
+			}
+			datatest=excelname.contains(leavesname);
+			datatest=leavesname.contains(excelname);	
+			if(!datatest){
+				System.out.println("Data wrong");	
+			}
+			else
+				System.out.println("Data well done");
+		}
+		if(submitchoice == 3) {// 验证AHP部分
+			ArrayList<String>title=new ArrayList<String>();
+			ArrayList<Object>node=new ArrayList<Object>();
+			HashSet<String>excelname=new HashSet<String>();//文件内容
+			HashSet<String>leavesname=new HashSet<String>();//叶子节点
+			HashSet<String>treename=new HashSet<String>();//所有节点
+			boolean datatest;
+			try {
+				node=reader.readExcel();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			leavesname=sql.getNameSetOfLeaves(indication_name);
+			treename=sql.getNameSetOfNoleaves(indication_name);
+			treename.addAll(leavesname);
+			for(int i=0;i<node.size(); i++){
+				if(i%2==0)
+					title.add((String) node.get(i));//不知道对不对，可能是i%2==1
+			}
+			for(int i=0;i<title.size();i++){
+				excelname.add(title.get(i));
+			}
+			datatest=excelname.contains(treename);
+			datatest=treename.contains(excelname);	
+			if(!datatest){
+				System.out.println("Data wrong");
+				
+			}
+			else
+				System.out.println("Data well done");
+			
 		}
 		if(data_is_correct) {
 			path="A_Input.jsp";
