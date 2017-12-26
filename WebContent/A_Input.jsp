@@ -197,10 +197,24 @@
 							损失函数C:<br><input type="text" name="C" value="1.9"><br>
 <%								
 							} else if(submitchoice==3) {
+								int max_num_of_children = sql.getMaxNumOfChildren(indication_name);
+								int unleaves_num = sql.getNumofnodes();
+								System.out.println(indication_name+" max_num_of_children:"+max_num_of_children+" Numofnodes:"+unleaves_num);
 %>
+							
 							输入重要度<abbr title="方便显示，-3表示1/3">(分数以负数来表示)</abbr><br>
 <%								
-							}
+								if(max_num_of_children>3) {									
+%>
+								该指标体系过于复杂，请上传Excel文件。<br>
+<%
+								} //if(max_num_of_children>3)
+								else {
+%>
+								表格。。。。。。<br>
+<%
+								} //else
+							} //else if(submitchoice==3)
 %>							
 							<input type="hidden" name="indication_name" value="<%=indication_name%>"/> <!-- 指标体系名称 -->
 							<input type="hidden" name="the_system_index" value="<%=indx %>"> <!-- 指标体系编号 -->
@@ -302,9 +316,7 @@
 <%
 	}
 %>
-  } 
-</script>
-<script>
+  }
       function alter(){ 
     	  var num;
     	  var location;
