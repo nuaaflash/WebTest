@@ -325,7 +325,7 @@ public class Sql {
 		String sql = null;
 		ConnectSql();
 		int num = 0;
-		sql = "SELECT num_of_children FROM " + nameoftree + " ORDER BY num_of_children";  
+		sql = "SELECT num_of_children FROM " + nameoftree + " ORDER BY num_of_children DESC";  
 		Statement stmt;
 		try {
 			stmt = conn.createStatement();
