@@ -2,6 +2,7 @@ package Sql;
 import java.sql.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.junit.Test;
 
@@ -48,10 +49,29 @@ public class Sql {
 		if(canwegetNode(id)){
 			Node parentNode = getNode(id);
 			int ChildnumofParent = parentNode.numofChildren + 1;
+			int level = parentNode.level + 1;
 			SetNodeChildrenNum(parentNode.nodeName,ChildnumofParent);
+			SetNodeChildrenLevel(id,level);
 		}
 	}
 	
+	public void SetNodeChildrenLevel(int id, int level) {
+		// TODO Auto-generated method stub
+		String sql = null;
+		sql = "UPDATE "+ treeName +" set node_level ="+ level + "WHERE parent_id = "+id; 
+		Statement stmt;
+		ConnectSql();
+		try {
+			stmt = conn.createStatement();
+			stmt.executeUpdate(sql);
+			System.out.println("Update successfully");
+			conn.close();
+			System.out.println("Database was Colsed successfully");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void decChildren(int id){
 		if(canwegetNode(id)){
 			Node parentNode = getNode(id);
@@ -95,7 +115,7 @@ public class Sql {
 		//ConnectSql();
 		//DestroyTree(name);
 		ConnectSql();
-		sql = "CREATE TABLE "+name+"(node_id int,node_name varchar(100),parent_id int,num_of_children int,node_value numeric(18,2));";  //合成sql命令 添加记录
+		sql = "CREATE TABLE "+name+"(node_id int,node_name varchar(100),parent_id int,num_of_children int,node_value numeric(18,2),node_level int);";  //合成sql命令 添加记录
 		Statement stmt;
 		try {
 			stmt = conn.createStatement();
@@ -130,18 +150,20 @@ public class Sql {
 		}
 	}
 	
-	public void Addnode(String name, int parent,int value){
+	public void Addnode(String name, int parent,int value,int level){
 		// Insert A Record into Table;
 		String sql = null;
 		int nodeid = 0;
 		nodeid = getNumofnodes() + 1;
 		ConnectSql();
-		sql = "INSERT INTO "+ treeName +"(node_id, node_name, parent_id, num_of_children, node_value) values("+nodeid+", "+"'"+name+"'"+","+parent+","+ 0+","+ value+");";  //mysql锟斤拷锟�
+		Node parentNode = null;
 		if(parent != 0){
-			Node parentNode = getNode(parent);
+			parentNode = getNode(parent);
 			int ChildnumofParent = parentNode.numofChildren + 1;
 			SetNodeChildrenNum(parentNode.nodeName,ChildnumofParent);
+			level = parentNode.level + 1;
 		}
+		sql = "INSERT INTO "+ treeName +"(node_id, node_name, parent_id, num_of_children, node_value, node_level) values("+nodeid+", "+"'"+name+"'"+","+parent+","+ 0+","+ value+","+level+");"; 
 		Statement stmt;
 		ConnectSql();
 		try {
@@ -189,12 +211,12 @@ public class Sql {
 	
 	public Node getNode(String name){
 		// Find the Record with this Name;
-		String nodeName = null;int parentId = 0;double value = 0;int nodeId = 0;int numofChildren = 0;
+		String nodeName = null;int parentId = 0;double value = 0;int nodeId = 0;int numofChildren = 0;int level = 0;
 		Node node = null;
 		ConnectSql();
 		String sql = null;
 		System.out.println("name"+"1231232424444444444444444444444444444444444444444444444444");
-		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM "+ treeName +" WHERE node_name ="+ "'"+name+ "'"+";";  //mysql锟斤拷锟�
+		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value, node_level FROM "+ treeName +" WHERE node_name ="+ "'"+name+ "'"+";";  
 		PreparedStatement pstmt;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -204,8 +226,9 @@ public class Sql {
 				nodeName = rs.getString(2);
 				parentId = rs.getInt(3);
 				numofChildren = rs.getInt(4);
-				value = rs.getInt(5);
-				node = new Node(nodeName,parentId,value,nodeId, numofChildren);
+				value = rs.getDouble(5);
+				level = rs.getInt(6);
+				node = new Node(nodeName,parentId,value,nodeId, numofChildren, level);
 				System.out.println("Node gotten!");
 			}
 			
@@ -295,6 +318,29 @@ public class Sql {
 			e.printStackTrace();
 		}
 		return names;
+	}
+	
+	public int getMaxNumOfChildren(String nameoftree){		//通过树名查询树的节点 返回子节点数目最大的值
+		numofnodes = 0;
+		String sql = null;
+		ConnectSql();
+		int num = 0;
+		sql = "SELECT num_of_children FROM " + nameoftree + " ORDER BY num_of_children";  
+		Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			if (rs.next()) {
+				num = rs.getInt(1);
+			}
+			System.out.println("Children showed!");
+			conn.close();
+			System.out.println("Database was Colsed successfully");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return num;
 	}
 	
 	public ArrayList<Node> getIndexNodetoShow(){		//得到需要在指标体系里展示的节点 返回ArrayList<Node>
@@ -405,11 +451,11 @@ public class Sql {
 	
 	public Node getNode(int ID){	
 		// Find the Record with this Name;
-		String nodeName = null;int parentId = 0;double value = 0;int nodeId = 0;int numofChildren = 0;
+		String nodeName = null;int parentId = 0;double value = 0;int nodeId = 0;int numofChildren = 0;int level = 0;
 		Node node = null;
 		ConnectSql();
 		String sql = null;
-		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM "+ treeName +" WHERE node_Id ="+ ID +";";  //mysql锟斤拷锟�
+		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value,node_level FROM "+ treeName +" WHERE node_Id ="+ ID +";";  //mysql锟斤拷锟�
 		PreparedStatement pstmt;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -420,7 +466,8 @@ public class Sql {
 				parentId = rs.getInt(3);
 				numofChildren = rs.getInt(4);
 				value = rs.getInt(5);
-				node = new Node(nodeName,parentId,value,nodeId, numofChildren);
+				level = rs.getInt(6);
+				node = new Node(nodeName,parentId,value,nodeId, numofChildren, level);
 				System.out.println("Got the NODE!");
 			}
 			
@@ -461,11 +508,11 @@ public class Sql {
 	
 	public void showChildrenofNode(String name){
 		// Show the Children of a Node with this Name
-		String nodeName = null;int parentId = 0;double value = 0;int nodeId = 0;int numofChildren = 0;
+		String nodeName = null;int parentId = 0;double value = 0;int nodeId = 0;int numofChildren = 0;int level = 0;
 		Node node = null;
 		String sql = null;
 		Node parentnode = getNode(name);
-		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM "+ treeName +" WHERE parent_id =" + parentnode.nodeId + ";";  //mysql锟斤拷锟�
+		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value, node_level FROM "+ treeName +" WHERE parent_id =" + parentnode.nodeId + ";";  //mysql锟斤拷锟�
 		PreparedStatement pstmt;
 		ConnectSql();
 		try {
@@ -479,7 +526,8 @@ public class Sql {
 					parentId = rs.getInt(3);
 					numofChildren = rs.getInt(4);
 					value = rs.getInt(5);
-					node = new Node(nodeName,parentId,value,nodeId, numofChildren);
+					level = rs.getInt(6);
+					node = new Node(nodeName,parentId,value,nodeId, numofChildren, level);
 					node.ShowNode();
 				}
 			}
@@ -580,6 +628,23 @@ public class Sql {
 	}
 	
 	
+	public void SetNodeLevel(String name,int level){
+		// Show the Children of a Node with this Name
+		String sql = null;
+		sql = "UPDATE "+ treeName +" set node_level ="+ level + "WHERE node_name = '"+name+"'"; 
+		Statement stmt;
+		ConnectSql();
+		try {
+			stmt = conn.createStatement();
+			stmt.executeUpdate(sql);
+			System.out.println("Update successfully");
+			conn.close();
+			System.out.println("Database was Colsed successfully");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}			
+	}
+	
 	public void TestnewSql(){
 		@SuppressWarnings("unused")
 		Sql sql = new Sql();
@@ -588,7 +653,7 @@ public class Sql {
 	
 	public void TestAddnode(){
 		Sql sql = new Sql();
-		sql.Addnode("lalal", 1, 2);
+		sql.Addnode("lalal", 1, 2, 1);
 	}
 	
 	
@@ -643,6 +708,58 @@ public class Sql {
 		return numofnodes;
 	}
 
+	public HashSet<String> getNameSetOfNoleaves(String nameoftree){ // 获取非叶子节点的名字集合
+		numofnodes = 0;
+		String sql = null;
+		//ConnectSql();
+		//DestroyTree(name);
+		ConnectSql();
+		HashSet<String> names = new HashSet<String>();
+		sql = "SELECT node_name FROM " + nameoftree +" WHERE num_of_children != 0 ORDER BY node_id;";  
+		Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				String temp = rs.getString(1);
+			    names.add(temp);
+			}
+			System.out.println("No-leaves-Set gotten!");
+			conn.close();
+			System.out.println("Database was Colsed successfully");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return names;
+	}
+	
+	public HashSet<String> getNameSetOfLeaves(String nameoftree){   // 获取叶子节点的名字集合
+		numofnodes = 0;
+		String sql = null;
+		//ConnectSql();
+		//DestroyTree(name);
+		ConnectSql();
+		HashSet<String> names = new HashSet<String>();
+		sql = "SELECT node_name FROM " + nameoftree +" WHERE num_of_children = 0 ORDER BY node_id;";  
+		Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				String temp = rs.getString(1);
+			    names.add(temp);
+			}
+			System.out.println("Leaves-Set gotten!");
+			conn.close();
+			System.out.println("Database was Colsed successfully");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return names;
+	}
+	
 	public void setNumofnodes(int numofnodes) {
 		this.numofnodes = numofnodes;
 	}

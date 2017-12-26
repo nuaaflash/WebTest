@@ -82,7 +82,7 @@
 		nodenum = sqlnode.size();
 	}
 	else{
-		sql.Addnode("root", 0, 0);	// 判断是否有根节点来 自动创建根节点
+		sql.Addnode("root", 0, 0, 0);	// 判断是否有根节点来 自动创建根节点
 	}
 %>
 	var zNodes =[];
@@ -239,8 +239,7 @@
 			// 添加添加节点的指令
 			var tree_Name = "<%=sql.getTreename()%>";
 			var node_value = "<%=sql.getinitvalue()%>";
-	
-			instruct[instruct.length]=("INSERT INTO "+ tree_Name +"(node_id, node_name, parent_id, num_of_children, node_value) values("+newCount+", "+"'"+newName+"'"+","+treeNode.id+","+ 0+","+ node_value +");");
+			instruct[instruct.length]=("INSERT INTO "+ tree_Name +"(node_id, node_name, parent_id, num_of_children, node_value, node_level) values("+newCount+", "+"'"+newName+"'"+","+treeNode.id+","+ 0+","+ node_value + 0 +");");
 			if(treeNode.id != 0){ // 记录以用于增加父节点的 子节点个数
 				childadded[childadded.length] = treeNode.id;
 			}
