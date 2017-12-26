@@ -59,4 +59,12 @@
     <servlet-name>SelectServlet</servlet-name>
     <url-pattern>/SelectServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>DisposeDataServlet</servlet-name>
+    <servlet-class>com.zgzzh.servlet.DisposeDataServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DisposeDataServlet</servlet-name>
+    <url-pattern>/DisposeDataServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

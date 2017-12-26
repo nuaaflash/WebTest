@@ -84,7 +84,7 @@ public class SelectServlet extends HttpServlet {
 		}
 		if(data_is_correct) {
 			path="A_Input.jsp";
-			request.setAttribute("submitchoice_from_SelectServlet", submitchoice);
+			request.setAttribute("submitchoice_from_Servlet", submitchoice);
 			request.setAttribute("the_system_index", indx);
 		}
 		else {

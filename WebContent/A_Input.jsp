@@ -92,25 +92,30 @@
 			
 			<!-- CONTAINER -->
 			<div class="container">
-				
+
 				<!-- ROW -->
 				<div class="row">
-				<form action="AlgorithmServlet" method="get" enctype="multipart/form-data">
+				<form name="theForm" enctype="multipart/form-data">
 					<!-- BLOG BLOCK -->
 					<div class="blog_block col-lg-9 col-md-9 padbot50">
 					
 <%
-						int submitchoice=(Integer)request.getAttribute("submitchoice_from_SelectServlet");
+						int submitchoice=(Integer)request.getAttribute("submitchoice_from_Servlet");
 						System.out.println("submitchoice:"+submitchoice);
 						int indx=(Integer)request.getAttribute("the_system_index");	//指标体系编号
 						String indication_name=null;
 						Sql sql = Sql.getInstance();
 						ArrayList<String> al = sql.getTreeS();
-						indication_name=al.get(indx);
-						ArrayList<String> leaves = sql.getLeaves(indication_name);
-						int num = leaves.size();
-						String s;
-						System.out.println("indication_name:"+indication_name+" indx:"+indx+" num:"+num);
+						indication_name=al.get(indx);	//指标体系的名字
+						ArrayList<String> leaves = sql.getLeaves(indication_name);	//指标体系各个叶节点的名字
+						int num = leaves.size();	//叶节点的个数
+						ArrayList<Double> leaves_value_from_file = new ArrayList<Double>();	//上传文件中各个叶节点的值
+						for(int i=0;i<num;i++) {
+							leaves_value_from_file.add(5.1);
+						}
+						for(int i=0;i<num;i++) {
+							leaves_value_from_file.set(i, (Double)request.getAttribute("leaves_value_from_Servlet"+i));
+						}				
 %>
 						
 						<!-- SINGLE BLOG POST -->
@@ -133,8 +138,11 @@
 %>
 						</div>	
 							<div class="single_blog_post_content">
-								
-								
+								<p>上传记录了叶子结点值的Excel表格或直接在下方填写</p>
+								<input type="file" name="leaves" ><br>
+								<button name="Submits" value="2" onclick="process('file')">开始上传</button>
+								<hr>
+
 								<table border="2" cellspacing="5" cellpadding="5" width="600">
 									<thead>
 										<tr>
@@ -151,9 +159,9 @@
 											<td><%= i%></td>
 											<td><%=leaves.get(i).toString() %></td>
 											<td>
-												<input type="range" id="range<%= i%>" name="point_value<%= i%>" min="1" max="100" step="0.01" value="1" oninput="change()">
+												<input type="range" id="range<%= i%>" name="point_value<%= i%>" min="1" max="100" step="0.01" value="<%=leaves_value_from_file.get(i) %>" oninput="change()">
 												<input type="hidden" id="leavesname<%= i%>" name="leavesname<%= i%>" value="<%=leaves.get(i).toString() %>">
-												<input type="number" id="show<%= i%>" value="1" step="0.01" width="6px" oninput="alter()">
+												<input type="number" id="show<%= i%>" min="1" max="100" step="0.01" value="<%=leaves_value_from_file.get(i) %>" width="6px" oninput="alter()">
 											</td>
 										</tr>
 <%
@@ -174,7 +182,7 @@
 						
 						<!-- POPULAR TAGS WIDGET -->
 						<div class="sidepanel widget_tags">
-							<h3><b>相关的参数</b> Tags</h3>
+							<h3><b>相关的参数</b> Argument</h3>
 <%
 							if(submitchoice==1) {
 %>
@@ -190,20 +198,22 @@
 <%								
 							} else if(submitchoice==3) {
 %>
-							.
+							输入重要度<abbr title="方便显示，-3表示1/3">(分数以负数来表示)</abbr><br>
 <%								
 							}
 %>							
 							<input type="hidden" name="indication_name" value="<%=indication_name%>"/> <!-- 指标体系名称 -->
+							<input type="hidden" name="the_system_index" value="<%=indx %>"> <!-- 指标体系编号 -->
 							<input type="hidden" name="submitchoice" value="<%=submitchoice%>"/> <!-- 算法编号 -->
-							<input type ="hidden" name="num" value="<%=num %>"> <!-- 指标体系的叶子个数 -->
-            				<button name="Submits" value="1">开始计算</button>
+							<input type="hidden" name="num" value="<%=num %>"> <!-- 指标体系的叶子个数 -->
+							
+            				<button name="Submits" value="1" onclick="process('cal')">开始计算</button>
 						</div><!-- POPULAR TAGS WIDGET -->
 						
 						<hr>
 						
 						<!-- TEXT WIDGET -->
-					<!--	<div class="sidepanel widget_text">
+						<!--<div class="sidepanel widget_text">
 							<h3><b>About</b> Blog</h3>
 							<p>I must admit this particular defense set me on edge a little bit, for two reasons. The first is that she’s being held to a completely different standard than male politicians are held to.</p>-->
 						</div><!-- //TEXT WIDGET -->
@@ -308,6 +318,18 @@
 	}
 %>
   } 
+</script>
+<script language=javascript>    
+  function   process(v){    
+    if(v=="file") {    
+      document.theForm.action="DisposeDataServlet"; 
+      document.theForm.method="post";
+    } else {    
+      document.theForm.action="AlgorithmServlet";
+      document.theForm.method="get";
+    }    
+    document.theForm.submit();    
+  }    
 </script>
 </body>
 </html>
