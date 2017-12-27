@@ -155,7 +155,7 @@ public class AlgorithmServlet extends HttpServlet {
                 	value = Double.parseDouble(request.getParameter("point_value"+i));
                 	lname = request.getParameter("leavesname"+i);
                 	sql.SetNodeValue(lname, value);
-                	System.out.println(value);
+                	System.out.println("SetNodeValue("+lname+", "+value+");");
                 }
                 
 				AlgorithmAHP A = new AlgorithmAHP();
@@ -191,6 +191,7 @@ public class AlgorithmServlet extends HttpServlet {
 						TempV = TempV + TempW[j] * x.value;
 					}
 					S.SetNodeValue(name, TempV);
+					System.out.println("SetNodeValue("+name+", "+TempV+");");
 				}
 				break;
 			}

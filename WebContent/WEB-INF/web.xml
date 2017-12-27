@@ -67,4 +67,12 @@
     <servlet-name>DisposeDataServlet</servlet-name>
     <url-pattern>/DisposeDataServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>DisposeImportanceServlet</servlet-name>
+    <servlet-class>com.zgzzh.servlet.DisposeImportanceServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DisposeImportanceServlet</servlet-name>
+    <url-pattern>/DisposeImportanceServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
