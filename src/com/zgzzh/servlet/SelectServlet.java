@@ -64,7 +64,7 @@ public class SelectServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(submitchoice != 3) {// 验证REF,SVR部分
+		/*if(submitchoice != 3) {// 验证REF,SVR部分
 			ArrayList<String>title=new ArrayList<String>();			
 			HashSet<String>excelname=new HashSet<String>();//文件内容
 			HashSet<String>leavesname=new HashSet<String>();//叶子节点
@@ -93,8 +93,8 @@ public class SelectServlet extends HttpServlet {
 			ArrayList<String>title=new ArrayList<String>();
 			ArrayList<Object>node=new ArrayList<Object>();
 			HashSet<String>excelname=new HashSet<String>();//文件内容
-			HashSet<String>leavesname=new HashSet<String>();//叶子节点
-			HashSet<String>treename=new HashSet<String>();//所有节点
+		
+			HashSet<String>treename=new HashSet<String>();//非叶子节点
 			boolean datatest;
 			try {
 				node=reader.readExcel();
@@ -102,9 +102,9 @@ public class SelectServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			leavesname=sql.getNameSetOfLeaves(indication_name);
+			
 			treename=sql.getNameSetOfNoleaves(indication_name);
-			treename.addAll(leavesname);
+			
 			for(int i=0;i<node.size(); i++){
 				if(i%2==0)
 					title.add((String) node.get(i));//不知道对不对，可能是i%2==1
@@ -121,7 +121,7 @@ public class SelectServlet extends HttpServlet {
 			else
 				System.out.println("Data well done");
 			
-		}
+		}*/
 		if(data_is_correct) {
 			path="A_Input.jsp";
 			request.setAttribute("submitchoice_from_Servlet", submitchoice);

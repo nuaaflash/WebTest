@@ -7,7 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;  
-import java.util.HashMap;  
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;  
   
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;  
@@ -20,6 +21,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
 import org.slf4j.Logger;  
 import org.slf4j.LoggerFactory;
+
+import Algorithm.RBF;
+import Sql.Sql;
   
 /** 
  * 读取Excel 
@@ -34,7 +38,7 @@ public class ReadExcelUtils {
     private String filepath; 
     private static ReadExcelUtils single = null;
     
-    private ReadExcelUtils(){}
+    public ReadExcelUtils(){}
 	
 	public static ReadExcelUtils getInstance() {  
 		if (single == null) {    
@@ -143,7 +147,105 @@ public class ReadExcelUtils {
         }  
         return content;  
     }  
-  
+    //给EXCEL文件里的内容进行排序，使其与数据库的内容一致
+     public ArrayList<String>gettreeleaves(String nameoftree){ 		
+    	 Sql sql=Sql.getInstance();   		
+    	 ArrayList<String>datatitle=new ArrayList<String>();
+    	 datatitle=sql.getLeaves(nameoftree);
+    	 
+    	 return datatitle;
+     }
+    public ArrayList<Object> equaldata(ArrayList<String>datatitle,String filepath) throws Exception{  
+        if(wb==null){  
+            throw new Exception("Workbook对象为空！");  
+        }  
+        sheet = wb.getSheetAt(0);  
+        // 得到总行数  
+        int rowNum = sheet.getLastRowNum();  //行数
+        row = sheet.getRow(0);  
+      
+        
+        ReadExcelUtils reader = ReadExcelUtils.getInstance();       
+        Sql sql=Sql.getInstance(); 
+        ArrayList<String>title=new ArrayList<String>();	
+        HashSet<Object>hashset=new  HashSet<Object>();
+        ArrayList<Object>content=new  ArrayList<Object>();
+        ArrayList<Object>temp=new  ArrayList<Object>();
+        ArrayList<Object>temp2=new  ArrayList<Object>();
+        content=reader.readExcel();//文件内容
+        title=reader.readExcelTitle();
+     
+   
+        HashSet<String>excelname=new HashSet<String>();//文件内容
+		HashSet<String>leavesname=new HashSet<String>();//叶子节点
+		boolean datatest;
+		for(int i=0;i<datatitle.size(); i++){
+			Object obj=new Object();
+			obj=datatitle.get(i);
+			leavesname.add((String) obj);	
+		}
+		
+		for(int i=0;i<title.size(); i++){
+			Object obj=new Object();
+			obj=title.get(i);
+			excelname.add((String) obj);	
+		}
+		datatest=excelname.equals(leavesname);
+		
+		if(datatest){
+			System.out.println("Data well done");
+				
+		}
+		else
+			System.out.println("Data wrong");	 //判断叶子节点个数是否相符
+		
+       if(datatest){
+    	   System.out.println("进入循环");
+    	   for(int i=0;i<datatitle.size();i++){
+    		   if(hashset.contains(i))
+  				i++;
+    		 for(int j=0;j<title.size();j++){
+    		
+    			
+    		
+    			if( datatitle.get(i).equals(title.get(j))){
+    				hashset.add(j);
+    				hashset.add(i);
+    				
+    				for(int k=0;k<rowNum*2;k++){      				
+    					   double numble;
+    					   Object obj;
+    					    obj=content.get(k);
+    					    temp.add(obj);
+    					    k++;   
+    						double num[]=(double[]) content.get(k);    			
+    						numble=num[i];
+    						num[i]=num[j];
+    						num[j]=numble;		
+    					
+    			    	   temp.add(num);
+    				}
+    			
+    			}
+    	
+    		
+    		 }
+    				
+    	   }
+    	   
+       }
+       for (int i = 0; i < temp.size()/2; i++) { 
+      
+    	   Object obj;
+    	   obj=temp.get(i);
+       	temp2.add(obj);
+       	i ++;
+       	double [] num = (double[])temp.get(i);
+       	temp2.add(num);
+       }  
+       return temp2;
+    }  
+    
 	public ArrayList<Object> readExcel() throws Exception{  
         if(wb==null){  
             throw new Exception("Workbook对象为空！");  
@@ -194,7 +296,7 @@ public class ReadExcelUtils {
             	System.out.print(result.get(i)+"  ");
             	i ++;
             	double [] num = (double[])result.get(i);
-            	for(int j = 0;j < num.length - 1;j ++){
+            	for(int j = 0;j < num.length-1 ;j ++){
             		System.out.print(num[j]+"  ");  
             	}
             	System.out.println(num[num.length - 1]);
@@ -206,6 +308,53 @@ public class ReadExcelUtils {
             e.printStackTrace();  
         }  
     }
+   /* @Test
+    public void test2(){
+    	System.out.println("This is test2");
+		try {  
+    	ReadExcelUtils excelReader = ReadExcelUtils.getInstance();  
+    	excelReader.setFilepath("F:\\1.xlsx");
+        // 对读取Excel表格标题测试  
+//      String[] title = excelReader.readExcelTitle();  
+//      System.out.println("获得Excel表格的标题:");  
+//      for (String s : title) {  
+//          System.out.print(s + " ");  
+//      }  
+        
+    	// 获取数据库里的顺序
+    	ArrayList<String> shunxu = new ArrayList<String>();   	
+    	shunxu.add("n2");
+    	shunxu.add("result");
+    	shunxu.add("n1");  
+    	System.out.println("shunxu:"+shunxu.toString());
+        // 对读取Excel表格内容测试  
+        ArrayList<Object> result = excelReader.equaldata(shunxu, filepath);      
+        System.out.println("获得Excel表格的内容:");  
+       // System.out.print(result.get()+"  ");
+        for(int i= 0; i < shunxu.size(); i++) { 
+        	System.out.println(shunxu.get(i));
+        }
+        for (int i = 0; i < result.size(); i++) { 
+        	System.out.print(result.get(i)+"  ");
+        	i ++;
+        	double [] num = (double[])result.get(i);
+        	for(int j = 0;j < num.length-1 ;j ++){
+        		System.out.print(num[j]+"  ");  
+        	}
+        	System.out.println(num[num.length - 1]);
+        }  
+       //TODO 
+   
+   } catch (FileNotFoundException e) {  
+        System.out.println("未找到指定路径的文件!");  
+        e.printStackTrace();  
+    }catch (Exception e) {  
+        e.printStackTrace();  
+    }  
+	
+}*/
+    
+    
     /** 
      *  
      * 根据Cell类型设置数据 
@@ -249,5 +398,8 @@ public class ReadExcelUtils {
         return cellvalue;  
     }  
   
- 
+    public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+	}
 }  
