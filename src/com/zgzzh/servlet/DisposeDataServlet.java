@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.lxh.smart.SmartUpload;
 
 import Dataset.ReadExcelUtils;
+import Sql.Sql;
 /**
  * Servlet implementation class DisposeDataServlet
  */
@@ -45,16 +46,30 @@ public class DisposeDataServlet extends HttpServlet {
 			// TODO: handle exception
 		}
 		
-		int num = Integer.parseInt(su.getRequest().getParameter("num"));
-		for(int i=0;i<num;i++) {
-			request.setAttribute("leaves_value_from_Servlet"+i, 3.14);
-		}
-		
 		int submitchoice = Integer.parseInt(su.getRequest().getParameter("submitchoice"));
 		int indx = Integer.parseInt(su.getRequest().getParameter("the_system_index"));
-		System.out.println("DisposeDataServlet-- submitchoice:"+submitchoice+" indx:"+indx);
+		String indication_name = su.getRequest().getParameter("indication_name");
+		System.out.println("indication_name:"+indication_name);
 		request.setAttribute("the_system_index", indx);
 		request.setAttribute("submitchoice_from_Servlet", submitchoice);
+		
+		Sql sql = Sql.getInstance();
+		System.out.println(sql.getLeaves(indication_name));
+		ReadExcelUtils reu = ReadExcelUtils.getInstance();
+		ArrayList<Object> result = null;
+		try {
+			result = reu.equaldata(sql.getLeaves(indication_name), "E:\\theInputData.xlsx");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		double[] input_data = (double[])result.get(3);
+		
+		int num = Integer.parseInt(su.getRequest().getParameter("num"));
+		for(int i=0;i<num;i++) {
+			request.setAttribute("leaves_value_from_Servlet"+i, input_data[i]);
+		}
+		
 		request.getRequestDispatcher(path).forward(request, response);
 	}
 

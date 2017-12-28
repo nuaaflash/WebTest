@@ -35,9 +35,9 @@ public class DisposeImportanceServlet extends HttpServlet {
 		su.initialize(this.getServletConfig(), request, response);
 		try {
 			su.upload();
-			String ext = su.getFiles().getFile(0).getFileExt();
+			String ext = su.getFiles().getFile(1).getFileExt();
 			String filename="theData."+ext;
-			su.getFiles().getFile(0).saveAs("E:\\"+filename);
+			su.getFiles().getFile(1).saveAs("E:\\"+filename);
 			//su.save("E:\\"); //使用绝对路径
 		} catch (Exception e) {
 			// TODO: handle exception
