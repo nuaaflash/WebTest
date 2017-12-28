@@ -69,7 +69,7 @@
 			nodenum = sqlnode.size();
 		}
 		else{
-			sql.Addnode("root", 0, 0);	// 判断是否有根节点来 自动创建根节点
+			//sql.Addnode("root", 0, 0);	// 判断是否有根节点来 自动创建根节点
 		}
 %>
 		var zNodes =[];

@@ -125,20 +125,7 @@
 						
 						<!-- POPULAR POSTS WIDGET -->
 						<div class="sidepanel widget_popular_posts">
-							<h3><b>请上传训练用的数据</b>(支持.xls，.xlsx格式)</h3>
-							
-							<div class="sidepanel widget_tags">
-								<div class="post_item_content_widget">
-									<form action="UploadAG1Servlet" method="post" enctype="multipart/form-data">
-										<input type="hidden" name="submitchoice" value="3"> <!-- 区分算法 -->
-										<input type="file" name="file1" ><br>
-										<button name="Submits" value="2">开始上传</button>
-									</form>
-								</div>
-							</div>
-							
-							<hr>
-							
+
 							<h3><b>请选择指标体系</b></h3>
 							<div class="sidepanel widget_popular_posts">
 								<div class="post_item_content_widget">
@@ -208,7 +195,7 @@
 							<img src="white/images/footer/a.jpg" alt="" />
 						</div>
 						<div class="post_item_content_small">
-							<a class="title" href="http://www.layui.com/" >Layui</a>
+							<a class="title" href="http://www.layui.com/" target="_blank">Layui</a>
 							<ul class="post_item_inf_small">
 								<li>结果展示的进度条</li>
 							</ul>
@@ -219,7 +206,7 @@
 							<img src="white/images/footer/b.jpg" alt="" />
 						</div>
 						<div class="post_item_content_small">
-							<a class="title" href="http://www.treejs.cn/v3/main.php#_zTreeInfo" >zTree</a>
+							<a class="title" href="http://www.treejs.cn/v3/main.php#_zTreeInfo" target="_blank">zTree</a>
 							<ul class="post_item_inf_small">
 								<li>以树状结构形象显示指标体系</li>
 							</ul>
@@ -230,7 +217,7 @@
 							<img src="white/images/footer/c.jpg" alt="" />
 						</div>
 						<div class="post_item_content_small">
-							<a class="title" href="https://w3layouts.com/" >w3layouts</a>
+							<a class="title" href="https://w3layouts.com/" target="_blank">w3layouts</a>
 							<ul class="post_item_inf_small">
 								<li>精美的网站模板</li>
 							</ul>

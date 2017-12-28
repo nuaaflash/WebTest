@@ -554,7 +554,7 @@
 							<img src="white/images/footer/a.jpg" alt="" />
 						</div>
 						<div class="post_item_content_small">
-							<a class="title" href="http://www.layui.com/" >Layui</a>
+							<a class="title" href="http://www.layui.com/" target="_blank">Layui</a>
 							<ul class="post_item_inf_small">
 								<li>结果展示的进度条</li>
 							</ul>
@@ -565,7 +565,7 @@
 							<img src="white/images/footer/b.jpg" alt="" />
 						</div>
 						<div class="post_item_content_small">
-							<a class="title" href="http://www.treejs.cn/v3/main.php#_zTreeInfo" >zTree</a>
+							<a class="title" href="http://www.treejs.cn/v3/main.php#_zTreeInfo" target="_blank">zTree</a>
 							<ul class="post_item_inf_small">
 								<li>以树状结构形象显示指标体系</li>
 							</ul>
@@ -576,7 +576,7 @@
 							<img src="white/images/footer/c.jpg" alt="" />
 						</div>
 						<div class="post_item_content_small">
-							<a class="title" href="https://w3layouts.com/" >w3layouts</a>
+							<a class="title" href="https://w3layouts.com/" target="_blank">w3layouts</a>
 							<ul class="post_item_inf_small">
 								<li>精美的网站模板</li>
 							</ul>
@@ -589,6 +589,7 @@
 					<p>We value people over profits, quality over quantity, and keeping it real. As such, we deliver an unmatched working relationship with our clients.</p>
 					<p>Life is half spent before we know what it is.</p>
 				</div>
+				
 				<div class="respond_clear"></div>
 				
 			</div><!-- //ROW -->

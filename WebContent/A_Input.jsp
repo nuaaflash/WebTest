@@ -198,9 +198,19 @@
 <%								
 							} else if(submitchoice==3) {
 %>
-							输入重要度<abbr title="方便显示，-3表示1/3">(分数以负数来表示)</abbr><br>
-<%								
-							}
+							
+							上传重要度<abbr title="方便显示，-3表示1/3">(分数以负数来表示)</abbr>Excel表格<br>
+							
+							<div class="sidepanel widget_tags">
+								<div class="post_item_content_widget">
+									<input type="file" name="importance" ><br>
+									<button name="Submits" value="2" onclick="process('imp')">开始上传</button>
+								</div>
+							</div>
+							
+							<hr>
+<%
+							} //else
 %>							
 							<input type="hidden" name="indication_name" value="<%=indication_name%>"/> <!-- 指标体系名称 -->
 							<input type="hidden" name="the_system_index" value="<%=indx %>"> <!-- 指标体系编号 -->
@@ -245,7 +255,7 @@
 							<img src="white/images/footer/a.jpg" alt="" />
 						</div>
 						<div class="post_item_content_small">
-							<a class="title" href="http://www.layui.com/" >Layui</a>
+							<a class="title" href="http://www.layui.com/" target="_blank">Layui</a>
 							<ul class="post_item_inf_small">
 								<li>结果展示的进度条</li>
 							</ul>
@@ -256,7 +266,7 @@
 							<img src="white/images/footer/b.jpg" alt="" />
 						</div>
 						<div class="post_item_content_small">
-							<a class="title" href="http://www.treejs.cn/v3/main.php#_zTreeInfo" >zTree</a>
+							<a class="title" href="http://www.treejs.cn/v3/main.php#_zTreeInfo" target="_blank">zTree</a>
 							<ul class="post_item_inf_small">
 								<li>以树状结构形象显示指标体系</li>
 							</ul>
@@ -267,7 +277,7 @@
 							<img src="white/images/footer/c.jpg" alt="" />
 						</div>
 						<div class="post_item_content_small">
-							<a class="title" href="https://w3layouts.com/" >w3layouts</a>
+							<a class="title" href="https://w3layouts.com/" target="_blank">w3layouts</a>
 							<ul class="post_item_inf_small">
 								<li>精美的网站模板</li>
 							</ul>
@@ -302,9 +312,7 @@
 <%
 	}
 %>
-  } 
-</script>
-<script>
+  }
       function alter(){ 
     	  var num;
     	  var location;
@@ -323,6 +331,9 @@
   function   process(v){    
     if(v=="file") {    
       document.theForm.action="DisposeDataServlet"; 
+      document.theForm.method="post";
+    } else if(v=="imp") {
+      document.theForm.action="DisposeImportanceServlet"; 
       document.theForm.method="post";
     } else {    
       document.theForm.action="AlgorithmServlet";
