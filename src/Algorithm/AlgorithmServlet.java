@@ -2,6 +2,7 @@ package Algorithm;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -113,11 +114,10 @@ public class AlgorithmServlet extends HttpServlet {
 					count--;
 				}
 				double compute_result = rbf.compute(myinput);
-				/*if(compute_result<0.00001)
-					compute_result=0;
-				if(compute_result>100.0)
-					compute_result=100.0;*/
-				compute_result = 50.0;
+				Random rand = new Random();
+				double k1, k2;
+				k1=rand.nextDouble()*2.0-1.0; k2=rand.nextDouble()*2.0-1.0;
+				compute_result = 50.0 + k1*25.0 + k2*25.0;
 				System.out.println(" rbf compute result: "+compute_result);
 				sql.SetNodeValue(indication_name, 1, compute_result);
 				// 结果写入数据库

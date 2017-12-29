@@ -67,7 +67,7 @@ public class DisposeDataServlet extends HttpServlet {
 		
 		int num = Integer.parseInt(su.getRequest().getParameter("num"));
 		for(int i=0;i<num;i++) {
-			request.setAttribute("leaves_value_from_Servlet"+i, input_data[i]);
+			request.setAttribute("leaves_value_from_Servlet"+i, input_data[num-i-1]);
 		}
 		
 		request.getRequestDispatcher(path).forward(request, response);
