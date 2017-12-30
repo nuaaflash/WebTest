@@ -167,14 +167,13 @@ public class ReadExcelUtils {
 		int rowNum = sheet.getLastRowNum(); // 行数
 		row = sheet.getRow(0);
 
-		ReadExcelUtils reader = ReadExcelUtils.getInstance();
 		ArrayList<String> title = new ArrayList<String>();
 		HashSet<Object> hashset = new HashSet<Object>();
 		ArrayList<Object> content = new ArrayList<Object>();
 		ArrayList<Object> temp = new ArrayList<Object>();
 		ArrayList<Object> temp2 = new ArrayList<Object>();
-		content = reader.readExcel();// 文件内容
-		title = reader.readExcelTitle();
+		content = this.readExcel();// 文件内容
+		title = this.readExcelTitle();
 
 		HashSet<String> excelname = new HashSet<String>();// 文件内容
 		HashSet<String> leavesname = new HashSet<String>();// 叶子节点

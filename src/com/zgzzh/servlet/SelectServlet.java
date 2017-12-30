@@ -50,20 +50,26 @@ public class SelectServlet extends HttpServlet {
 		System.out.println("indication_name:"+indication_name);
 		sql.SetTreeName(indication_name);
 		sql.InitNodeValue(0);
-		ArrayList<String> leaves = sql.getLeaves(indication_name);
+		HashSet<String> leaves_set = sql.getNameSetOfLeaves(indication_name);
 		
-
-		// 读文件并验证部分
-		boolean data_is_correct = true;
 		ReadExcelUtils reader = ReadExcelUtils.getInstance();
 		reader.setFilepath("E:\\theData.xlsx");
-		ArrayList<Object> result = null;
+		ArrayList<String> title = new ArrayList<String>();
+		HashSet<Object> excel_title = new HashSet<Object>();	//excel文件的标题
 		try {
-			result = reader.readExcel();
+			title = reader.readExcelTitle();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		for(String str:title)
+			excel_title.add(str);
+		// 读文件并验证部分
+		boolean data_is_correct = true;
+		data_is_correct = data_is_correct && excel_title.containsAll(leaves_set);
+		System.out.println("leaves_set: "+leaves_set.toString());
+		System.out.println("excel_title: "+excel_title.toString());
+		
 		/*if(submitchoice != 3) {// 验证REF,SVR部分
 			ArrayList<String>title=new ArrayList<String>();			
 			HashSet<String>excelname=new HashSet<String>();//文件内容

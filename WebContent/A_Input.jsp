@@ -138,7 +138,7 @@
 %>
 						</div>	
 							<div class="single_blog_post_content">
-								<p>上传记录了叶子结点值的Excel表格或直接在下方填写</p>
+								<p>上传记录了叶子结点值的Excel表格或直接在下方填写<%if(submitchoice==3) {//AHP层次分析算法%> <b>请先上传重要度文件</b><%} %></p>
 								<input type="file" name="leaves" ><br>
 								<button name="Submits" value="2" onclick="process('file')">开始上传</button>
 								<hr>
