@@ -39,6 +39,27 @@
 	<script src="white/js/animate.js" type="text/javascript"></script>
 	<script src="white/js/jquery.BlackAndWhite.js" type="text/javascript"></script>
 	<script src="white/js/myscript.js" type="text/javascript"></script>
+	
+	<style>
+        #qrcode img {
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            display: block;
+        }
+        #qrcode {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.6);
+            z-index: 9999;
+            display: none;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+
 </head>
 <body>
 
@@ -125,6 +146,11 @@
 						<div class="sidepanel widget_popular_posts">
 							<h3><b>请上传训练用的数据</b>(支持.xls，.xlsx格式)</h3>
 							
+							<button id="train_file">点此查看文件格式</button>
+							<div id="qrcode">
+						        <img id="image" src="white/images/fileFormat/train.jpg">
+						    </div>
+						    
 							<div class="sidepanel widget_tags">
 								<div class="post_item_content_widget">
 									<form action="UploadAG1Servlet" method="post" enctype="multipart/form-data">
@@ -249,5 +275,18 @@
 	</footer><!-- //FOOTER -->
 
 </div>
+
+	<script>
+        $(function() {
+            $("#train_file").click(function() {
+                $("#qrcode").fadeIn("slow");
+            });
+
+            $("#qrcode").click(function() {
+                $("#qrcode").fadeOut("slow");
+            })
+            
+        });
+    </script>
 </body>
 </html>

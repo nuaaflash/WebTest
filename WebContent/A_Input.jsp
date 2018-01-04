@@ -139,6 +139,7 @@
 						</div>	
 							<div class="single_blog_post_content">
 								<p>上传记录了叶子结点值的Excel表格或直接在下方填写<%if(submitchoice==3) {//AHP层次分析算法%> <b>请先上传重要度文件</b><%} %></p>
+								
 								<input type="file" name="leaves" ><br>
 								<button name="Submits" value="2" onclick="process('file')">开始上传</button>
 								<hr>
@@ -200,7 +201,7 @@
 %>
 							
 							上传重要度<abbr title="方便显示，-3表示1/3">(分数以负数来表示)</abbr>Excel表格<br>
-							
+						    
 							<div class="sidepanel widget_tags">
 								<div class="post_item_content_widget">
 									<input type="file" name="importance" ><br>
@@ -335,10 +336,10 @@
     } else if(v=="imp") {
       document.theForm.action="DisposeImportanceServlet"; 
       document.theForm.method="post";
-    } else {    
+    } else if(v=="cal"){    
       document.theForm.action="AlgorithmServlet";
       document.theForm.method="get";
-    }    
+    } 
     document.theForm.submit();    
   }    
 </script>

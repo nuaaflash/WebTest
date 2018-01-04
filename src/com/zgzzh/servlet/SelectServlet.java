@@ -66,10 +66,11 @@ public class SelectServlet extends HttpServlet {
 			excel_title.add(str);
 		// 读文件并验证部分
 		boolean data_is_correct = true;
-		data_is_correct = data_is_correct && excel_title.containsAll(leaves_set);
-		System.out.println("leaves_set: "+leaves_set.toString());
-		System.out.println("excel_title: "+excel_title.toString());
-		
+		if(submitchoice != 3) {
+			data_is_correct = data_is_correct && excel_title.containsAll(leaves_set);
+			System.out.println("leaves_set: "+leaves_set.toString());
+			System.out.println("excel_title: "+excel_title.toString());
+		}
 		/*if(submitchoice != 3) {// 验证REF,SVR部分
 			ArrayList<String>title=new ArrayList<String>();			
 			HashSet<String>excelname=new HashSet<String>();//文件内容
