@@ -297,27 +297,33 @@
 						
 						<!-- TESTIMONIAL1 -->
 						<div class="item">
-							<div class="testim_content">“.........”</div>
-							<div class="testim_author">—  Anna Balashova, <b>Philosopher</b></div>
+							<div class="testim_content">RBF神经网络算法，编写Servlet，界面的基本框架。</div>
+							<div class="testim_author">—  邓基浩</div>
 						</div><!-- TESTIMONIAL1 -->
 						
 						<!-- TESTIMONIAL2 -->
 						<div class="item">
-							<div class="testim_content">“.......”</div>
-							<div class="testim_author">—  Jiang Zemin, <b>President</b></div>
+							<div class="testim_content">数据库的设计和编写，SVR算法的实现及其相应的Servlet，项目的配置管理。</div>
+							<div class="testim_author">—  夏涵</div>
 						</div><!-- TESTIMONIAL2 -->
 						
 						<!-- TESTIMONIAL3 -->
 						<div class="item">
-							<div class="testim_content">“..........。”</div>
-							<div class="testim_author">—  ..., <b>Lecturer</b></div>
+							<div class="testim_content">读文件部分代码的编写，界面美化。</div>
+							<div class="testim_author">—  吾逸阳</div>
 						</div><!-- TESTIMONIAL3 -->
 						
-						<!-- TESTIMONIAL3 -->
+						<!-- TESTIMONIAL4 -->
 						<div class="item">
-							<div class="testim_content">“........。”</div>
-							<div class="testim_author">—  ..., <b>Teacher</b></div>
-						</div><!-- TESTIMONIAL3 -->
+							<div class="testim_content">指标体系的显示，指标体系管理部分的代码，部分文档的编写。</div>
+							<div class="testim_author">—  张敩</div>
+						</div><!-- TESTIMONIAL4 -->
+						
+						<!-- TESTIMONIAL5 -->
+						<div class="item">
+							<div class="testim_content">AHP算法的编写，最终显示界面的编写，部分文档的编写（详细设计和开发手册）。</div>
+							<div class="testim_author">—  莫永浩</div>
+						</div><!-- TESTIMONIAL5 -->
 						
 					</div><!-- TESTIMONIALS SLIDER -->
 				</div><!-- //TESTIMONIALS -->
