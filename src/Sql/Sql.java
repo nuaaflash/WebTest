@@ -49,26 +49,45 @@ public class Sql {
 		if(canwegetNode(id)){
 			Node parentNode = getNode(id);
 			int ChildnumofParent = parentNode.numofChildren + 1;
-			int level = parentNode.level + 1;
 			SetNodeChildrenNum(parentNode.nodeName,ChildnumofParent);
+		}
+	}
+	
+	public void refreshlevelofChildren(int id){
+		if(canwegetNode(id)){
+			Node parentNode = getNode(id);
+			int level = parentNode.level + 1;
+			System.out.println("level>>>>>>>>>>>><<<<<<<<<<<<<<<<><><>>>>>>>>>>>>"+level);
 			SetNodeChildrenLevel(id,level);
 		}
 	}
 	
+	public void testREfresh(){
+		Sql sql = new Sql();
+		sql.SetDBS("threatDegree");
+		sql.setUser("ROOT");
+		sql.setPassword("123");
+		sql.SetTreeName("qq");
+		sql.refreshlevelofChildren(1);
+		
+	}
+	
 	public void SetNodeChildrenLevel(int id, int level) {
 		// TODO Auto-generated method stub
-		String sql = null;
-		sql = "UPDATE "+ treeName +" set node_level ="+ level + "WHERE parent_id = "+id; 
-		Statement stmt;
-		ConnectSql();
-		try {
-			stmt = conn.createStatement();
-			stmt.executeUpdate(sql);
-			System.out.println("Update successfully");
-			conn.close();
-			System.out.println("Database was Colsed successfully");
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if(canwegetparentNode(id)){
+			String sql = null;
+			sql = "UPDATE "+ treeName +" set node_level ="+ level + " WHERE(parent_id = " + id +" );"; 
+			Statement stmt;
+			ConnectSql();
+			try {
+				stmt = conn.createStatement();
+				stmt.executeUpdate(sql);
+				System.out.println("Update successfully");
+				conn.close();
+				System.out.println("Database was Colsed successfully");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -487,6 +506,31 @@ public class Sql {
 		ConnectSql();
 		String sql = null;
 		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM "+ treeName +" WHERE node_Id ="+ ID +";";  //mysql锟斤拷锟�
+		PreparedStatement pstmt;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			if(!rs.next()){
+				System.out.println("The NODE doesn't exist!");
+				can = false;
+			}
+			
+			conn.close();
+			System.out.println("Database was Colsed successfully");
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return can;
+	}
+	
+	public boolean canwegetparentNode(int ID){	
+		// Find the Record with this Name;
+		boolean can = true;
+		ConnectSql();
+		String sql = null;
+		sql = "SELECT node_id, node_name, parent_id, num_of_children, node_value FROM "+ treeName +" WHERE parent_id ="+ ID +";";  
 		PreparedStatement pstmt;
 		try {
 			pstmt = conn.prepareStatement(sql);

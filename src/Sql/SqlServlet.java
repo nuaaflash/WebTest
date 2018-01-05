@@ -100,6 +100,12 @@ public class SqlServlet extends HttpServlet {
 					sql.addChildren(addc);
 				}
 				
+				for(int i=0;i<Integer.parseInt(request.getParameter("length1"));i++) {
+					int addc = Integer.parseInt(request.getParameter("childadded"+i));
+					System.out.println(addc);
+					sql.refreshlevelofChildren(addc);
+				}
+				
 				for(int i=0;i<Integer.parseInt(request.getParameter("length2"));i++) {
 					int decc = Integer.parseInt(request.getParameter("childdeleted"+i));
 					sql.addChildren(decc);
